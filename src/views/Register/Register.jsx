@@ -51,7 +51,7 @@ const Register = () => {
                 })
                 .catch((err) => {
                     console.log(err);
-                    setFieldError('email', err.response.message);
+                    setFieldError('email', err.response.data.message);
                 })
                 .finally(() => {
                     setSubmitting(false);
