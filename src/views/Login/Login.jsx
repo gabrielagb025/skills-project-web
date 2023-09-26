@@ -34,7 +34,7 @@ const Login = () => {
             loginRequest(values)
                 .then((res) => {
                     console.log(res);
-                    login(res.accessToken, () => navigate('/'));
+                    login(res.accessToken, () => navigate('/user/profile'));
                 })
                 .catch((err) => {
                     console.log(err);
@@ -46,7 +46,9 @@ const Login = () => {
         },
     });
 
-    return (
+    return user ? (
+        <Navigate to="/user/profile"/>
+    ) : (
         <div className="Login container mt-5">
             <h1>Iniciar sesión</h1>
             <form onSubmit={handleSubmit}>

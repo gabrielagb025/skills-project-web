@@ -1,0 +1,10 @@
+.home-container h1 {
+    text-align: center;
+}
+
+.home-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
