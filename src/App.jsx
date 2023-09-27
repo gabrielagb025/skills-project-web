@@ -8,6 +8,8 @@ import Login from './views/Login/Login';
 import Profile from './views/Profile/Profile';
 import Timeline from './views/Timeline/Timeline';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import EditProfile from './views/EditProfile/EditProfile';
+import UsersList from './views/UsersList/UsersList';
 
 
 function App() {
@@ -24,10 +26,10 @@ function App() {
         <Route path="register" element={<Register/>}/>
         <Route path="login" element={<Login/>}/>
         
-        <Route path="/user" element={<ProtectedRoute/>}>
           <Route path="/user/timeline" element={<Timeline/>}/>
+          <Route path="/user/users" element={<UsersList/>}/>
           <Route path="/user/profile" element={<Profile/>}/>
-        </Route>
+          <Route path="/user/edit" element={<EditProfile/>}/>
       </Routes>
     </div>
   )

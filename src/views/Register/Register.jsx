@@ -12,15 +12,22 @@ const initialValues = {
     name: "",
     email: "",
     password: "",
-    avatar: ""
+    avatar: "",
+    description: "",
+    teachSkills: [],
+    learnSkills: []
 }
 
 const Register = () => {
-    
+
+    const [skills, setSkills] = useState([]);
+    const [selectedTeachSkills, setSelectedTeachSkills] = useState([]);
+    const [selectedLearnSkills, setSelectedLearnSkills] = useState([]);
+    const { user } = useAuthContext();
+    const navigate = useNavigate();
+
     // Traer las skills
-    const [skills, setSkills] = useState()
     useEffect(() => {
-        // Obtener las habilidades cuando el componente se monta
         getSkills()
             .then(skillElem => {
                 setSkills(skillElem)
@@ -28,10 +35,23 @@ const Register = () => {
             .catch((err) => {
                 console.log(err)
             });
-    }, []);
-    
-    const { user } = useAuthContext();
-    const navigate = useNavigate();
+    }, [])
+
+    console.log(skills)
+
+    const handleTeachSkillsChange = (e) => {
+        const selectedOptions = Array.from(e.target.selectedOptions).map(
+            (option) => option.value
+        );
+        setSelectedTeachSkills(selectedOptions);
+    };
+
+    const handleLearnSkillsChange = (e) => {
+        const selectedOptions = Array.from(e.target.selectedOptions).map(
+            (option) => option.value
+        );
+        setSelectedLearnSkills(selectedOptions);
+    }
 
     const {
         values,
@@ -54,6 +74,9 @@ const Register = () => {
             formData.append('name', values.name);
             formData.append('email', values.email);
             formData.append('password', values.password);
+            formData.append('description', values.description);
+            formData.append('teachSkills', values.teachSkills);
+            formData.append('learnSkills', values.learnSkills);
 
             if (values.avatar) {
                 console.log('values.avatar: ', values.avatar);
@@ -76,7 +99,7 @@ const Register = () => {
     });
 
     return user ? (
-        <Navigate to="/user/profile"/>
+        <Navigate to="/user/profile" />
     ) : (
         <div className="register container mt-5">
             <h1>Registrarse</h1>
@@ -90,7 +113,7 @@ const Register = () => {
                     error={touched.name && errors.name}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Introduce un nombre"
+                    placeholder="Harry Potter"
                 />
                 <InputGroup
                     label="Email"
@@ -100,7 +123,7 @@ const Register = () => {
                     error={touched.email && errors.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Introduce un correo"
+                    placeholder="harry@hogwarts.es"
                 />
                 <InputGroup
                     label="Contraseña"
@@ -110,7 +133,7 @@ const Register = () => {
                     error={touched.password && errors.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Introduce una contraseña"
+                    placeholder="**************"
                 />
                 <InputGroup
                     label="Imagen de perfil"
@@ -130,7 +153,7 @@ const Register = () => {
                     error={touched.description && errors.description}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Escribe una breve descripción acerca de tus conocimientos e intereses"
+                    placeholder="Soy profesor de pintura y me interesa la fotografía"
                 />
                 <InputGroup
                     label="Ciudad"
@@ -140,28 +163,40 @@ const Register = () => {
                     error={touched.city && errors.city}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Escribe el nombre de tu ciudad"
+                    placeholder="Valencia"
                 />
                 <InputGroup
-                    label="Habilidades que puedes enseñar"
+                    label="Selecciona una o dos habilidades que puedes enseñar"
                     name="teachSkills"
-                    type="text"
-                    value={values.teachSkills}
+                    type="select"
+                    multiple
+                    value={values.selectedTeachSkills}
                     error={touched.teachSkills && errors.teachSkills}
-                    onChange={handleChange}
+                    onChange={handleTeachSkillsChange}
                     onBlur={handleBlur}
-                    placeholder="Escribe las habilidades que puedes enseñar"
-                />
+                    placeholder="">
+                    {skills.map((skill) => (
+                        <option key={skill} value={skill}>
+                            {skill.name}
+                        </option>
+                    ))}
+                </InputGroup>
                 <InputGroup
-                    label="Habilidades que quieres aprender"
+                    label="Selecciona una o dos habilidades que quieres aprender"
                     name="learnSkills"
-                    type="text"
-                    value={values.learnSkills}
+                    type="select"
+                    multiple
+                    value={values.selectedLearnSkills}
                     error={touched.learnSkills && errors.learnSkills}
-                    onChange={handleChange}
+                    onChange={handleLearnSkillsChange}
                     onBlur={handleBlur}
-                    placeholder="Escribe las habilidades que quieres aprender"
-                />
+                    placeholder="">
+                    {skills.map((skill) => (
+                        <option key={skill} value={skill}>
+                            {skill.name}
+                        </option>
+                    ))}
+                </InputGroup>
                 <div className="submitButton mt-4 d-flex justify-content-center align-items-center">
                     <button type="submit" className={`btn btn-${isSubmitting ? 'secondary' : 'primary'}`}>
                         {isSubmitting ? "Cargando" : "Registrarse"}

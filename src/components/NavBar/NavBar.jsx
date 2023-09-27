@@ -21,7 +21,13 @@ const NavBar = () => {
                                 <NavLink className="nav-link" to="/user/timeline">Inicio</NavLink>
                             </li>
                             <li className="nav-item">
+                                <NavLink className="nav-link" to="/user/users">Buscar usuarios</NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <NavLink className="nav-link" to="/user/profile">Mi perfil</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/user/edit">Editar perfil</NavLink>
                             </li>
                             <li className="nav-item">
                                 <button className="nav-link" onClick={logout}>Cerrar sesión</button>
