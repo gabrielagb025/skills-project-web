@@ -1,4 +1,5 @@
-import './UserCard.css'
+import './UserCard.css';
+import { Link } from 'react-router-dom';
 
 const UserCard = (user) => {
     return (
@@ -6,7 +7,7 @@ const UserCard = (user) => {
             <div className="row no-gutters">
                 <div className="col-md-4 d-flex align-items-center">
                     <div className="card-img-container">
-                        <img src={user.avatar} className="card-img user-img" alt="..."/>
+                        <img src={user.avatar} className="user-img" alt="..."/>
                     </div>
                     <div className="ms-3">
                         <h3 className="card-title">{user.name}</h3>
@@ -23,7 +24,7 @@ const UserCard = (user) => {
                         {user.learnSkills.map((skill) => (
                             <p key={skill.id}>{skill.name}</p>
                         ))}
-                        <a href="#" className="btn btn-primary">Ver más</a>
+                        <Link to={`/user/users/detail/${user.id}`}><button className="btn btn-primary">Ver más</button></Link>
                     </div>
                 </div>
             </div>

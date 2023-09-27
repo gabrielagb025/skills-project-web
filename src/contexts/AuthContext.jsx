@@ -34,8 +34,10 @@ export const AuthContextProvider = ({ children }) => {
     useEffect(() => {
         if(getAccessToken()) {
             if(!verifyJWT(getAccessToken())) {
+                console.log('entro al logout')
                 logout()
             } else {
+                console.log('entro a getuser')
                 getUser()
             } 
         } else {

@@ -1,5 +1,6 @@
 import './Profile.css'
 import { useAuthContext } from "../../contexts/AuthContext"
+import { useState } from 'react';
 
 const Profile = () => {
   const { user } = useAuthContext();
@@ -14,20 +15,19 @@ const Profile = () => {
         <p>{user.description}</p>
         <p>{user.city}</p>
         <h4>Habilidades que puedes enseñar:</h4>
-        {console.log(user.teachSkills)}
         {user.teachSkills.map((skill) => (
-          <>
-            <h5 key={skill.id}>{skill.name}</h5>
+          <div key={skill.id}>
+            <h5>{skill.name}</h5>
             <p>{skill.category}</p>
             <p>{skill.description}</p>
-          </>
+          </div>
         ))}
         <h4>Habilidades que quieres aprender:</h4>
         {user.learnSkills.map((skill) => (
-          <>
-            <h5 key={skill.id}>{skill.name}</h5>
+          <div key={skill.id}>
+            <h5>{skill.name}</h5>
             <p>{skill.description}</p>
-          </>
+          </div >
         ))}
       </div>
     </div>

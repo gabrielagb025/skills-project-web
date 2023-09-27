@@ -13,9 +13,7 @@ const initialValues = {
     email: "",
     password: "",
     avatar: "",
-    description: "",
-    teachSkills: [],
-    learnSkills: []
+    description: ""
 }
 
 const Register = () => {
@@ -75,8 +73,6 @@ const Register = () => {
             formData.append('email', values.email);
             formData.append('password', values.password);
             formData.append('description', values.description);
-            formData.append('teachSkills', values.teachSkills);
-            formData.append('learnSkills', values.learnSkills);
 
             if (values.avatar) {
                 console.log('values.avatar: ', values.avatar);
@@ -86,7 +82,7 @@ const Register = () => {
             register(formData)
                 .then(() => {
                     console.log('registered');
-                    navigate('/')
+                    navigate('/login')
                 })
                 .catch((err) => {
                     console.log(err);
@@ -165,7 +161,7 @@ const Register = () => {
                     onBlur={handleBlur}
                     placeholder="Valencia"
                 />
-                <InputGroup
+                {/*<InputGroup
                     label="Selecciona una o dos habilidades que puedes enseñar"
                     name="teachSkills"
                     type="select"
@@ -196,7 +192,7 @@ const Register = () => {
                             {skill.name}
                         </option>
                     ))}
-                </InputGroup>
+                    </InputGroup>*/}
                 <div className="submitButton mt-4 d-flex justify-content-center align-items-center">
                     <button type="submit" className={`btn btn-${isSubmitting ? 'secondary' : 'primary'}`}>
                         {isSubmitting ? "Cargando" : "Registrarse"}
