@@ -21,7 +21,10 @@ const NavBar = () => {
                                 <NavLink className="nav-link" to="/user/timeline">Inicio</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/user/users">Buscar usuarios</NavLink>
+                                <NavLink className="nav-link" to="/user/users">Usuarios</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/user/users/filtered">Usuarios para ti</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/user/profile">Mi perfil</NavLink>

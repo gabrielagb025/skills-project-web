@@ -10,6 +10,7 @@ import Timeline from './views/Timeline/Timeline';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import EditProfile from './views/EditProfile/EditProfile';
 import UsersList from './views/UsersList/UsersList';
+import FilteredUsersList from './views/FilteredUsersList/FilteredUsersList';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         
           <Route path="/user/timeline" element={<Timeline/>}/>
           <Route path="/user/users" element={<UsersList/>}/>
+          <Route path="/user/users/filtered" element={<FilteredUsersList/>}/>
           <Route path="/user/profile" element={<Profile/>}/>
           <Route path="/user/edit" element={<EditProfile/>}/>
       </Routes>

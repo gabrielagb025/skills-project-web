@@ -18,6 +18,7 @@ const Profile = () => {
         {user.teachSkills.map((skill) => (
           <>
             <h5 key={skill.id}>{skill.name}</h5>
+            <p>{skill.category}</p>
             <p>{skill.description}</p>
           </>
         ))}
