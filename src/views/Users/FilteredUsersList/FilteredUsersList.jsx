@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import UserCard from "../../components/UserCard/UserCard";
-import { getUsers } from "../../services/UserService";
+import UserCard from "../../../components/UserCard/UserCard";
+import { getFilteredUsers } from "../../../services/UserService";
 
 
 const FilteredUsersList = () => {
+
     const [filteredUsers, setFilteredUsers] = useState([])
 
     useEffect(() => {
-        getUsers()
+        getFilteredUsers()
             .then(userElem => {
                 setFilteredUsers(userElem)
             })

@@ -1,4 +1,4 @@
-import { useAuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../../contexts/AuthContext';
 import './Home.css'
 import { NavLink, Navigate } from "react-router-dom";
 

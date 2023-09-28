@@ -1,9 +1,9 @@
-import InputGroup from '../../components/InputGroup/InputGroup';
+import InputGroup from '../../../components/InputGroup/InputGroup';
 import { useFormik } from 'formik';
-import { loginSchema } from '../../utils/yup.schemas';
-import { login as loginRequest } from '../../services/AuthService';
+import { loginSchema } from '../../../utils/yup.schemas';
+import { login as loginRequest } from '../../../services/AuthService';
 import { useNavigate, Navigate} from 'react-router-dom';
-import { useAuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../../contexts/AuthContext';
 
 const initialValues = {
     email: "",

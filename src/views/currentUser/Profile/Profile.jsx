@@ -1,5 +1,5 @@
 import './Profile.css'
-import { useAuthContext } from "../../contexts/AuthContext"
+import { useAuthContext } from "../../../contexts/AuthContext"
 import { useState } from 'react';
 
 const Profile = () => {

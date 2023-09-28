@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getUser } from "../../services/UserService";
+import { getUser } from "../../../services/UserService";
 
 const UserDetail = () => {
     const [ user, setUser ] = useState(null);

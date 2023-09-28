@@ -1,17 +1,17 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { useAuthContext } from './contexts/AuthContext';
-import Home from './views/Home/Home';
+import Home from './views/Auth/Home/Home';
 import NavBar from './components/NavBar/NavBar';
-import Register from './views/Register/Register';
-import Login from './views/Login/Login';
-import Profile from './views/Profile/Profile';
+import Register from './views/Auth/Register/register';
+import Login from './views/Auth/Login/Login';
+import Profile from './views/currentUser/Profile/Profile';
 import Timeline from './views/Timeline/Timeline';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import EditProfile from './views/EditProfile/EditProfile';
-import UsersList from './views/UsersList/UsersList';
-import FilteredUsersList from './views/FilteredUsersList/FilteredUsersList';
-import UserDetail from './views/UserDetail/UserDetail';
+import EditProfile from './views/currentUser/EditProfile/EditProfile';
+import UsersList from './views/Users/UsersList/UsersList';
+import FilteredUsersList from './views/Users/FilteredUsersList/FilteredUsersList';
+import UserDetail from './views/Users/UserDetail/UserDetail';
 
 
 function App() {

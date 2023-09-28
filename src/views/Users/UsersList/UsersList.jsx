@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import UserCard from "../../components/UserCard/UserCard";
-import { getUsers } from "../../services/UserService";
-import { useAuthContext } from "../../contexts/AuthContext";
+import UserCard from "../../../components/UserCard/UserCard";
+import { getUsers } from "../../../services/UserService";
+import { useAuthContext } from "../../../contexts/AuthContext";
 
 
 const UsersList = () => {

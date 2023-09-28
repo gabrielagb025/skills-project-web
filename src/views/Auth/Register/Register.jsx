@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useFormik } from 'formik';
-import { registerSchema } from "../../utils/yup.schemas";
-import { register } from "../../services/AuthService";
-import { getSkills } from "../../services/SkillService";
-import InputGroup from '../../components/InputGroup/InputGroup'
+import { registerSchema } from '../../../utils/yup.schemas';
+import { register } from '../../../services/AuthService';
+import { getSkills } from "../../../services/SkillService";
+import InputGroup from '../../../components/InputGroup/InputGroup'
 import { useNavigate, Navigate } from "react-router-dom";
-import { useAuthContext } from "../../contexts/AuthContext";
+import { useAuthContext } from "../../../contexts/AuthContext";
 
 
 const initialValues = {
