@@ -1,11 +1,14 @@
 import './Profile.css'
 import { useAuthContext } from "../../../contexts/AuthContext"
 import { useState } from 'react';
+import ChooseSkills from '../../../components/ChooseSkills/ChooseSkills';
 
 const Profile = () => {
   const { user } = useAuthContext();
 
-  return (
+  return user.teachSkills.length === 0 && user.learnSkills.length === 0 ? (
+    <ChooseSkills/>
+  ) : (
     <div className="Profile profile-container container">
       <div className="mt-5">
         <img src={user.avatar} alt="" width="300" />

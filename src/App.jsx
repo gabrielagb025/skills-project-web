@@ -12,6 +12,7 @@ import EditProfile from './views/currentUser/EditProfile/EditProfile';
 import UsersList from './views/Users/UsersList/UsersList';
 import FilteredUsersList from './views/Users/FilteredUsersList/FilteredUsersList';
 import UserDetail from './views/Users/UserDetail/UserDetail';
+import ChooseSkills from './components/ChooseSkills/ChooseSkills';
 
 
 function App() {
@@ -34,12 +35,13 @@ function App() {
           <Route path="login" element={<Login/>}/>
           
           <Route path="/user" element={<ProtectedRoute/>}>
+            <Route path="/user/skills" element={<ChooseSkills/>}/>
             <Route path="/user/timeline" element={<Timeline/>}/>
             <Route path="/user/users" element={<UsersList/>}/>
             <Route path="/user/users/filtered" element={<FilteredUsersList/>}/>
             <Route path="/user/users/detail/:id" element={<UserDetail/>}/>
             <Route path="/user/profile" element={<Profile/>}/>
-            <Route path="/user/edit" element={<EditProfile/>}/>
+            <Route path="/user/edit" element={<Register/>}/>
           </Route>
         </Routes>
       </>

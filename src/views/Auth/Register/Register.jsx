@@ -13,43 +13,76 @@ const initialValues = {
     email: "",
     password: "",
     avatar: "",
-    description: ""
+    description: "",
+    teachSkills: [],
+    learnSkills: []
 }
+
 
 const Register = () => {
 
     const [skills, setSkills] = useState([]);
-    const [selectedTeachSkills, setSelectedTeachSkills] = useState([]);
-    const [selectedLearnSkills, setSelectedLearnSkills] = useState([]);
     const { user } = useAuthContext();
     const navigate = useNavigate();
+    const [selectedTeachSkills, setSelectedTeachSkills] = useState([]);
+    const [selectedLearnSkills, setSelectedLearnSkills] = useState([]);
 
-    // Traer las skills
     useEffect(() => {
         getSkills()
-            .then(skillElem => {
-                setSkills(skillElem)
+            .then((skillList) => {
+                setSkills(skillList)
             })
             .catch((err) => {
                 console.log(err)
-            });
-    }, [])
+            })
+    }, []);
 
-    console.log(skills)
+    skills.sort((a, b) => {
+        if (a.category < b.category) {
+            return -1;
+        }
+        if (a.category > b.category) {
+            return 1;
+        }
+        return 0;
+    });
 
-    const handleTeachSkillsChange = (e) => {
-        const selectedOptions = Array.from(e.target.selectedOptions).map(
-            (option) => option.value
-        );
-        setSelectedTeachSkills(selectedOptions);
+
+    const handleSkillChange = (e, skillType) => {
+        const skillId = e.target.value;
+
+        // Verificar si el usuario está seleccionando o deseleccionando la habilidad.
+        if (e.target.checked) {
+            // Agregar la habilidad seleccionada al estado local.
+            setSelectedTeachSkills((prevSelectedSkills) => [
+                ...prevSelectedSkills,
+                skillId,
+            ]);
+        } else {
+            // Quitar la habilidad deseleccionada del estado local.
+            setSelectedTeachSkills((prevSelectedSkills) =>
+                prevSelectedSkills.filter((id) => id !== skillId)
+            );
+        }
     };
 
-    const handleLearnSkillsChange = (e) => {
-        const selectedOptions = Array.from(e.target.selectedOptions).map(
-            (option) => option.value
-        );
-        setSelectedLearnSkills(selectedOptions);
-    }
+    const handleSaveSkills = () => {
+
+
+        const selectedSkills = {
+            teachSkills: selectedTeachSkills,
+            learnSkills: selectedLearnSkills,
+        };
+
+        updateCurrentUser(user._id, selectedSkills)
+            .then((response) => {
+
+            })
+            .catch((error) => {
+
+            });
+    };
+
 
     const {
         values,
@@ -161,38 +194,35 @@ const Register = () => {
                     onBlur={handleBlur}
                     placeholder="Valencia"
                 />
-                {/*<InputGroup
-                    label="Selecciona una o dos habilidades que puedes enseñar"
-                    name="teachSkills"
-                    type="select"
-                    multiple
-                    value={values.selectedTeachSkills}
-                    error={touched.teachSkills && errors.teachSkills}
-                    onChange={handleTeachSkillsChange}
-                    onBlur={handleBlur}
-                    placeholder="">
+                <div className="teachSkills">
+                    <h1>Elige una o dos habilidades que puedes enseñar</h1>
                     {skills.map((skill) => (
-                        <option key={skill} value={skill}>
+                        <label>
+                            <input
+                                type="checkbox"
+                                value={skill.id}
+                                onChange={(e) => handleSkillChange(e, 'teach')}
+                                checked={selectedTeachSkills.includes(skill.id)}
+                            />
                             {skill.name}
-                        </option>
+
+                        </label>
                     ))}
-                </InputGroup>
-                <InputGroup
-                    label="Selecciona una o dos habilidades que quieres aprender"
-                    name="learnSkills"
-                    type="select"
-                    multiple
-                    value={values.selectedLearnSkills}
-                    error={touched.learnSkills && errors.learnSkills}
-                    onChange={handleLearnSkillsChange}
-                    onBlur={handleBlur}
-                    placeholder="">
+                </div>
+                <div className="learnSkills">
+                    <h1>Elige una o dos habilidades que quieres aprender</h1>
                     {skills.map((skill) => (
-                        <option key={skill} value={skill}>
+                        <label>
+                            <input
+                                type="checkbox"
+                                value={skill.id}
+                                onChange={(e) => handleSkillChange(e, 'learn')}
+                                checked={selectedTeachSkills.includes(skill.id)}
+                            />
                             {skill.name}
-                        </option>
+                        </label>
                     ))}
-                    </InputGroup>*/}
+                </div>
                 <div className="submitButton mt-4 d-flex justify-content-center align-items-center">
                     <button type="submit" className={`btn btn-${isSubmitting ? 'secondary' : 'primary'}`}>
                         {isSubmitting ? "Cargando" : "Registrarse"}

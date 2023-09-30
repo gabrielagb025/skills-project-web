@@ -8,4 +8,6 @@ export const getUsers = () => http.get('/users');
 
 export const getFilteredUsers = () => http.get('/users/filtered');
 
-export const getUser = (id) => http.get(`/user/detail/${id}`)
+export const getUser = (id) => http.get(`/user/detail/${id}`);
+
+export const updateCurrentUser = (body) => http.patch('/currentUser/edit', body);

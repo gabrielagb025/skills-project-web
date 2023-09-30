@@ -16,10 +16,16 @@ const baseUserSchema = {
       .string('Nombre inválido')
       .min(2, 'El nombre debe tener mínimo 2 caracteres')
       .required('El nombre es requerido'),
-    ...baseUserSchema
+    avatar: Yup
+      .string('Imagen inválida'),
+    description: Yup
+      .string('Descripción inválida')
+      .max(300, 'La descripción debe tener máximo 300 caracteres'),
+    city: Yup
+      .string('Ciudad inválida'),
+    ...baseUserSchema,
   });
   
   export const loginSchema = Yup.object({
     ...baseUserSchema
   });
-  
