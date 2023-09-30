@@ -18,11 +18,8 @@ const UserDetail = () => {
   const { user: currentUser } = useAuthContext();
 
   useEffect(() => {
-    console.log('se ejecuta useEffect');
-
     Promise.all([getUser(id), getRatings(id)])
       .then(([user, ratings]) => {
-        console.log(user);
         setUser(user);
         setRatingList(ratings);
       })
@@ -99,11 +96,13 @@ const UserDetail = () => {
             ))}
           </div>
           {/* FORMULARIO DE RESEÑAS */}
+          <hr />
           <div className="rating-form">
             <form onSubmit={handleSubmit}>
+              <h4>Deja una reseña sobre {user.name}</h4>
               <div className="mb-3">
-                <label id="rating-message" className="form-label">Deja un comentario sobre {user.name}</label>
-                <input onChange={handleChange} id="rating-message" type="text" name="message" className="form-control" value={newRating.message} placeholder="Comentario..."/>
+                <label id="rating-message" className="form-label">Comentario</label>
+                <input onChange={handleChange} id="rating-message" type="text" name="message" className="form-control" value={newRating.message} placeholder="Comentario"/>
               </div>
               <div className="mb-3">
                 <label id="rating-score" className="form-label">Valoración</label>
@@ -118,7 +117,7 @@ const UserDetail = () => {
       <div className="rating-list container mt-4">
         {ratingList.length > 0 ? (
           <>
-            <h1>Reseñas de {user.name}</h1>
+            <h4>Reseñas de {user.name}</h4>
             {ratingList.map((rating) => (
               <div key={rating.id} className="rating-container mt-4">
                 <img src={rating.currentUser.avatar} alt="" width="100" />

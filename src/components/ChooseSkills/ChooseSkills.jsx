@@ -4,20 +4,20 @@ import { updateCurrentUser } from "../../services/UserService";
 import { useAuthContext } from "../../contexts/AuthContext";
 
 
-const ChooseSkills = () => {
-    const [ skills, setSkills ] = useState([]);
+const ChooseSkills = ({ setSkillsSelected }) => {
+    const [skills, setSkills] = useState([]);
     const { user } = useAuthContext();
     const [selectedTeachSkills, setSelectedTeachSkills] = useState([]);
     const [selectedLearnSkills, setSelectedLearnSkills] = useState([]);
 
     useEffect(() => {
         getSkills()
-        .then((skillList) => {
-            setSkills(skillList)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            .then((skillList) => {
+                setSkills(skillList)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }, []);
 
     skills.sort((a, b) => {
@@ -30,50 +30,109 @@ const ChooseSkills = () => {
         return 0;
     });
 
-    const handleSaveSkills = () => {
-        
+    const skillsByCategory = skills.reduce((acc, skill) => {
+        if (!acc[skill.category]) {
+            acc[skill.category] = [];
+        }
+        acc[skill.category].push(skill);
+        return acc;
+    }, {});
+
+    const handleSkillChange = (e, type) => {
+        const skillId = e.target.value;
+        if (type === 'teach') {
+            const newSelectedSkills = toggleSkill(skillId, selectedTeachSkills);
+            setSelectedTeachSkills(newSelectedSkills);             
+        } else if (type === 'learn') {
+            const newSelectedSkills = toggleSkill(skillId, selectedLearnSkills);
+            setSelectedLearnSkills(newSelectedSkills);
+        }
+    };
+
+    const toggleSkill = (skillId, selectedSkills) => {
+        if (selectedSkills.includes(skillId)) {
+            return selectedSkills.filter((id) => id !== skillId);
+        } else {
+            if (selectedSkills.length < 2) {
+                return [...selectedSkills, skillId];
+            }
+            return selectedSkills;
+        }
+    };
+
+    const handleSaveSkills = (event) => {
+        event.preventDefault();
 
         const selectedSkills = {
             teachSkills: selectedTeachSkills,
             learnSkills: selectedLearnSkills,
         };
 
-        updateCurrentUser(user._id, selectedSkills)
+        updateCurrentUser(selectedSkills)
             .then((response) => {
-                
+                console.log('actualizado')
+                setSkillsSelected(true)
             })
             .catch((error) => {
-               
+                console.log(err)
             });
     };
 
-    return(
+    return (
         <div className="ChooseSkills container">
-            <div className="teachSkills">
-                <h1>Elige una o dos habilidades que puedes enseñar</h1>
-                    {skills.map((skill) => (
-                        <label>
-                        <input
-                            type="checkbox"
-                            value={skill.id}
-                            onChange={(e) => handleSkillChange(e, 'teach')}
-                            checked={selectedTeachSkills.includes(skill.id)}
-                        />
-                        {skill.name}
-                        {skill.category}
-                        </label>
-                    ))}
-            </div>
-            <div className="learnSkills">
-                <h1>Elige una o dos habilidades que quieres aprender</h1>
-                    {skills.map((skill) => (
-                        <div className="skill-element" key={skill.id}>
-                        <h1>{skill.name}</h1>
-                        <h3>{skill.category}</h3>
-                        <p>{skill.description}</p>
+            <form onSubmit={handleSaveSkills}>
+                <div className="teachSkills">
+                    <h1>Elige una o dos habilidades que puedes enseñar</h1>
+                    {Object.entries(skillsByCategory).map(([category, skillsInCategory]) => (
+                        <div className="mt-2" key={category}>
+                            <hr />
+                            <h2 className="mb-4">{category}</h2>
+                            {skillsInCategory.map((skill) => (
+                                <label key={skill.id} className="d-flex mb-2 align-items-start">
+                                    <input
+                                        type="checkbox"
+                                        value={skill.id}
+                                        onChange={(e) => handleSkillChange(e, 'teach')}
+                                        checked={selectedTeachSkills.includes(skill.id)}
+                                        className="me-2"
+                                    />
+                                    <div className="d-flex flex-column">
+                                        <h6>{skill.name}</h6>
+                                        <p>{skill.description}</p>
+                                    </div>
+                                </label>
+                            ))}
                         </div>
                     ))}
-            </div>
+                </div>
+                <div className="learnSkills">
+                    <h1>Elige una o dos habilidades que quieres aprender</h1>
+                    {Object.entries(skillsByCategory).map(([category, skillsInCategory]) => (
+                        <div className="mt-2" key={category}>
+                            <hr />
+                            <h2 className="mb-4">{category}</h2>
+                            {skillsInCategory.map((skill) => (
+                                <label key={skill.id} className="d-flex mb-2 align-items-start">
+                                    <input
+                                        type="checkbox"
+                                        value={skill.id}
+                                        onChange={(e) => handleSkillChange(e, 'learn')}
+                                        checked={selectedLearnSkills.includes(skill.id)}
+                                        className="me-2"
+                                    />
+                                    <div className="d-flex flex-column">
+                                        <h6>{skill.name}</h6>
+                                        <p>{skill.description}</p>
+                                    </div>
+                                </label>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+                <div className="btn-container d-flex align-items-center justify-content-center mt-3">
+                    <button type="submit" className="btn btn-primary">Enviar</button>
+                </div>
+            </form>
         </div>
     )
 }

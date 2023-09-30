@@ -1,13 +1,20 @@
 import './Profile.css'
 import { useAuthContext } from "../../../contexts/AuthContext"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ChooseSkills from '../../../components/ChooseSkills/ChooseSkills';
 
 const Profile = () => {
   const { user } = useAuthContext();
+  const [skillsSelected, setSkillsSelected] = useState(false);
 
-  return user.teachSkills.length === 0 && user.learnSkills.length === 0 ? (
-    <ChooseSkills/>
+  useEffect(() => {
+    if (user.teachSkills.length > 0 && user.learnSkills.length > 0) {
+      setSkillsSelected(true);
+    }
+  }, [user.teachSkills, user.learnSkills]);
+
+  return !skillsSelected ? (
+    <ChooseSkills skillsSelected={skillsSelected} setSkillsSelected={setSkillsSelected}/>
   ) : (
     <div className="Profile profile-container container">
       <div className="mt-5">

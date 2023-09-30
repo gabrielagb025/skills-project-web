@@ -194,35 +194,6 @@ const Register = () => {
                     onBlur={handleBlur}
                     placeholder="Valencia"
                 />
-                <div className="teachSkills">
-                    <h1>Elige una o dos habilidades que puedes enseñar</h1>
-                    {skills.map((skill) => (
-                        <label>
-                            <input
-                                type="checkbox"
-                                value={skill.id}
-                                onChange={(e) => handleSkillChange(e, 'teach')}
-                                checked={selectedTeachSkills.includes(skill.id)}
-                            />
-                            {skill.name}
-
-                        </label>
-                    ))}
-                </div>
-                <div className="learnSkills">
-                    <h1>Elige una o dos habilidades que quieres aprender</h1>
-                    {skills.map((skill) => (
-                        <label>
-                            <input
-                                type="checkbox"
-                                value={skill.id}
-                                onChange={(e) => handleSkillChange(e, 'learn')}
-                                checked={selectedTeachSkills.includes(skill.id)}
-                            />
-                            {skill.name}
-                        </label>
-                    ))}
-                </div>
                 <div className="submitButton mt-4 d-flex justify-content-center align-items-center">
                     <button type="submit" className={`btn btn-${isSubmitting ? 'secondary' : 'primary'}`}>
                         {isSubmitting ? "Cargando" : "Registrarse"}
