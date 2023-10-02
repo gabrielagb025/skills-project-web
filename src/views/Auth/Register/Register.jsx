@@ -12,77 +12,16 @@ const initialValues = {
     name: "",
     email: "",
     password: "",
+    'repeat-password': "",
     avatar: "",
     description: "",
-    teachSkills: [],
-    learnSkills: []
+    city: ""
 }
 
 
 const Register = () => {
-
-    const [skills, setSkills] = useState([]);
     const { user } = useAuthContext();
     const navigate = useNavigate();
-    const [selectedTeachSkills, setSelectedTeachSkills] = useState([]);
-    const [selectedLearnSkills, setSelectedLearnSkills] = useState([]);
-
-    useEffect(() => {
-        getSkills()
-            .then((skillList) => {
-                setSkills(skillList)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, []);
-
-    skills.sort((a, b) => {
-        if (a.category < b.category) {
-            return -1;
-        }
-        if (a.category > b.category) {
-            return 1;
-        }
-        return 0;
-    });
-
-
-    const handleSkillChange = (e, skillType) => {
-        const skillId = e.target.value;
-
-        // Verificar si el usuario está seleccionando o deseleccionando la habilidad.
-        if (e.target.checked) {
-            // Agregar la habilidad seleccionada al estado local.
-            setSelectedTeachSkills((prevSelectedSkills) => [
-                ...prevSelectedSkills,
-                skillId,
-            ]);
-        } else {
-            // Quitar la habilidad deseleccionada del estado local.
-            setSelectedTeachSkills((prevSelectedSkills) =>
-                prevSelectedSkills.filter((id) => id !== skillId)
-            );
-        }
-    };
-
-    const handleSaveSkills = () => {
-
-
-        const selectedSkills = {
-            teachSkills: selectedTeachSkills,
-            learnSkills: selectedLearnSkills,
-        };
-
-        updateCurrentUser(user._id, selectedSkills)
-            .then((response) => {
-
-            })
-            .catch((error) => {
-
-            });
-    };
-
 
     const {
         values,
@@ -106,9 +45,9 @@ const Register = () => {
             formData.append('email', values.email);
             formData.append('password', values.password);
             formData.append('description', values.description);
+            formData.append('city', values.city);
 
             if (values.avatar) {
-                console.log('values.avatar: ', values.avatar);
                 formData.append('avatar', values.avatar);
             }
 
@@ -133,7 +72,7 @@ const Register = () => {
         <div className="register container mt-5">
             <h1>Registrarse</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <InputGroup
                     label="Nombre"
                     name="name"
@@ -160,6 +99,16 @@ const Register = () => {
                     type="password"
                     value={values.password}
                     error={touched.password && errors.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="**************"
+                />
+                 <InputGroup
+                    label="Repite la contraseña"
+                    name="repeat-password"
+                    type="password"
+                    value={values['repeat-password']}
+                    error={touched['repeat-password'] && errors['repeat-password']}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="**************"

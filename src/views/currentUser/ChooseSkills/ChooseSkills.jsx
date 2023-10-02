@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
-import { getSkills } from "../../services/SkillService";
-import { updateCurrentUser } from "../../services/UserService";
-import { useAuthContext } from "../../contexts/AuthContext";
+import { getSkills } from "../../../services/SkillService"; 
+import { updateCurrentUser } from "../../../services/UserService"; 
+import { useAuthContext } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 const ChooseSkills = ({ setSkillsSelected }) => {
     const [skills, setSkills] = useState([]);
-    const { user } = useAuthContext();
+    const { user, getUser } = useAuthContext();
     const [selectedTeachSkills, setSelectedTeachSkills] = useState([]);
     const [selectedLearnSkills, setSelectedLearnSkills] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getSkills()
@@ -70,11 +72,10 @@ const ChooseSkills = ({ setSkillsSelected }) => {
 
         updateCurrentUser(selectedSkills)
             .then((response) => {
-                console.log('actualizado')
-                setSkillsSelected(true)
+                getUser(() => navigate('/user/profile'))
             })
-            .catch((error) => {
-                console.log(err)
+            .catch((err) => {
+                console.error(err)
             });
     };
 

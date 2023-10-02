@@ -1,5 +1,6 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useAuthContext } from './contexts/AuthContext';
 import Home from './views/Auth/Home/Home';
 import NavBar from './components/NavBar/NavBar';
@@ -12,41 +13,53 @@ import EditProfile from './views/currentUser/EditProfile/EditProfile';
 import UsersList from './views/Users/UsersList/UsersList';
 import FilteredUsersList from './views/Users/FilteredUsersList/FilteredUsersList';
 import UserDetail from './views/Users/UserDetail/UserDetail';
-import ChooseSkills from './components/ChooseSkills/ChooseSkills';
+import ChooseSkills from './views/currentUser/ChooseSkills/ChooseSkills';
 
 
 function App() {
 
-  const { isAuthenticationFetched } = useAuthContext()
-  const { user } = useAuthContext()
+  const { isAuthenticationFetched, user } = useAuthContext();
+  const userHasSkills = user && user.teachSkills.length > 0 && user.learnSkills.length > 0;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticationFetched) {
+      if (user) {
+        if (!userHasSkills) {
+          navigate("/user/skills");
+        }
+      }
+    }
+  }, [isAuthenticationFetched, user, userHasSkills, navigate]);
+  
 
   return (
     <div className="App">
 
       {!isAuthenticationFetched ? (
-          <p>Loading...</p>
-      ):(
+        <p>Loading...</p>
+      ) : (
         <>
-          {user ? <NavBar/> : null }
+          {user ? <NavBar /> : null}
 
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="register" element={<Register/>}/>
-          <Route path="login" element={<Login/>}/>
-          
-          <Route path="/user" element={<ProtectedRoute/>}>
-            <Route path="/user/skills" element={<ChooseSkills/>}/>
-            <Route path="/user/timeline" element={<Timeline/>}/>
-            <Route path="/user/users" element={<UsersList/>}/>
-            <Route path="/user/users/filtered" element={<FilteredUsersList/>}/>
-            <Route path="/user/users/detail/:id" element={<UserDetail/>}/>
-            <Route path="/user/profile" element={<Profile/>}/>
-            <Route path="/user/edit" element={<Register/>}/>
-          </Route>
-        </Routes>
-      </>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+
+            <Route path="/user" element={<ProtectedRoute />}>
+              <Route path="/user/timeline" element={<Timeline />} />
+              <Route path="/user/users" element={<UsersList />} />
+              <Route path="/user/users/filtered" element={<FilteredUsersList />} />
+              <Route path="/user/users/detail/:id" element={<UserDetail />} />
+              <Route path="/user/profile" element={<Profile/>} />
+              <Route path="/user/skills" element={<ChooseSkills />} />
+              <Route path="/user/edit" element={<EditProfile />} />
+            </Route>
+          </Routes>
+        </>
       )}
-      
+
     </div>
   )
 }

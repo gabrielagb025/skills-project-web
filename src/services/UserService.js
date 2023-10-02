@@ -11,3 +11,5 @@ export const getFilteredUsers = () => http.get('/users/filtered');
 export const getUser = (id) => http.get(`/user/detail/${id}`);
 
 export const updateCurrentUser = (body) => http.patch('/currentUser/edit', body);
+
+export const editUser = (body) => http.patch('/currentUser/edit', body);
