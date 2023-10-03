@@ -17,7 +17,7 @@ import * as Yup from 'yup';
         .oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir') 
         .required('Por favor, repite la contraseña'),
     avatar: Yup
-      .string('Imagen inválida'),
+      .mixed(),
     description: Yup
       .string('Descripción inválida')
       .max(300, 'La descripción debe tener máximo 300 caracteres'),

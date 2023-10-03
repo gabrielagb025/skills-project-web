@@ -19,7 +19,7 @@ const EditProfile = () => {
 
     const initialValues = {
         name: user.name,
-        // avatar: user.avatar,
+        avatar: user.avatar,
         description: user.description,
         city: user.city
     }
@@ -46,9 +46,9 @@ const EditProfile = () => {
             formData.append('description', values.description);
             formData.append('city', values.city);
 
-            /*if (values.avatar) {
+            if (values.avatar) {
                 formData.append('avatar', values.avatar);
-            }*/
+            }
 
             editUser(formData)
                 .then(() => {
@@ -81,16 +81,16 @@ const EditProfile = () => {
                     onBlur={handleBlur}
                     placeholder="Harry Potter"
                 />
-                {/*<InputGroup
+                 <InputGroup
                     label="Imagen de perfil"
                     name="avatar"
                     type="file"
-                    value={values.avatar}
-                    error={touched.avatar && errors.avatar}
-                    onChange={handleChange}
+                    onChange={(event) => {
+                        setFieldValue("avatar", event.target.files[0]);
+                    }}
                     onBlur={handleBlur}
                     placeholder=""
-                />*/}
+                />
                 <InputGroup
                     label="Descripción"
                     name="description"

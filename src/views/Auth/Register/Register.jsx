@@ -46,10 +46,13 @@ const Register = () => {
             formData.append('password', values.password);
             formData.append('description', values.description);
             formData.append('city', values.city);
-
+            
             if (values.avatar) {
+                console.log('values.avatar: ', values.avatar);
                 formData.append('avatar', values.avatar);
-            }
+              }
+
+            console.log(formData);
 
             register(formData)
                 .then(() => {
@@ -117,9 +120,9 @@ const Register = () => {
                     label="Imagen de perfil"
                     name="avatar"
                     type="file"
-                    value={values.avatar}
-                    error={touched.avatar && errors.avatar}
-                    onChange={handleChange}
+                    onChange={(event) => {
+                        setFieldValue("avatar", event.target.files[0]);
+                    }}
                     onBlur={handleBlur}
                     placeholder=""
                 />
