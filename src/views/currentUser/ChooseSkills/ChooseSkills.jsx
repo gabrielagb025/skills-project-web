@@ -23,9 +23,11 @@ const ChooseSkills = ({ setSkillsSelected }) => {
             .catch((err) => {
                 console.log(err)
             })
-            if(userHasSkills) {
-                setSelectedTeachSkills(userCurrentTeachSkills) && setSelectedLearnSkills(userCurrentLearnSkills)
-            } 
+            
+            if (userHasSkills) {
+                setSelectedTeachSkills(userCurrentTeachSkills);
+                setSelectedLearnSkills(userCurrentLearnSkills);
+            }
     }, []);
 
     skills.sort((a, b) => {
