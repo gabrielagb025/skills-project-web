@@ -10,6 +10,9 @@ const ChooseSkills = ({ setSkillsSelected }) => {
     const { user, getUser } = useAuthContext();
     const [selectedTeachSkills, setSelectedTeachSkills] = useState([]);
     const [selectedLearnSkills, setSelectedLearnSkills] = useState([]);
+    const userCurrentTeachSkills = user ? user.teachSkills.map((skill) => skill.id) : [];
+    const userCurrentLearnSkills = user ? user.learnSkills.map((skill) => skill.id) : [];
+    const userHasSkills = user && user.teachSkills.length > 0 && user.learnSkills.length > 0;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,6 +23,9 @@ const ChooseSkills = ({ setSkillsSelected }) => {
             .catch((err) => {
                 console.log(err)
             })
+            if(userHasSkills) {
+                setSelectedTeachSkills(userCurrentTeachSkills) && setSelectedLearnSkills(userCurrentLearnSkills)
+            } 
     }, []);
 
     skills.sort((a, b) => {

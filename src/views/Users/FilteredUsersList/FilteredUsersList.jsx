@@ -17,6 +17,8 @@ const FilteredUsersList = () => {
             });
     }, [])
 
+    console.log(filteredUsers)
+
     return (
         <div className="UsersList container">
             <h1>Encuentra usuarios según tus intereses</h1>

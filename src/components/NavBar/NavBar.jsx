@@ -33,6 +33,9 @@ const NavBar = () => {
                                 <NavLink className="nav-link" to="/user/edit">Editar perfil</NavLink>
                             </li>
                             <li className="nav-item">
+                                <NavLink className="nav-link" to="/user/skills">Editar habilidades</NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <button className="nav-link" onClick={logout}>Cerrar sesión</button>
                             </li>
                         </ul>
