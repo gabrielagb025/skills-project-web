@@ -1,0 +1,8 @@
+.multimedia-list {
+    list-style-type: none;
+}
+
+.multimedia-preview img {
+    max-width: 100px;
+    height: auto
+}
