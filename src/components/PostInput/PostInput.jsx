@@ -13,6 +13,7 @@ const PostInput = () => {
     const [post, setPost] = useState(initialValues);
     const [files, setFiles] = useState([]);
     const [selectedFileType, setSelectedFileType] = useState(null);
+    const [showInputFile, setShowInputFile] = useState(false);
 
     useEffect(() => {
         setPost(prevPost => ({
@@ -24,16 +25,16 @@ const PostInput = () => {
     const handleChange = (ev) => {
         const key = ev.target.name;
         const value = ev.target.value;
-    
+
         setPost(prevPost => ({
-          ...prevPost,
-          [key]: value
+            ...prevPost,
+            [key]: value
         }))
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+
         const formData = new FormData();
         formData.append('message', post.message);
         post.multimedia.forEach((image) => {
@@ -41,18 +42,23 @@ const PostInput = () => {
         })
         console.log(formData);
         createPost(formData)
-          .then(() => {
-            setPost(initialValues)
-            setFiles([])
-          })
-          .catch(err => console.error(err))
-      }
-    
-    /*const handleFileSelect = (fileType, event) => {
-        event.preventDefault()
-        setSelectedFileType(fileType)
-    }*/
+            .then(() => {
+                setPost(initialValues)
+                setFiles([])
+            })
+            .catch(err => console.error(err))
+    }
 
+    const showInputHandler = () => {
+        setShowInputFile(true);
+    }
+
+    const handleFileSelect = (event, fileType) => {
+        event.preventDefault();
+        setSelectedFileType(fileType);
+        showInputHandler();
+    }
+    
     const onDrop = useCallback(acceptedFiles => {
         if (acceptedFiles?.length) {
             setFiles(previousFiles => [
@@ -64,16 +70,13 @@ const PostInput = () => {
         }
     }, []);
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        accept: {
-            'image/*' : []
-        }
-        /*accept: selectedFileType === 'image' ? 'image/*' : 
+        accept: selectedFileType === 'image' ? 'image/*' : 
             selectedFileType === 'video' ? 'video/*' : 
             selectedFileType === 'document' ? '.pdf,.doc,.docx' : 
-            selectedFileType === 'audio' ? 'audio/*' : ''*/
-     });
+            selectedFileType === 'audio' ? 'audio/*' : ''
+    });
 
     const removeFile = name => {
         setFiles(files => files.filter(file => file.name !== name))
@@ -87,21 +90,22 @@ const PostInput = () => {
                     <label id="post-message" className="form-label">Comentario</label>
                     <input onChange={handleChange} id="post-message" type="text" name="message" className="form-control" placeholder="Publicación..." value={post.message} />
                 </div>
-                {/*<div className="multimedia-buttons d-flex justify-content-around">
-                    <button className="btn btn-primary" onClick={() => handleFileSelect('image', event)}>Imágenes</button>
-                    <button className="btn btn-primary" onClick={() => handleFileSelect('video', event)}>Vídeo</button>
-                    <button className="btn btn-primary" onClick={() => handleFileSelect('document', event)}>Documento</button>
-                    <button className="btn btn-primary" onClick={() => handleFileSelect('audio', event)}>Audio</button>
-                </div>*/}
+                <div className="multimedia-buttons d-flex justify-content-around">
+                    <button className="btn btn-primary" onClick={() => handleFileSelect(event, 'image')}>Imágenes</button>
+                    <button className="btn btn-primary" onClick={() => handleFileSelect('video')}>Vídeo</button>
+                    <button className="btn btn-primary" onClick={() => handleFileSelect('document')}>Documento</button>
+                    <button className="btn btn-primary" onClick={() => handleFileSelect('audio')}>Audio</button>
+                </div>
                 <div className="mb-3">
-                    <div {...getRootProps()}>
-                        <input {...getInputProps()} />
-                        {isDragActive ? (
-                            <p>Coloca tus archivos aquí...</p>
-                        ) : (
-                            <p>Arrastra y suelta tus archivos aquí, o pulsa para seleccionar archivos.</p>
-                        )}
-                    </div>
+                    {showInputFile &&
+                        <div {...getRootProps()}>
+                            <input {...getInputProps()} />
+                            {isDragActive ? (
+                                <p>Coloca tus archivos aquí...</p>
+                            ) : (
+                                <p>Arrastra y suelta tus archivos aquí, o pulsa para seleccionar archivos.</p>
+                            )}
+                        </div>}
                     <div className="multimedia-preview">
                         <ul className="multimedia-list">
                             {files.map(file => (

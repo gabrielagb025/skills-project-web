@@ -1,11 +1,36 @@
 import './Profile.css'
 import { useAuthContext } from "../../../contexts/AuthContext"
 import { useState, useEffect } from 'react';
+import { deletePost, getCurrentUserPosts} from '../../../services/PostService';
 
 const Profile = () => {
   const { user } = useAuthContext();
+  const [userPostList, setUserPostList] = useState([])
 
-  return ( 
+  useEffect(() => {
+    getCurrentUserPosts()
+    .then((posts) => {
+      setUserPostList(posts)
+    })
+    .catch(err => {
+      console.error(err)
+    })
+  }, []);
+
+
+  const handleDeletePost = (postId) => {
+    deletePost(postId)
+      .then(() => {
+        console.log('post borrado')
+        const filteredPosts = userPostList.filter((post) => post.id !== postId);
+        setUserPostList(filteredPosts);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  return (
     <div className="Profile profile-container container">
       <div className="mt-5">
         <img src={user.avatar} alt="" width="300" />
@@ -30,16 +55,20 @@ const Profile = () => {
             <p>{skill.description}</p>
           </div >
         ))}
-      </div>
-      <div className="profile-container">
         <h4>Tus publicaciones</h4>
-        {user.posts.map((post) => (
+        {userPostList.map((post) => (
           <div className="post-container" key={post.id}>
+            <div className="post info">
             <p>{post.message}</p>
             {post.multimedia.map((image) => (
-              <img className="me-2" src={image} width={100}/>
+              <img className="me-2" src={image} width={100} key={image}/>
             ))}
             <p>{post.date}</p>
+            </div>
+            <div className="post-buttons d-flex">
+              <button className="btn btn-success me-4">Editar</button>
+              <button className="btn btn-danger" onClick={() => handleDeletePost(post.id)}>Borrar</button>
+            </div>
           </div>
         ))}
       </div>
