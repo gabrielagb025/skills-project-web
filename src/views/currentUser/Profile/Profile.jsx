@@ -31,6 +31,18 @@ const Profile = () => {
           </div >
         ))}
       </div>
+      <div className="profile-container">
+        <h4>Tus publicaciones</h4>
+        {user.posts.map((post) => (
+          <div className="post-container" key={post.id}>
+            <p>{post.message}</p>
+            {post.multimedia.map((image) => (
+              <img className="me-2" src={image} width={100}/>
+            ))}
+            <p>{post.date}</p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

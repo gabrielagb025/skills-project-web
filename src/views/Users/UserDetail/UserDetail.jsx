@@ -29,6 +29,7 @@ const UserDetail = () => {
   }, [id]);
 
 
+
   const handleChange = (ev) => {
     const key = ev.target.name;
     const value = ev.target.value;
@@ -55,14 +56,14 @@ const UserDetail = () => {
 
   const handleDeleteRating = (ratingId) => {
     deleteRating(ratingId)
-    .then(() => {
-      console.log('rating borrado')
-      const filteredRatings = ratingList.filter((rating) => rating.id !== ratingId);
-      setRatingList(filteredRatings);
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then(() => {
+        console.log('rating borrado')
+        const filteredRatings = ratingList.filter((rating) => rating.id !== ratingId);
+        setRatingList(filteredRatings);
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   return (
@@ -70,73 +71,90 @@ const UserDetail = () => {
       {!user ? (
         <p>Loading...</p>
       ) : (
-        /* INFORMACIÓN DEL USUARIO */
-        <div className="UserDetail detail-container container">
-          <div className="mt-5">
-            <img src={user.avatar} alt="" width="300" />
+        <>
+        {/* INFORMACIÓN DEL USUARIO */}
+          <div className="UserDetail detail-container container">
+            <div className="mt-5">
+              <img src={user.avatar} alt="" width="300" />
+            </div>
+            <div className="mt-4 profile-info-container">
+              <h1>{user.name}</h1>
+              <p>{user.description}</p>
+              <p>{user.city}</p>
+              <h4>Habilidades que {user.name} puede enseñar:</h4>
+              {user.teachSkills.map((skill) => (
+                <div key={skill.id}>
+                  <h5>{skill.name}</h5>
+                  <p>{skill.category}</p>
+                  <p>{skill.description}</p>
+                </div>
+              ))}
+              <h4>Habilidades que {user.name} quiere aprender:</h4>
+              {user.learnSkills.map((skill) => (
+                <div key={skill.id}>
+                  <h5>{skill.name}</h5>
+                  <p>{skill.description}</p>
+                </div >
+              ))}
+            </div>
+            {/* PUBLICACIONES */}
+            <div className="posts-container">
+              {user.posts?.length > 0 ? (
+                <>
+                  <h4>Publicaciones de {user.name}</h4>
+                  {user.posts.map((post) => (
+                    <div className="post-container" key={post.id}>
+                      <p>{post.message}</p>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <p>{user.name} todavía no ha hecho ninguna publicación.</p>
+              )}
+            </div>
+            <hr />
+            {/* FORMULARIO DE RESEÑAS */}
+            <div className="rating-form">
+              <form onSubmit={handleSubmit}>
+                <h4>Deja una reseña sobre {user.name}</h4>
+                <div className="mb-3">
+                  <label id="rating-message" className="form-label">Comentario</label>
+                  <input onChange={handleChange} id="rating-message" type="text" name="message" className="form-control" value={newRating.message} placeholder="Comentario" />
+                </div>
+                <div className="mb-3">
+                  <label id="rating-score" className="form-label">Valoración</label>
+                  <input onChange={handleChange} id="rating-score" type="number" name="score" className="form-control" value={newRating.score} />
+                </div>
+                <button type="submit" className="btn btn-primary">Enviar</button>
+              </form>
+            </div>
           </div>
-          <div className="mt-4 profile-info-container">
-            <h1>{user.name}</h1>
-            <p>{user.description}</p>
-            <p>{user.city}</p>
-            <h4>Habilidades que {user.name} puede enseñar:</h4>
-            {user.teachSkills.map((skill) => (
-              <div key={skill.id}>
-                <h5>{skill.name}</h5>
-                <p>{skill.category}</p>
-                <p>{skill.description}</p>
-              </div>
-            ))}
-            <h4>Habilidades que {user.name} quiere aprender:</h4>
-            {user.learnSkills.map((skill) => (
-              <div key={skill.id}>
-                <h5>{skill.name}</h5>
-                <p>{skill.description}</p>
-              </div >
-            ))}
+          {/* LISTA DE RESEÑAS */}
+          <div className="rating-list container mt-4">
+            {ratingList.length > 0 ? (
+              <>
+                <h4>Reseñas acerca de {user.name}</h4>
+                {ratingList.map((rating) => (
+                  <div key={rating.id} className="rating-container mt-4">
+                    <img src={rating.currentUser.avatar} alt="" width="100" />
+                    <p>{rating.currentUser.name}</p>
+                    <p>{rating.message}</p>
+                    <p>{rating.score}</p>
+                    <p>{rating.date}</p>
+                    {rating.currentUser.id === currentUser.id ? (
+                      <button className="btn btn-danger" onClick={() => handleDeleteRating(rating.id)}>Borrar</button>
+                    ) : (
+                      null
+                    )}
+                  </div>
+                ))}
+              </>
+            ) : (
+              <p>{user.name} todavía no tiene reseñas.</p>
+            )}
           </div>
-          {/* FORMULARIO DE RESEÑAS */}
-          <hr />
-          <div className="rating-form">
-            <form onSubmit={handleSubmit}>
-              <h4>Deja una reseña sobre {user.name}</h4>
-              <div className="mb-3">
-                <label id="rating-message" className="form-label">Comentario</label>
-                <input onChange={handleChange} id="rating-message" type="text" name="message" className="form-control" value={newRating.message} placeholder="Comentario"/>
-              </div>
-              <div className="mb-3">
-                <label id="rating-score" className="form-label">Valoración</label>
-                <input onChange={handleChange} id="rating-score" type="number" name="score" className="form-control" value={newRating.score}/>
-              </div>
-              <button type="submit" className="btn btn-primary">Enviar</button>
-            </form>
-          </div>
-        </div>
+        </>
       )}
-      {/* LISTA DE RESEÑAS */}
-      <div className="rating-list container mt-4">
-        {ratingList.length > 0 ? (
-          <>
-            <h4>Reseñas de {user.name}</h4>
-            {ratingList.map((rating) => (
-              <div key={rating.id} className="rating-container mt-4">
-                <img src={rating.currentUser.avatar} alt="" width="100" />
-                <p>{rating.currentUser.name}</p>
-                <p>{rating.message}</p>
-                <p>{rating.score}</p>
-                <p>{rating.date}</p>
-                {rating.currentUser.id === currentUser.id ? (
-                  <button className="btn btn-danger" onClick={() => handleDeleteRating(rating.id)}>Borrar</button>
-                ) : (
-                  null
-                )}
-              </div>
-            ))}
-          </>
-        ) : (
-          <p>Este usuario todavía no tiene reseñas.</p>
-        )}
-      </div>
     </div>
   )
 }
