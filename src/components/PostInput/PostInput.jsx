@@ -43,6 +43,7 @@ const PostInput = () => {
         console.log(formData);
         createPost(formData)
             .then(() => {
+                console.log('post creado')
                 setPost(initialValues)
                 setFiles([])
             })

@@ -1,11 +1,13 @@
 import './Profile.css'
 import { useAuthContext } from "../../../contexts/AuthContext"
 import { useState, useEffect } from 'react';
-import { deletePost, getCurrentUserPosts} from '../../../services/PostService';
+import { deletePost, getCurrentUserPosts, editPost } from '../../../services/PostService';
+import PostInput from '../../../components/PostInput/PostInput';
 
 const Profile = () => {
   const { user } = useAuthContext();
-  const [userPostList, setUserPostList] = useState([])
+  const [ userPostList, setUserPostList ] = useState([]);
+  const [ postInput, setPostInput ] = useState(false)
 
   useEffect(() => {
     getCurrentUserPosts()
@@ -24,6 +26,17 @@ const Profile = () => {
         console.log('post borrado')
         const filteredPosts = userPostList.filter((post) => post.id !== postId);
         setUserPostList(filteredPosts);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  const handleEditPost = (postId) => {
+    setPostInput(true)
+    editPost(postId, postData)
+      .then(() => {
+        console.log('post editado')
       })
       .catch(err => {
         console.log(err)
@@ -65,8 +78,9 @@ const Profile = () => {
             ))}
             <p>{post.date}</p>
             </div>
+            {postInput && <PostInput/>}
             <div className="post-buttons d-flex">
-              <button className="btn btn-success me-4">Editar</button>
+              <button className="btn btn-success me-4" onClick={() => handleEditPost(post.id)}>Editar</button>
               <button className="btn btn-danger" onClick={() => handleDeletePost(post.id)}>Borrar</button>
             </div>
           </div>
