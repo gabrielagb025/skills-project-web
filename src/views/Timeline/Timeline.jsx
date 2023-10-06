@@ -36,7 +36,9 @@ const Timeline = () => {
             <h1 className="mt-4">Timeline</h1>
             <PostInput />
             <div className="posts-list mt-4">
-                {postList.map((post) => (
+                {postList
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .map((post) => (
                     <PostCard key={post._id} post={post} onDeletePost={handleDeletePost}/>
                 ))}
             </div>
