@@ -37,7 +37,6 @@ export const AuthContextProvider = ({ children }) => {
                 console.log('entro al logout')
                 logout()
             } else {
-                console.log('entro a getuser')
                 getUser()
             } 
         } else {

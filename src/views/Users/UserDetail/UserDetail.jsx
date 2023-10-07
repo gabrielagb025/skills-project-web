@@ -4,7 +4,8 @@ import { getUser } from "../../../services/UserService";
 import { createRating, getRatings, deleteRating } from "../../../services/RatingService";
 import { useAuthContext } from "../../../contexts/AuthContext";
 import InputGroup from "../../../components/InputGroup/InputGroup";
-import { sendFriendRequest } from "../../../services/FriendRequestService";
+import { sendFriendRequest, getFriends, getPendingFriendRequests } from "../../../services/FriendRequestService";
+import { NavLink } from "react-router-dom";
 
 
 const ratingInitialValues = {
@@ -23,14 +24,27 @@ const UserDetail = () => {
   const [ratingList, setRatingList] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [requestSent, setRequestSent] = useState(false);
+  const [isFriend, setIsFriend] = useState(false);
+  const [madeRequest, setMadeRequest] = useState(false);
+  const [haveRequest, setHaveRequest] = useState(false);
   const { id } = useParams();
   const { user: currentUser } = useAuthContext();
 
   useEffect(() => {
-    Promise.all([getUser(id), getRatings(id)])
-      .then(([user, ratings]) => {
+    Promise.all([getUser(id), getRatings(id), getFriends(), getPendingFriendRequests()])
+      .then(([user, ratings, friends, pendingFriendRequests]) => {
         setUser(user);
         setRatingList(ratings);
+        setIsFriend(friends.some(f => f.id === user.id));
+
+        const receivedRequest = pendingFriendRequests.find(request => request.userSend === user.id);
+        const sentRequest = pendingFriendRequests.find(request => request.userReceive === user.id);
+
+        if (sentRequest) {
+          setMadeRequest(true);
+        } else if (receivedRequest) {
+          setHaveRequest(true);
+        }
       })
       .catch(err => {
         console.error(err);
@@ -99,10 +113,10 @@ const UserDetail = () => {
         setFriendRequest(friendRequestIntialValues)
         setShowInput(false)
         setRequestSent(true)
+        setMadeRequest(true)
       })
       .catch(err => console.error(err))
   }
-
 
   return (
     <div className="UserDetail">
@@ -115,24 +129,43 @@ const UserDetail = () => {
             <div className="mt-5">
               <img src={user.avatar} alt="" width="300" />
             </div>
-            <div className="mt-4">
-              <button className="btn btn-success" onClick={handleShowInput}>Conectar</button>
-            </div>
-            {showInput &&
-              <div>
-                <form onSubmit={handleSubmitFriendRequest}>
-                  <InputGroup
-                    label={`Envía un mensaje a ${user.name}`}
-                    type="text"
-                    id="message"
-                    name="message"
-                    placeholder="!Hola! Me gustaría conectar contigo."
-                    value={friendRequest.message}
-                    onChange={handleChangeFriendRequest} />
-                  <button type="submit" className="btn btn-primary">Enviar petición</button>
-                </form>
-              </div>}
-            {!showInput && requestSent && <p className="mt-4">Solicitud enviada correctamente</p>}
+            {isFriend ? (
+              <>
+                <button className="btn btn-secondary mt-4">Chatear con {user.name}</button>
+                <button className="btn btn-danger mt-4 ms-3">Dejar de conectar con {user.name}</button>
+              </>
+            ) : (
+              <>
+                <div className="mt-4">
+                  {madeRequest ? (
+                    <p>Has enviado una solicitud de amistad a {user.name}.</p>
+                  ) : haveRequest ? (
+                    <>
+                      <p>Tienes una solicitud de amistad pendiente de {user.name}.</p>
+                      <NavLink to="/user/notifications"><button className="btn btn-primary">Ver solicitudes</button></NavLink>
+                    </>
+                  ) : (
+                    !madeRequest && (
+                      <button className="btn btn-success" onClick={handleShowInput}>Conectar con {user.name}</button>
+                    )
+                  )}
+                </div>
+                {showInput &&
+                  <div>
+                    <form onSubmit={handleSubmitFriendRequest}>
+                      <InputGroup
+                        label={`Envía un mensaje a ${user.name}`}
+                        type="text"
+                        id="message"
+                        name="message"
+                        placeholder="!Hola! Me gustaría conectar contigo."
+                        value={friendRequest.message}
+                        onChange={handleChangeFriendRequest} />
+                      <button type="submit" className="btn btn-primary">Enviar petición</button>
+                    </form>
+                  </div>}
+              </>
+            )}
             <div className="mt-4 profile-info-container">
               <h1>{user.name}</h1>
               <p>{user.description}</p>
