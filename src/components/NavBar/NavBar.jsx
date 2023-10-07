@@ -27,6 +27,9 @@ const NavBar = () => {
                                 <NavLink className="nav-link" to="/user/users/filtered">Usuarios para ti</NavLink>
                             </li>
                             <li className="nav-item">
+                                <NavLink className="nav-link" to="/user/notifications">Notificaciones</NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <NavLink className="nav-link" to="/user/profile">Mi perfil</NavLink>
                             </li>
                             <li className="nav-item">
