@@ -15,6 +15,7 @@ import FilteredUsersList from './views/Users/FilteredUsersList/FilteredUsersList
 import UserDetail from './views/Users/UserDetail/UserDetail';
 import ChooseSkills from './views/currentUser/ChooseSkills/ChooseSkills';
 import Notifications from './views/currentUser/Notificacions/Notifications';
+import Friends from './views/Users/Friends/Friends';
 
 
 function App() {
@@ -54,7 +55,8 @@ function App() {
               <Route path="/user/users/filtered" element={<FilteredUsersList />} />
               <Route path="/user/users/detail/:id" element={<UserDetail />} />
               <Route path="/user/notifications" element={<Notifications />} />
-              <Route path="/user/profile" element={<Profile/>} />
+              <Route path="/user/friends" element={<Friends />} />
+              <Route path="/user/profile" element={<Profile />} />
               <Route path="/user/skills" element={<ChooseSkills />} />
               <Route path="/user/edit" element={<EditProfile />} />
             </Route>
