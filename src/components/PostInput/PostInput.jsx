@@ -12,8 +12,15 @@ const PostInput = (props) => {
 
     const [post, setPost] = useState(initialValues);
     const [files, setFiles] = useState([]);
+
     const [selectedFileType, setSelectedFileType] = useState(null);
+
     const [showInputFile, setShowInputFile] = useState(false);
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [postIdToEdit, setPostIdToEdit] = useState(null);
+
+
     const { updatePost } = props
 
     useEffect(() => {

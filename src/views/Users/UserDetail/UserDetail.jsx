@@ -3,17 +3,26 @@ import { useParams } from "react-router-dom";
 import { getUser } from "../../../services/UserService";
 import { createRating, getRatings, deleteRating } from "../../../services/RatingService";
 import { useAuthContext } from "../../../contexts/AuthContext";
+import InputGroup from "../../../components/InputGroup/InputGroup";
+import { sendFriendRequest } from "../../../services/FriendRequestService";
 
 
-const initialValues = {
+const ratingInitialValues = {
   message: "",
   score: "1"
 }
 
+const friendRequestIntialValues = {
+  message: ""
+}
+
 const UserDetail = () => {
   const [user, setUser] = useState(null);
-  const [newRating, setNewRating] = useState(initialValues);
+  const [newRating, setNewRating] = useState(ratingInitialValues);
+  const [friendRequest, setFriendRequest] = useState(friendRequestIntialValues);
   const [ratingList, setRatingList] = useState([]);
+  const [showInput, setShowInput] = useState(false);
+  const [requestSent, setRequestSent] = useState(false);
   const { id } = useParams();
   const { user: currentUser } = useAuthContext();
 
@@ -28,9 +37,9 @@ const UserDetail = () => {
       });
   }, [id]);
 
+  /* RATINGS */
 
-
-  const handleChange = (ev) => {
+  const handleChangeRating = (ev) => {
     const key = ev.target.name;
     const value = ev.target.value;
 
@@ -40,12 +49,12 @@ const UserDetail = () => {
     }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmitRating = (event) => {
     event.preventDefault()
     createRating(id, newRating)
       .then(() => {
         console.log('rating creado')
-        setNewRating(initialValues)
+        setNewRating(ratingInitialValues)
         getRatings(id)
           .then(ratings => {
             setRatingList(ratings)
@@ -66,17 +75,64 @@ const UserDetail = () => {
       })
   }
 
+  /* FRIEND REQUESTS */
+
+  const handleShowInput = () => {
+    setShowInput(true)
+  }
+
+  const handleChangeFriendRequest = (ev) => {
+    const key = ev.target.name;
+    const value = ev.target.value;
+
+    setFriendRequest(prevFriendRequest => ({
+      ...prevFriendRequest,
+      [key]: value
+    }))
+  }
+
+  const handleSubmitFriendRequest = (event) => {
+    event.preventDefault()
+    sendFriendRequest(id, friendRequest)
+      .then(() => {
+        console.log('friend request enviado')
+        setFriendRequest(friendRequestIntialValues)
+        setShowInput(false)
+        setRequestSent(true)
+      })
+      .catch(err => console.error(err))
+  }
+
+
   return (
     <div className="UserDetail">
       {!user ? (
         <p>Loading...</p>
       ) : (
         <>
-        {/* INFORMACIÓN DEL USUARIO */}
+          {/* INFORMACIÓN DEL USUARIO */}
           <div className="UserDetail detail-container container">
             <div className="mt-5">
               <img src={user.avatar} alt="" width="300" />
             </div>
+            <div className="mt-4">
+              <button className="btn btn-success" onClick={handleShowInput}>Conectar</button>
+            </div>
+            {showInput &&
+              <div>
+                <form onSubmit={handleSubmitFriendRequest}>
+                  <InputGroup
+                    label={`Envía un mensaje a ${user.name}`}
+                    type="text"
+                    id="message"
+                    name="message"
+                    placeholder="!Hola! Me gustaría conectar contigo."
+                    value={friendRequest.message}
+                    onChange={handleChangeFriendRequest} />
+                  <button type="submit" className="btn btn-primary">Enviar petición</button>
+                </form>
+              </div>}
+            {!showInput && requestSent && <p className="mt-4">Solicitud enviada correctamente</p>}
             <div className="mt-4 profile-info-container">
               <h1>{user.name}</h1>
               <p>{user.description}</p>
@@ -115,15 +171,15 @@ const UserDetail = () => {
             <hr />
             {/* FORMULARIO DE RESEÑAS */}
             <div className="rating-form">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmitRating}>
                 <h4>Deja una reseña sobre {user.name}</h4>
                 <div className="mb-3">
                   <label id="rating-message" className="form-label">Comentario</label>
-                  <input onChange={handleChange} id="rating-message" type="text" name="message" className="form-control" value={newRating.message} placeholder="Comentario" />
+                  <input onChange={handleChangeRating} id="rating-message" type="text" name="message" className="form-control" value={newRating.message} placeholder="Comentario" />
                 </div>
                 <div className="mb-3">
                   <label id="rating-score" className="form-label">Valoración</label>
-                  <input onChange={handleChange} id="rating-score" type="number" name="score" className="form-control" value={newRating.score} />
+                  <input onChange={handleChangeRating} id="rating-score" type="number" name="score" className="form-control" value={newRating.score} />
                 </div>
                 <button type="submit" className="btn btn-primary">Enviar</button>
               </form>
