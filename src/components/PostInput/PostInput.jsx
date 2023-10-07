@@ -8,12 +8,13 @@ const initialValues = {
     multimedia: []
 }
 
-const PostInput = () => {
+const PostInput = (props) => {
 
     const [post, setPost] = useState(initialValues);
     const [files, setFiles] = useState([]);
     const [selectedFileType, setSelectedFileType] = useState(null);
     const [showInputFile, setShowInputFile] = useState(false);
+    const { updatePost } = props
 
     useEffect(() => {
         setPost(prevPost => ({
@@ -46,6 +47,7 @@ const PostInput = () => {
                 console.log('post creado')
                 setPost(initialValues)
                 setFiles([])
+                updatePost()
             })
             .catch(err => console.error(err))
     }

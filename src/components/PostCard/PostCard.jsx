@@ -10,10 +10,10 @@ const PostCard = (props) => {
     return (
         <div className="PostCard post-container mt-4 d-flex">
             <div className="user-img me-3">
-                <NavLink to={`/user/users/detail/${post.user._id}`}><img src={post.user.avatar} alt="" width={100} /></NavLink>
+                <NavLink to={post.user._id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user._id}`}><img src={post.user.avatar} alt="" width={100} /></NavLink>
             </div>
             <div className="post-content">
-                <NavLink style={{ textDecoration: 'none' }} to={`/user/users/detail/${post.user._id}`}><h5 id="post-user-name">{post.user.name}</h5></NavLink>
+                <NavLink style={{ textDecoration: 'none' }} to={post.user._id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user._id}`}><h5 id="post-user-name">{post.user.name}</h5></NavLink>
                 <p>{post.message}</p>
                 {post.multimedia.length > 0 ?
                     post.multimedia.map((image) => (

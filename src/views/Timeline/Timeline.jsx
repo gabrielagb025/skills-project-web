@@ -31,10 +31,20 @@ const Timeline = () => {
           })
     }
 
+    const handleUpdatePost = () => {
+        getTimelinePosts()
+        .then((posts) => {
+            setPostList(posts)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
     return (
         <div className="Timeline container">
             <h1 className="mt-4">Timeline</h1>
-            <PostInput />
+            <PostInput updatePost={handleUpdatePost}/>
             <div className="posts-list mt-4">
                 {postList
                 .sort((a, b) => new Date(b.date) - new Date(a.date))
