@@ -55,6 +55,7 @@ const PostInput = (props) => {
         post.multimedia.forEach((image) => {
             formData.append('multimedia', image);
         })
+        formData.append('type', selectedFileType);
         console.log(formData);
         createPost(formData)
             .then(() => {

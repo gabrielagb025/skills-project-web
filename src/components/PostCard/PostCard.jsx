@@ -24,7 +24,7 @@ const PostCard = (props) => {
                 <p>{post.date}</p>
             </div>
             <div className="delete-btn">
-                {post.user._id === currentUser.id ? (
+                {post.user.id === currentUser.id ? (
                     <button className="btn btn-danger" onClick={() => onDeletePost(post._id)}>Borrar</button>
                 ) : (
                     null
