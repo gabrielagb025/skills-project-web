@@ -4,7 +4,7 @@ import { getUser } from "../../../services/UserService";
 import { createRating, getRatings, deleteRating } from "../../../services/RatingService";
 import { useAuthContext } from "../../../contexts/AuthContext";
 import InputGroup from "../../../components/InputGroup/InputGroup";
-import { sendFriendRequest, getFriends, getPendingFriendRequests } from "../../../services/FriendRequestService";
+import { sendFriendRequest, getFriends, getPendingFriendRequests, cancelFriendRequest, getAcceptedFriendRequest } from "../../../services/FriendRequestService";
 import { NavLink } from "react-router-dom";
 
 
@@ -15,7 +15,7 @@ const ratingInitialValues = {
 
 const friendRequestIntialValues = {
   message: ""
-}
+} 
 
 const UserDetail = () => {
   const [user, setUser] = useState(null);
@@ -27,15 +27,17 @@ const UserDetail = () => {
   const [isFriend, setIsFriend] = useState(false);
   const [madeRequest, setMadeRequest] = useState(false);
   const [haveRequest, setHaveRequest] = useState(false);
+  const [acceptedFriendRequest, setAcceptedFriendRequest] = useState(null);
   const { id } = useParams();
   const { user: currentUser } = useAuthContext();
 
   useEffect(() => {
-    Promise.all([getUser(id), getRatings(id), getFriends(), getPendingFriendRequests()])
-      .then(([user, ratings, friends, pendingFriendRequests]) => {
+    Promise.all([getUser(id), getRatings(id), getFriends(), getPendingFriendRequests(), getAcceptedFriendRequest(id)])
+      .then(([user, ratings, friends, pendingFriendRequests, acceptedFriendReq]) => {
         setUser(user);
         setRatingList(ratings);
         setIsFriend(friends.some(f => f.id === user.id));
+        setAcceptedFriendRequest(acceptedFriendReq);
 
         const receivedRequest = pendingFriendRequests.find(request => request.userSend === user.id);
         const sentRequest = pendingFriendRequests.find(request => request.userReceive === user.id);
@@ -50,6 +52,8 @@ const UserDetail = () => {
         console.error(err);
       });
   }, [id]);
+
+  console.log(acceptedFriendRequest)
 
   /* RATINGS */
 
@@ -118,6 +122,17 @@ const UserDetail = () => {
       .catch(err => console.error(err))
   }
 
+  const handleCancelFriendRequest = (requestId) => {
+    cancelFriendRequest(requestId)
+      .then(() => {
+        console.log('conexión cancelada')
+        setIsFriend(false);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   return (
     <div className="UserDetail">
       {!user ? (
@@ -132,7 +147,7 @@ const UserDetail = () => {
             {isFriend ? (
               <>
                 <button className="btn btn-secondary mt-4">Chatear con {user.name}</button>
-                <button className="btn btn-danger mt-4 ms-3">Dejar de conectar con {user.name}</button>
+                <button className="btn btn-danger mt-4 ms-3" onClick={() => handleCancelFriendRequest(acceptedFriendRequest.id)}>Dejar de conectar con {user.name}</button>
               </>
             ) : (
               <>

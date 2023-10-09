@@ -11,3 +11,7 @@ export const respondToFriendRequest = (id, status) => http.patch(`/friend-reques
 export const getFriends = () => http.get('/friends');
 
 export const getPendingFriendRequests = () => http.get('/friend-requests/pending');
+
+export const cancelFriendRequest = (id) => http.delete(`/friend-request/delete/${id}`);
+
+export const getAcceptedFriendRequest = (id) => http.get(`/friend-request/accepted/${id}`);
