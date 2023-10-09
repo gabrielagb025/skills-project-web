@@ -31,7 +31,7 @@ const Timeline = () => {
           })
     }
 
-    const handleUpdatePost = () => {
+    const handleUpdatePostList = () => {
         getTimelinePosts()
         .then((posts) => {
             setPostList(posts)
@@ -44,7 +44,7 @@ const Timeline = () => {
     return (
         <div className="Timeline container">
             <h1 className="mt-4">Timeline</h1>
-            <PostInput updatePost={handleUpdatePost}/>
+            <PostInput updatePost={handleUpdatePostList}/>
             <div className="posts-list mt-4">
                 {postList
                 .sort((a, b) => new Date(b.date) - new Date(a.date))

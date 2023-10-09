@@ -53,8 +53,6 @@ const UserDetail = () => {
       });
   }, [id]);
 
-  console.log(acceptedFriendRequest)
-
   /* RATINGS */
 
   const handleChangeRating = (ev) => {

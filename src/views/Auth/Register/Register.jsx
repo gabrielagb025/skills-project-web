@@ -6,6 +6,8 @@ import { getSkills } from "../../../services/SkillService";
 import InputGroup from '../../../components/InputGroup/InputGroup'
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuthContext } from "../../../contexts/AuthContext";
+import { NavLink } from "react-router-dom";
+import './Register.css'
 
 
 const initialValues = {
@@ -72,12 +74,16 @@ const Register = () => {
     return user ? (
         <Navigate to="/user/profile" />
     ) : (
-        <div className="register container mt-5">
+        <div className="register-container container mt-5">
             <h1>Registrarse</h1>
 
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <InputGroup
-                    label="Nombre"
+                    label={
+                        <>
+                          <i className="bi bi-person-fill"></i> Nombre
+                        </>
+                    }
                     name="name"
                     type="text"
                     value={values.name}
@@ -87,7 +93,11 @@ const Register = () => {
                     placeholder="Harry Potter"
                 />
                 <InputGroup
-                    label="Email"
+                    label={
+                        <>
+                          <i className="bi bi-envelope-fill"></i> Correo electrónico
+                        </>
+                    }
                     name="email"
                     type="email"
                     value={values.email}
@@ -97,7 +107,11 @@ const Register = () => {
                     placeholder="harry@hogwarts.es"
                 />
                 <InputGroup
-                    label="Contraseña"
+                    label={
+                        <>
+                          <i className="bi bi-lock-fill"></i> Contraseña
+                        </>
+                    }
                     name="password"
                     type="password"
                     value={values.password}
@@ -107,7 +121,11 @@ const Register = () => {
                     placeholder="**************"
                 />
                  <InputGroup
-                    label="Repite la contraseña"
+                    label={
+                        <>
+                          <i className="bi bi-lock-fill"></i> Repite la contraseña
+                        </>
+                    }
                     name="repeat-password"
                     type="password"
                     value={values['repeat-password']}
@@ -117,7 +135,11 @@ const Register = () => {
                     placeholder="**************"
                 />
                 <InputGroup
-                    label="Imagen de perfil"
+                    label={
+                        <>
+                          <i className="bi bi-card-image"></i> Imagen de perfil
+                        </>
+                    }
                     name="avatar"
                     type="file"
                     onChange={(event) => {
@@ -127,7 +149,11 @@ const Register = () => {
                     placeholder=""
                 />
                 <InputGroup
-                    label="Descripción"
+                    label={
+                        <>
+                          <i className="bi bi-info-circle-fill"></i> Descripción
+                        </>
+                    }
                     name="description"
                     type="text"
                     value={values.description}
@@ -137,7 +163,11 @@ const Register = () => {
                     placeholder="Soy profesor de pintura y me interesa la fotografía"
                 />
                 <InputGroup
-                    label="Ciudad"
+                    label={
+                        <>
+                          <i className="bi bi-geo-alt-fill"></i> Ciudad
+                        </>
+                    }
                     name="city"
                     type="text"
                     value={values.city}
@@ -146,8 +176,8 @@ const Register = () => {
                     onBlur={handleBlur}
                     placeholder="Valencia"
                 />
-                <div className="submitButton mt-4 d-flex justify-content-center align-items-center">
-                    <button type="submit" className={`btn btn-${isSubmitting ? 'secondary' : 'primary'}`}>
+                <div className="submit-button mt-4 d-flex justify-content-center align-items-center">
+                    <button type="submit" className={`submit-button btn`}>
                         {isSubmitting ? "Cargando" : "Registrarse"}
                     </button>
                 </div>

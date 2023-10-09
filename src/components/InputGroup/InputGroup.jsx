@@ -1,3 +1,5 @@
+import './InputGroup.css'
+
 const InputGroup = (props) => {
     return (
         <div className="has-validation mt-3 mb-3">

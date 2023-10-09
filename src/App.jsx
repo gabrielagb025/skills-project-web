@@ -4,7 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useAuthContext } from './contexts/AuthContext';
 import Home from './views/Auth/Home/Home';
 import NavBar from './components/NavBar/NavBar';
-import Register from './views/Auth/Register/register';
+import Register from './views/Auth/Register/Register';
 import Login from './views/Auth/Login/Login';
 import Profile from './views/currentUser/Profile/Profile';
 import Timeline from './views/Timeline/Timeline';

@@ -1,0 +1,18 @@
+.register-container i {
+    margin-right: 5px;
+}
+
+.submit-button {
+    width: 200px;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1.5px solid #166339 !important;
+    background-color: #166339 !important;
+    color: #ffffff !important;
+}
+
+.submit-button:hover {
+    border: 1.5px solid #2e8957 !important;
+    background-color: #2e8957  !important;
+    color: #ffffff !important;
+}

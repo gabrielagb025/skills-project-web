@@ -20,6 +20,8 @@ const PostInput = (props) => {
     const [isEditing, setIsEditing] = useState(false);
     const [postIdToEdit, setPostIdToEdit] = useState(null);
 
+    const [messageError, setMessageError] = useState("");
+
 
     const { updatePost } = props
 
@@ -43,6 +45,11 @@ const PostInput = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        if (!post.message) {
+            setMessageError("El comentario es obligatorio"); // Establecer el mensaje de error si el mensaje está vacío
+            return;
+        }
+
         const formData = new FormData();
         formData.append('message', post.message);
         post.multimedia.forEach((image) => {
@@ -59,6 +66,16 @@ const PostInput = (props) => {
             .catch(err => console.error(err))
     }
 
+    const handleFocus = () => {
+        setMessageError(""); // Ocultar el mensaje de error cuando el campo de entrada recibe foco
+    };
+
+    const handleBlur = () => {
+        if (!post.message) {
+            setMessageError("El comentario es obligatorio"); // Mostrar el mensaje de error si el campo de entrada está vacío cuando el usuario deja el campo
+        }
+    };
+
     const showInputHandler = () => {
         setShowInputFile(true);
     }
@@ -68,7 +85,7 @@ const PostInput = (props) => {
         setSelectedFileType(fileType);
         showInputHandler();
     }
-    
+
     const onDrop = useCallback(acceptedFiles => {
         if (acceptedFiles?.length) {
             setFiles(previousFiles => [
@@ -82,10 +99,12 @@ const PostInput = (props) => {
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        accept: selectedFileType === 'image' ? 'image/*' : 
-            selectedFileType === 'video' ? 'video/*' : 
-            selectedFileType === 'document' ? '.pdf,.doc,.docx' : 
-            selectedFileType === 'audio' ? 'audio/*' : ''
+        accept: {
+            ...(selectedFileType === 'image' && {'image/*': ['.jpeg', '.png'] }),
+            ...(selectedFileType === 'video' && {'video/*': ['.mp4', '.mov'] }),
+            ...(selectedFileType === 'document' && {'text/*': ['.pdf', '.doc', '.docx'] }),
+            ...(selectedFileType === 'audio' && {'audio/*': ['.mp3', '.wav'] })
+        },
     });
 
     const removeFile = name => {
@@ -98,13 +117,14 @@ const PostInput = (props) => {
                 <h4>Publica algo</h4>
                 <div className="mb-3">
                     <label id="post-message" className="form-label">Comentario</label>
-                    <input onChange={handleChange} id="post-message" type="text" name="message" className="form-control" placeholder="Publicación..." value={post.message} />
+                    <input onChange={handleChange} id="post-message" type="text" name="message" className={`form-control ${messageError && 'is-invalid'}`} placeholder="Publicación..." value={post.message} onFocus={handleFocus} onBlur={handleBlur} />
+                    {messageError && <div className="text-danger">{messageError}</div>}
                 </div>
                 <div className="multimedia-buttons d-flex justify-content-around">
-                    <button className="btn btn-primary" onClick={() => handleFileSelect(event, 'image')}>Imágenes</button>
-                    <button className="btn btn-primary" onClick={() => handleFileSelect('video')}>Vídeo</button>
-                    <button className="btn btn-primary" onClick={() => handleFileSelect('document')}>Documento</button>
-                    <button className="btn btn-primary" onClick={() => handleFileSelect('audio')}>Audio</button>
+                    <button className="btn btn-primary" onClick={(e) => handleFileSelect(e, 'image')}>Imágenes</button>
+                    <button className="btn btn-primary" onClick={(e) => handleFileSelect(e,'video')}>Vídeo</button>
+                    <button className="btn btn-primary" onClick={(e) => handleFileSelect(e,'document')}>Documento</button>
+                    <button className="btn btn-primary" onClick={(e) => handleFileSelect(e,'audio')}>Audio</button>
                 </div>
                 <div className="mb-3">
                     {showInputFile &&

@@ -4,6 +4,7 @@ import { loginSchema } from '../../../utils/yup.schemas';
 import { login as loginRequest } from '../../../services/AuthService';
 import { useNavigate, Navigate} from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
+import './Login.css';
 
 const initialValues = {
     email: "",
@@ -49,11 +50,15 @@ const Login = () => {
     return user ? (
         <Navigate to="/user/profile"/>
     ) : (
-        <div className="Login container mt-5">
+        <div className="Login login-container container mt-5">
             <h1>Iniciar sesión</h1>
             <form onSubmit={handleSubmit}>
                 <InputGroup
-                    label="Correo electrónico"
+                    label={
+                        <>
+                          <i className="bi bi-envelope-fill"></i> Correo electrónico
+                        </>
+                    }
                     name="email"
                     type="email"
                     value={values.email}
@@ -63,7 +68,11 @@ const Login = () => {
                     placeholder="Introduce tu correo electrónico"
                 />
                 <InputGroup
-                    label="Contraseña"
+                    label={
+                        <>
+                          <i className="bi bi-lock-fill"></i> Contraseña
+                        </>
+                    }
                     name="password"
                     type="password"
                     value={values.password}
