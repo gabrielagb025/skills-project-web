@@ -15,12 +15,16 @@ const PostCard = (props) => {
             <div className="post-content">
                 <NavLink style={{ textDecoration: 'none' }} to={post.user._id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user._id}`}><h5 id="post-user-name">{post.user.name}</h5></NavLink>
                 <p>{post.message}</p>
-                {post.multimedia.length > 0 ?
+                {post.type === 'image' ? (
                     post.multimedia.map((image) => (
-                        <img key={image} src={image} width={100} />
-                    )) : (
-                        null
-                    )}
+                    <img key={image} src={image} width={100} />
+                    ))
+                ) : (null)}
+                {post.type === 'document' ? (
+                    post.multimedia.map((doc) => (
+                    <embed key={doc} src={doc} width={500}/>
+                    ))
+                ) : (null)}
                 <p>{post.date}</p>
             </div>
             <div className="delete-btn">

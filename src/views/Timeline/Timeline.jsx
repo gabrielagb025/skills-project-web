@@ -10,7 +10,7 @@ const Timeline = () => {
     const { user: currentUser } = useAuthContext();
     const [postListForYou, setPostListForYou] = useState([]);
     const [postListFriends, setPostListFriends] = useState([]);
-    const [currentPosts, setCurrentPosts] = useState(postListForYou);
+    const [currentPosts, setCurrentPosts] = useState([]);
     const [forYou, setForYou] = useState(true);
 
     useEffect(() => {
@@ -18,6 +18,7 @@ const Timeline = () => {
         .then(([postsForYou, postsFriends]) => {
             setPostListForYou(postsForYou);
             setPostListFriends(postsFriends);
+            setCurrentPosts(postsForYou);
         })
         .catch(err => {
             console.log(err)
@@ -27,7 +28,6 @@ const Timeline = () => {
     const handleDeletePost = (postId) => {
         deletePost(postId)
           .then(() => {
-            console.log('post borrado')
             const updatedForYouPosts = postListForYou.filter((post) => post.id !== postId);
             const updatedFriendsPosts = postListFriends.filter((post) => post.id !== postId);
             setPostListForYou(updatedForYouPosts);
@@ -51,9 +51,9 @@ const Timeline = () => {
             setPostListFriends(postsFriends);
 
             if (forYou) {
-                setCurrentPosts(postListForYou);
+                setCurrentPosts(postsForYou);
             } else {
-                setCurrentPosts(postListFriends);
+                setCurrentPosts(postsFriends);
             }
         })
         .catch(err => {
