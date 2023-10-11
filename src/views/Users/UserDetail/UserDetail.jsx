@@ -141,7 +141,7 @@ const UserDetail = () => {
   /* CHAT */
 
 const handleChatClick = () => {
-  const chat = chatList.find((chat) => chat.users.includes(user.id));
+  const chat = chatList.find((chat) => chat.users.includes(user._id));
       if (chat) {
         navigate(`/user/chat/${chat.id}`);
       } else {

@@ -12,6 +12,7 @@ const initialValues = {
 const Chat = () => {
     const [chat, setChat] = useState(null);
     const [message, setMessage] = useState(initialValues);
+    const [chatMessages, setChatMessages] = useState([]);
     const { id } = useParams();
     const { user: currentUser } = useAuthContext();
 
@@ -19,6 +20,7 @@ const Chat = () => {
         getCurrentChat(id)
             .then((chat) => {
                 setChat(chat);
+                setChatMessages(chat.messages);
             })
             .catch(err => {
                 console.log(err);
@@ -38,19 +40,21 @@ const Chat = () => {
     const handleSubmitMessage = (e) => {
         e.preventDefault();
         createMessage(chat.id, message)
-        .then((newMessage) => {
-            const updatedChat = {
-                ...chat,
-                messages: [...chat.messages, newMessage]
-            };
+            .then((newMessage) => {
 
-            // Actualiza el estado con el chat actualizado
-            setChat(updatedChat);
-            console.log('mensaje creado');
-        })
-        .catch(err => {
-            console.log(err)
-        })
+                const updatedMessages = [...chatMessages, newMessage];
+                setChatMessages(updatedMessages);
+
+                const updatedChat = {
+                    ...chat,
+                    messages: updatedMessages
+                };
+                setChat(updatedChat);
+                console.log('mensaje creado');
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     const otherUser = chat?.users.find((user) => user.id !== currentUser.id);
@@ -64,12 +68,12 @@ const Chat = () => {
                 </div>
                 <hr />
                 <div className="chat-box">
-                    <div className="message">
-                        <span className="user">User1:</span> Hi there!
-                    </div>
-                    <div className="message">
-                        <span className="user">User2:</span> Hello! How can I help you?
-                    </div>
+                    {chatMessages.map((msg) => (
+                        <div className="message" key={msg.id}>
+                            <span className="user">{msg.sender.name}:</span> {msg.text}
+                            <i className={`bi bi-check-all ${msg.status === 'unread' ? 'grey' : 'green'} ms-2`}></i>
+                        </div>
+                    ))}
                 </div>
 
                 <form onSubmit={handleSubmitMessage}>

@@ -16,3 +16,11 @@
 .message .user {
     font-weight: bold;
 }
+
+.grey {
+    color: grey;
+}
+
+.green {
+    color: green;
+}
