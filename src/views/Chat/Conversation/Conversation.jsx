@@ -2,7 +2,7 @@ import { getCurrentChat } from "../../../services/Chat.service";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../../../contexts/AuthContext";
-import { createMessage } from "../../../services/Message.Service";
+import { createMessage, updateMessages } from "../../../services/Message.Service";
 import './Conversation.css';
 
 const initialValues = {
@@ -21,11 +21,26 @@ const Chat = () => {
             .then((chat) => {
                 setChat(chat);
                 setChatMessages(chat.messages);
+                markMessagesAsRead(chat.messages)
             })
             .catch(err => {
                 console.log(err);
             })
     }, [id]);
+
+    const markMessagesAsRead = (messages) => {
+        messages.forEach((message) => {
+            if (message.status === 'unread' && message.sender.id !== currentUser.id) {
+                updateMessages(message.id, { status: 'read' })
+                    .then((response) => {
+                        console.log('Mensaje actualizado:', response.message);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            }
+        });
+    };
 
     const handleMessageChange = (e) => {
         const key = e.target.name;
