@@ -18,6 +18,7 @@ import Notifications from './views/currentUser/Notificacions/Notifications';
 import Friends from './views/Users/Friends/Friends';
 import ChatsView from './views/Chat/AllChats/AllChats';
 import Conversation from './views/Chat/Conversation/Conversation';
+import Mail from './views/Auth/Mail/Mail'
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
+            <Route path="mail" element={<Mail />} />
 
             <Route path="/user" element={<ProtectedRoute />}>
               <Route path="/user/timeline" element={<Timeline />} />

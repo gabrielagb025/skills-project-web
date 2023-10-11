@@ -40,21 +40,34 @@ const Chat = () => {
     const handleSubmitMessage = (e) => {
         e.preventDefault();
         createMessage(chat.id, message)
-            .then((newMessage) => {
+            .then((response) => {
+                const newMessage = response.message;
 
-                const updatedMessages = [...chatMessages, newMessage];
+                console.log('Mensaje creado:', newMessage);
+
+                const newMessagePopulated = {
+                    ...newMessage,
+                    sender: {
+                        id: currentUser.id,
+                        name: currentUser.name,
+                        avatar: currentUser.avatar
+                    }
+                }
+
+                const updatedMessages = [...chatMessages, newMessagePopulated];
                 setChatMessages(updatedMessages);
 
                 const updatedChat = {
                     ...chat,
                     messages: updatedMessages
                 };
+
                 setChat(updatedChat);
-                console.log('mensaje creado');
             })
             .catch(err => {
                 console.log(err)
             })
+        setMessage(initialValues);
     }
 
     const otherUser = chat?.users.find((user) => user.id !== currentUser.id);
@@ -70,17 +83,17 @@ const Chat = () => {
                 <div className="chat-box">
                     {chatMessages.map((msg) => (
                         <div className="message" key={msg.id}>
-                            <span className="user">{msg.sender.name}:</span> {msg.text}
-                            <i className={`bi bi-check-all ${msg.status === 'unread' ? 'grey' : 'green'} ms-2`}></i>
+                            {msg.sender && <span className="user">{msg.sender.name}:</span>} {msg.text}
+                            {msg.sender.id === currentUser.id ? (<i className={`bi bi-check-all ${msg.status === 'unread' ? 'grey' : 'green'} ms-2`}></i>) : (null)}
                         </div>
                     ))}
                 </div>
 
                 <form onSubmit={handleSubmitMessage}>
                     <div className="form-group">
-                        <input onChange={handleMessageChange} type="text" name="text" className="form-control" placeholder="Type your message" value={message.text} />
+                        <input onChange={handleMessageChange} type="text" name="text" className="form-control" placeholder="Escribe un mensaje..." value={message.text} />
                     </div>
-                    <button type="submit" className="btn btn-primary mt-2">Send</button>
+                    <button type="submit" className="btn btn-primary mt-2">Enviar</button>
                 </form>
             </div>
         ) : (

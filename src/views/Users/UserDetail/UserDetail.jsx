@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getUser } from "../../../services/UserService";
 import { createRating, getRatings, deleteRating } from "../../../services/RatingService";
-import { getChats, createChat } from "../../../services/Chat.service";
+import { getChats, createChat, deleteChat } from "../../../services/Chat.service";
 import { useAuthContext } from "../../../contexts/AuthContext";
 import InputGroup from "../../../components/InputGroup/InputGroup";
 import { sendFriendRequest, getFriends, getPendingFriendRequests, cancelFriendRequest, getAcceptedFriendRequest } from "../../../services/FriendRequestService";
@@ -131,7 +131,18 @@ const UserDetail = () => {
   const handleCancelFriendRequest = (requestId) => {
     cancelFriendRequest(requestId)
       .then(() => {
-        console.log('conexión cancelada')
+        const chat = chatList.find((chat) => {
+          return chat.users.some(userObj => userObj.id === user.id);
+        });
+        if (chat) {
+          deleteChat(chat.id)
+            .then(() => {
+              console.log('chat borrado')
+            })
+            .catch(err => {
+              console.log(err)
+            })
+        }
         setIsFriend(false);
       })
       .catch(err => {
@@ -142,11 +153,11 @@ const UserDetail = () => {
   /* CHAT */
 
 const handleChatClick = () => {
+
   const chat = chatList.find((chat) => {
     return chat.users.some(userObj => userObj.id === user.id);
   });
-  
-  console.log(chat);
+
       if (chat) {
         navigate(`/user/chat/${chat.id}`);
       } else {
