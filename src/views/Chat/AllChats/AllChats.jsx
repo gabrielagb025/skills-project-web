@@ -25,7 +25,8 @@ const Chats = () => {
                 const otherUser = chat?.users.find((user) => user.id !== currentUser.id);
                 return (
                     <>
-                        <NavLink style={{ textDecoration: 'none', color: 'black'}} to={`/user/chat/${chat.id}`}><div key={chat.id} className="d-flex chat-container">
+                        <NavLink style={{ textDecoration: 'none', color: 'black'}} to={`/user/chat/${chat.id}`}>
+                            <div key={chat.id} className="d-flex chat-container">
                             <img src={otherUser.avatar} alt="" width={100} />
                             <div className="ms-4">
                             <h5>{otherUser.name}</h5>
@@ -35,7 +36,8 @@ const Chats = () => {
                                 <p>No hay mensajes aún</p>
                             )}
                             </div>
-                        </div></NavLink>
+                        </div>
+                        </NavLink>
                         <hr />
                     </>
                 )

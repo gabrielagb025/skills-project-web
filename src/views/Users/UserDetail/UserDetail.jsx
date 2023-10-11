@@ -58,7 +58,8 @@ const UserDetail = () => {
       });
   }, [id]);
 
-  console.log(chatList);
+  console.log(chatList)
+
 
   /* RATINGS */
 
@@ -141,7 +142,11 @@ const UserDetail = () => {
   /* CHAT */
 
 const handleChatClick = () => {
-  const chat = chatList.find((chat) => chat.users.includes(user._id));
+  const chat = chatList.find((chat) => {
+    return chat.users.some(userObj => userObj.id === user.id);
+  });
+  
+  console.log(chat);
       if (chat) {
         navigate(`/user/chat/${chat.id}`);
       } else {
