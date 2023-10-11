@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getUser } from "../../../services/UserService";
 import { createRating, getRatings, deleteRating } from "../../../services/RatingService";
+import { getChats, createChat } from "../../../services/Chat.service";
 import { useAuthContext } from "../../../contexts/AuthContext";
 import InputGroup from "../../../components/InputGroup/InputGroup";
 import { sendFriendRequest, getFriends, getPendingFriendRequests, cancelFriendRequest, getAcceptedFriendRequest } from "../../../services/FriendRequestService";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
 
 
 const ratingInitialValues = {
@@ -28,16 +30,19 @@ const UserDetail = () => {
   const [madeRequest, setMadeRequest] = useState(false);
   const [haveRequest, setHaveRequest] = useState(false);
   const [acceptedFriendRequest, setAcceptedFriendRequest] = useState(null);
+  const [chatList, setChatList] = useState([]); 
   const { id } = useParams();
   const { user: currentUser } = useAuthContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    Promise.all([getUser(id), getRatings(id), getFriends(), getPendingFriendRequests(), getAcceptedFriendRequest(id)])
-      .then(([user, ratings, friends, pendingFriendRequests, acceptedFriendReq]) => {
+    Promise.all([getUser(id), getRatings(id), getFriends(), getPendingFriendRequests(), getAcceptedFriendRequest(id), getChats()])
+      .then(([user, ratings, friends, pendingFriendRequests, acceptedFriendReq, chats]) => {
         setUser(user);
         setRatingList(ratings);
         setIsFriend(friends.some(f => f.id === user.id));
         setAcceptedFriendRequest(acceptedFriendReq);
+        setChatList(chats)
 
         const receivedRequest = pendingFriendRequests.find(request => request.userSend === user.id);
         const sentRequest = pendingFriendRequests.find(request => request.userReceive === user.id);
@@ -52,6 +57,8 @@ const UserDetail = () => {
         console.error(err);
       });
   }, [id]);
+
+  console.log(chatList);
 
   /* RATINGS */
 
@@ -131,6 +138,23 @@ const UserDetail = () => {
       })
   }
 
+  /* CHAT */
+
+const handleChatClick = () => {
+  const chat = chatList.find((chat) => chat.users.includes(user.id));
+      if (chat) {
+        navigate(`/user/chat/${chat.id}`);
+      } else {
+        createChat(user.id)
+          .then((chat) => {
+            navigate(`/user/chat/${chat.id}`);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+}
+
   return (
     <div className="UserDetail">
       {!user ? (
@@ -144,7 +168,7 @@ const UserDetail = () => {
             </div>
             {isFriend ? (
               <>
-                <button className="btn btn-secondary mt-4">Chatear con {user.name}</button>
+                <button className="btn btn-secondary mt-4" onClick={handleChatClick}>Chatear con {user.name}</button>
                 <button className="btn btn-danger mt-4 ms-3" onClick={() => handleCancelFriendRequest(acceptedFriendRequest.id)}>Dejar de conectar con {user.name}</button>
               </>
             ) : (
