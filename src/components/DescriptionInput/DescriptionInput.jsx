@@ -21,15 +21,18 @@ const DescriptionInput = (props) => {
 
     const [messageError, setMessageError] = useState("");
 
+    const [urlInput, setUrlInput] = useState('');
+    const [urlsElem, setUrlsElem] = useState([]);
 
     const { updateDescription } = props
 
     useEffect(() => {
         setDescription(prevDesc => ({
             ...prevDesc,
-            images: files
+            images: files,
+            urls: urlsElem
         }));
-    }, [files]);
+    }, [files, urlsElem]);
 
     const handleChange = (ev) => {
         const key = ev.target.name;
@@ -54,12 +57,16 @@ const DescriptionInput = (props) => {
         description.images.forEach((image) => {
             formData.append('images', image);
         });
+        description.urls.forEach((url) => {
+            formData.append('urls', url);
+        })
         console.log(formData);
         createDescription(formData)
             .then(() => {
-                console.log('descripción creada')
                 setDescription(initialValues)
                 setFiles([])
+                setUrlsElem([])
+                updateDescription()
             })
             .catch(err => console.error(err))
     }
@@ -101,9 +108,28 @@ const DescriptionInput = (props) => {
         setFiles(files => files.filter(file => file.name !== name))
     }
 
+    const handleUrlInputChange = (event) => {
+        event.preventDefault()
+        setUrlInput(event.target.value);
+    };
+
+    const handleAddUrl = () => {
+        if (urlInput.trim() !== '') {
+            setUrlsElem(prevUrls => [...prevUrls, urlInput.trim()]);
+            setUrlInput('');
+        }
+    };
+
+    const handleDeleteUrl = (urlToDelete) => {
+        setUrlsElem(prevUrls => prevUrls.filter(url => url !== urlToDelete));
+    }
+
+    console.log(urlsElem)
+
+
     return (
         <div className="PostInput post-form">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}  encType="multipart/form-data">
                 <div className="mb-3">
                     <label id="description" className="form-label">Descripción</label>
                     <input onChange={handleChange} id="description" type="text" name="description" className={`form-control ${messageError && 'is-invalid'}`} placeholder="Descripción..." value={description.description} onFocus={handleFocus} onBlur={handleBlur} />
@@ -136,6 +162,24 @@ const DescriptionInput = (props) => {
                                 </li>
                             ))}
                         </ul>
+                    </div>
+                    <div className="mb-3">
+                        <label id="urls" className="form-label">URLs</label>
+                        <input
+                            id="urls"
+                            type="text"
+                            className="form-control"
+                            placeholder="Ingrese la URL"
+                            value={urlInput}
+                            onChange={handleUrlInputChange}
+                        />
+                        {urlsElem ? urlsElem.map((url, index) => (
+                            <div className="d-flex mt-2" key={index}>
+                            <p>{url}</p>
+                            <button onClick={() => handleDeleteUrl(url)} className="btn btn-danger">Delete</button>
+                            </div>
+                        )): (null)}
+                        <button type="button" className="btn btn-primary mt-2" onClick={handleAddUrl}>Agregar</button>
                     </div>
                 </div>
                 <button type="submit" className="btn btn-primary">Enviar</button>

@@ -85,6 +85,10 @@ const Profile = () => {
             {userDescription.images.map((image, index) => (
               <img key={index} src={image} width={100}/>
             ))}
+            <p>URLs</p>
+            {userDescription.urls.map((url, index) => (
+              <a className="me-4" key={index} href={url}>{url}</a>
+            ))}
           </div>)}
         <h4>Habilidades que puedes enseñar:</h4>
         {user.teachSkills.map((skill) => (
