@@ -97,9 +97,14 @@ const Chat = () => {
                 <hr />
                 <div className="chat-box">
                     {chatMessages.map((msg) => (
-                        <div className="message" key={msg.id}>
-                            {msg.sender && <span className="user">{msg.sender.name}:</span>} {msg.text}
+                        <div className={`message d-flex ${msg.sender.id === currentUser.id ? 'message-right' : 'message-left'}`} key={msg.id}>
+                            <div>
+                            {msg.sender && <img src={msg.sender.avatar} width={40}/>}
+                            </div>
+                            <div className={`ms-3`}>
+                            {msg.text}
                             {msg.sender.id === currentUser.id ? (<i className={`bi bi-check-all ${msg.status === 'unread' ? 'grey' : 'green'} ms-2`}></i>) : (null)}
+                            </div>
                         </div>
                     ))}
                 </div>

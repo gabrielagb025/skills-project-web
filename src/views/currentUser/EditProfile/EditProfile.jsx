@@ -11,8 +11,8 @@ const EditProfile = () => {
     const [ userData, setUserData ] = useState({
         name: user.name,
         // avatar: user.avatar,
-        description: user.description,
-        city: user.city
+        city: user.city,
+        phone: user.phone
     });
 
     const navigate = useNavigate();
@@ -20,8 +20,8 @@ const EditProfile = () => {
     const initialValues = {
         name: user.name,
         avatar: user.avatar,
-        description: user.description,
-        city: user.city
+        city: user.city,
+        phone: user.phone
     }
     
     const {
@@ -43,8 +43,8 @@ const EditProfile = () => {
         onSubmit: (values) => {
             const formData = new FormData();
             formData.append('name', values.name);
-            formData.append('description', values.description);
             formData.append('city', values.city);
+            formData.append('phone', values.phone);
 
             if (values.avatar) {
                 formData.append('avatar', values.avatar);
@@ -92,14 +92,14 @@ const EditProfile = () => {
                     placeholder=""
                 />
                 <InputGroup
-                    label="Descripción"
-                    name="description"
+                    label="Teléfono"
+                    name="phone"
                     type="text"
-                    value={values.description}
-                    error={touched.description && errors.description}
+                    value={values.phone}
+                    error={touched.phone && errors.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Soy profesor de pintura y me interesa la fotografía"
+                    placeholder="999999999"
                 />
                 <InputGroup
                     label="Ciudad"

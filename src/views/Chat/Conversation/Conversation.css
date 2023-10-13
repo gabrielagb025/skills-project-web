@@ -17,10 +17,36 @@
     font-weight: bold;
 }
 
+.message img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
 .grey {
     color: grey;
 }
 
 .green {
     color: green;
+}
+
+.message-left {
+    background-color: #f7c8bc; /* Color de fondo para mensajes del otro usuario */
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 60%;
+}
+
+.message-right {
+    margin-left: auto;
+    background-color: #a5debe; /* Color de fondo para mensajes del usuario actual */
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 60%;
+    align-self: flex-end;
 }

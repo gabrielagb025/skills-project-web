@@ -223,6 +223,7 @@ const handleChatClick = () => {
               <h1>{user.name}</h1>
               <p>{user.description}</p>
               <p>{user.city}</p>
+              { isFriend ? <p>{user.phone}</p> : null}
               <h4>Habilidades que {user.name} puede enseñar:</h4>
               {user.teachSkills.map((skill) => (
                 <div key={skill.id}>

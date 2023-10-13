@@ -16,8 +16,8 @@ const initialValues = {
     password: "",
     'repeat-password': "",
     avatar: "",
-    description: "",
-    city: ""
+    city: "",
+    phone: ""
 }
 
 
@@ -46,8 +46,8 @@ const Register = () => {
             formData.append('name', values.name);
             formData.append('email', values.email);
             formData.append('password', values.password);
-            formData.append('description', values.description);
             formData.append('city', values.city);
+            formData.append('phone', values.phone);
             
             if (values.avatar) {
                 console.log('values.avatar: ', values.avatar);
@@ -59,7 +59,7 @@ const Register = () => {
             register(formData)
                 .then(() => {
                     console.log('registered');
-                    navigate('/login')
+                    navigate('/mail')
                 })
                 .catch((err) => {
                     console.log(err);
@@ -151,16 +151,16 @@ const Register = () => {
                 <InputGroup
                     label={
                         <>
-                          <i className="bi bi-info-circle-fill"></i> Descripción
+                          <i className="bi bi-telephone-fill"></i> Número de teléfono (Sólo tus contactos podrán ver el número de teléfono).
                         </>
                     }
-                    name="description"
+                    name="phone"
                     type="text"
-                    value={values.description}
-                    error={touched.description && errors.description}
+                    value={values.phone}
+                    error={touched.phone && errors.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Soy profesor de pintura y me interesa la fotografía"
+                    placeholder="999999999"
                 />
                 <InputGroup
                     label={
