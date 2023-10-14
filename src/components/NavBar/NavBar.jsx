@@ -36,6 +36,9 @@ const NavBar = () => {
                                 <NavLink className="nav-link" to="/user/chats">Conversaciones</NavLink>
                             </li>
                             <li className="nav-item">
+                                <NavLink className="nav-link" to="/user/calendar">Calendario</NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <NavLink className="nav-link" to="/user/profile">Mi perfil</NavLink>
                             </li>
                             <li className="nav-item">
