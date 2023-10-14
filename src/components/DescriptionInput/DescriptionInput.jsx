@@ -39,6 +39,8 @@ const DescriptionInput = (props) => {
             images: files,
             urls: urlsElem
         }));
+        handleMaxFiles();
+        handleMaxUrls();
     }, [files, urlsElem]);
 
     const handleChange = (ev) => {
@@ -88,12 +90,9 @@ const DescriptionInput = (props) => {
         }
     };
 
-    const showInputHandler = (e) => {
-        e.preventDefault();
-        setShowInputFile(true);
-    }
+     /*IMAGES*/
 
-    const onDrop = useCallback(acceptedFiles => {
+     const onDrop = useCallback(acceptedFiles => {
         if (acceptedFiles?.length) {
             setFiles(previousFiles => [
                 ...previousFiles,
@@ -101,6 +100,7 @@ const DescriptionInput = (props) => {
                     Object.assign(file, { preview: URL.createObjectURL(file) })
                 )
             ])
+            handleMaxFiles();
         }
     }, []);
 
@@ -111,8 +111,29 @@ const DescriptionInput = (props) => {
         },
     });
 
+    const showInputHandler = () => {
+        setShowInputFile(true);
+    }
+
     const removeFile = name => {
-        setFiles(files => files.filter(file => file.name !== name))
+        setFiles(files => files.filter(file => file.name !== name));
+        handleMaxFiles();
+    }
+
+    const handleMaxFiles = () => {
+        if (files.length >= 8) {
+            setShowInputFile(false);
+            setMessageImg("No puedes agregar más de 4 imágenes");
+            setShowImgBtn(false);
+        } else {
+            setMessageImg(" ");
+            setShowImgBtn(true);
+        }
+    }
+
+    /*URLS*/ 
+    const showUrlInputHandler = () => {
+        setShowUrlInput(true);
     }
 
     const handleUrlInputChange = (event) => {
@@ -120,19 +141,29 @@ const DescriptionInput = (props) => {
         setUrlInput(event.target.value);
     };
 
+    const handleMaxUrls = () => {
+        if (urlsElem.length >= 4) {
+            setShowUrlInput(false);
+            setMessageUrl("No puedes agregar más de 4 urls");
+            setShowUrlBtn(false)
+        } else {
+            setMessageUrl("");
+            setShowUrlBtn(true)
+        }
+    }
+
     const handleAddUrl = () => {
         if (urlInput.trim() !== '') {
             setUrlsElem(prevUrls => [...prevUrls, urlInput.trim()]);
             setUrlInput('');
         }
+        handleMaxUrls();
     };
 
     const handleDeleteUrl = (urlToDelete) => {
         setUrlsElem(prevUrls => prevUrls.filter(url => url !== urlToDelete));
+        handleMaxUrls();
     }
-
-    console.log(urlsElem)
-
 
     return (
         <div className="PostInput post-form">
@@ -143,8 +174,9 @@ const DescriptionInput = (props) => {
                     {messageError && <div className="text-danger">{messageError}</div>}
                 </div>
                 <div className="multimedia-buttons d-flex justify-content-around">
-                    <button className="btn btn-primary" onClick={showInputHandler}>Imágenes</button>
+                    {showImgBtn && <button type="button" className="btn btn-primary" onClick={showInputHandler}>Imágenes</button>} {files.length >= 4 && <div className="text-danger">{messageImg}</div>}
                 </div>
+                {/* Images */}
                 <div className="mb-3">
                     {showInputFile &&
                         <div {...getRootProps()}>
@@ -170,23 +202,26 @@ const DescriptionInput = (props) => {
                             ))}
                         </ul>
                     </div>
+                    {/* Urls */}
                     <div className="mb-3">
-                        <label id="urls" className="form-label">URLs</label>
-                        <input
-                            id="urls"
-                            type="text"
-                            className="form-control"
-                            placeholder="Ingrese la URL"
-                            value={urlInput}
-                            onChange={handleUrlInputChange}
-                        />
+                        {showUrlBtn && <button type="button" className="btn btn-primary" onClick={showUrlInputHandler}>Urls</button>}
+                        {showUrlInput && <>
+                            <input
+                                id="urls"
+                                type="text"
+                                className="form-control"
+                                placeholder="Ingrese la URL"
+                                value={urlInput}
+                                onChange={handleUrlInputChange}
+                            />
+                            <button type="button" className="btn btn-primary mt-2" onClick={handleAddUrl}>Agregar</button></>} {urlsElem.length >= 4 && <div className="text-danger">{messageUrl}</div>}
                         {urlsElem ? urlsElem.map((url, index) => (
                             <div className="d-flex mt-2" key={index}>
                                 <p>{url}</p>
                                 <button onClick={() => handleDeleteUrl(url)} className="btn btn-danger">Delete</button>
                             </div>
                         )) : (null)}
-                        <button type="button" className="btn btn-primary mt-2" onClick={handleAddUrl}>Agregar</button>
+
                     </div>
                 </div>
                 <button type="submit" className="btn btn-primary">Enviar</button>
