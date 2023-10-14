@@ -19,6 +19,7 @@ import Friends from './views/Users/Friends/Friends';
 import ChatsView from './views/Chat/AllChats/AllChats';
 import Conversation from './views/Chat/Conversation/Conversation';
 import Mail from './views/Auth/Mail/Mail'
+import ActivateUser from './views/Auth/Mail/ActiveUser';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
             <Route path="mail" element={<Mail />} />
+            <Route path="/activate/:id" element={<ActivateUser />} />
 
             <Route path="/user" element={<ProtectedRoute />}>
               <Route path="/user/timeline" element={<Timeline />} />

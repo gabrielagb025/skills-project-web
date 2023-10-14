@@ -12,15 +12,21 @@ const initialValues = {
 const PostInput = (props) => {
 
     const [post, setPost] = useState(initialValues);
-    const [files, setFiles] = useState([]);
 
-    //const [selectedFileType, setSelectedFileType] = useState(null);
-
+    /*IMAGES*/ 
     const [showInputFile, setShowInputFile] = useState(false);
+    const [showImgBtn, setShowImgBtn] = useState(true);
+    const [files, setFiles] = useState([]);
+    const [messageImg, setMessageImg] = useState("");
 
+    /*URLS*/
+    const [showUrlInput, setShowUrlInput] = useState(false);
+    const [showUrlBtn, setShowUrlBtn] = useState(true);
     const [urlInput, setUrlInput] = useState('');
     const [urlsElem, setUrlsElem] = useState([]);
-
+    const [messageUrl, setMessageUrl] = useState("");
+    
+    /*EDITAR*/
     const [isEditing, setIsEditing] = useState(false);
     const [postIdToEdit, setPostIdToEdit] = useState(null);
 
@@ -35,6 +41,8 @@ const PostInput = (props) => {
             images: files,
             urls: urlsElem
         }));
+        handleMaxFiles();
+        handleMaxUrls();
     }, [files, urlsElem]);
 
     const handleChange = (ev) => {
@@ -51,7 +59,7 @@ const PostInput = (props) => {
         event.preventDefault();
 
         if (!post.message) {
-            setMessageError("El comentario es obligatorio"); // Establecer el mensaje de error si el mensaje está vacío
+            setMessageError("El comentario es obligatorio"); 
             return;
         }
 
@@ -84,9 +92,7 @@ const PostInput = (props) => {
         }
     };
 
-    const showInputHandler = () => {
-        setShowInputFile(true);
-    }
+    /*IMAGES*/
 
     const onDrop = useCallback(acceptedFiles => {
         if (acceptedFiles?.length) {
@@ -96,6 +102,7 @@ const PostInput = (props) => {
                     Object.assign(file, { preview: URL.createObjectURL(file) })
                 )
             ])
+            handleMaxFiles();
         }
     }, []);
 
@@ -106,8 +113,29 @@ const PostInput = (props) => {
         },
     });
 
+    const showInputHandler = () => {
+        setShowInputFile(true);
+    }
+
     const removeFile = name => {
-        setFiles(files => files.filter(file => file.name !== name))
+        setFiles(files => files.filter(file => file.name !== name));
+        handleMaxFiles();
+    }
+
+    const handleMaxFiles = () => {
+        if (files.length >= 4) {
+            setShowInputFile(false);
+            setMessageImg("No puedes agregar más de 4 imágenes");
+            setShowImgBtn(false);
+        } else {
+            setMessageImg(" ");
+            setShowImgBtn(true);
+        }
+    }
+
+    /*URLS*/ 
+    const showUrlInputHandler = () => {
+        setShowUrlInput(true);
     }
 
     const handleUrlInputChange = (event) => {
@@ -115,15 +143,28 @@ const PostInput = (props) => {
         setUrlInput(event.target.value);
     };
 
+    const handleMaxUrls = () => {
+        if (urlsElem.length >= 4) {
+            setShowUrlInput(false);
+            setMessageUrl("No puedes agregar más de 4 urls");
+            setShowUrlBtn(false)
+        } else {
+            setMessageUrl("");
+            setShowUrlBtn(true)
+        }
+    }
+
     const handleAddUrl = () => {
         if (urlInput.trim() !== '') {
             setUrlsElem(prevUrls => [...prevUrls, urlInput.trim()]);
             setUrlInput('');
         }
+        handleMaxUrls();
     };
 
     const handleDeleteUrl = (urlToDelete) => {
         setUrlsElem(prevUrls => prevUrls.filter(url => url !== urlToDelete));
+        handleMaxUrls();
     }
 
     return (
@@ -136,8 +177,9 @@ const PostInput = (props) => {
                     {messageError && <div className="text-danger">{messageError}</div>}
                 </div>
                 <div className="multimedia-buttons d-flex justify-content-around">
-                    <button className="btn btn-primary" onClick={showInputHandler}>Imágenes</button>
+                    {showImgBtn && <button className="btn btn-primary" onClick={showInputHandler}>Imágenes</button>} {files.length >= 4 && <div className="text-danger">{messageImg}</div>}
                 </div>
+                {/* Images */}
                 <div className="mb-3">
                     {showInputFile &&
                         <div {...getRootProps()}>
@@ -163,23 +205,26 @@ const PostInput = (props) => {
                             ))}
                         </ul>
                     </div>
+                    {/* Urls */}
                     <div className="mb-3">
-                        <label id="urls" className="form-label">URLs</label>
-                        <input
-                            id="urls"
-                            type="text"
-                            className="form-control"
-                            placeholder="Ingrese la URL"
-                            value={urlInput}
-                            onChange={handleUrlInputChange}
-                        />
+                        {showUrlBtn && <button className="btn btn-primary" onClick={showUrlInputHandler}>Urls</button>}
+                        {showUrlInput && <>
+                            <input
+                                id="urls"
+                                type="text"
+                                className="form-control"
+                                placeholder="Ingrese la URL"
+                                value={urlInput}
+                                onChange={handleUrlInputChange}
+                            />
+                            <button type="button" className="btn btn-primary mt-2" onClick={handleAddUrl}>Agregar</button></>} {urlsElem.length >= 4 && <div className="text-danger">{messageUrl}</div>}
                         {urlsElem ? urlsElem.map((url, index) => (
                             <div className="d-flex mt-2" key={index}>
-                            <p>{url}</p>
-                            <button onClick={() => handleDeleteUrl(url)} className="btn btn-danger">Delete</button>
+                                <p>{url}</p>
+                                <button onClick={() => handleDeleteUrl(url)} className="btn btn-danger">Delete</button>
                             </div>
-                        )): (null)}
-                        <button type="button" className="btn btn-primary mt-2" onClick={handleAddUrl}>Agregar</button>
+                        )) : (null)}
+
                     </div>
                 </div>
                 <button type="submit" className="btn btn-primary">Publicar</button>

@@ -129,7 +129,7 @@ const Profile = () => {
         ))}
         <h4>Tus publicaciones</h4>
         {userPostList
-         .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((post) => (
           <div className="post-container" key={post.id}>
             <div className="post info">

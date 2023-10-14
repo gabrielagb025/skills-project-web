@@ -12,17 +12,24 @@ const initialValues = {
 const DescriptionInput = (props) => {
 
     const [description, setDescription] = useState(initialValues);
-    const [files, setFiles] = useState([]);
-
-    const [showInputFile, setShowInputFile] = useState(false);
 
     const [isEditing, setIsEditing] = useState(false);
     const [postIdToEdit, setPostIdToEdit] = useState(null);
 
     const [messageError, setMessageError] = useState("");
 
+    /*IMAGES*/
+    const [showInputFile, setShowInputFile] = useState(false);
+    const [showImgBtn, setShowImgBtn] = useState(true);
+    const [files, setFiles] = useState([]);
+    const [messageImg, setMessageImg] = useState("");
+
+    /*URLS*/
+    const [showUrlInput, setShowUrlInput] = useState(false);
+    const [showUrlBtn, setShowUrlBtn] = useState(true);
     const [urlInput, setUrlInput] = useState('');
     const [urlsElem, setUrlsElem] = useState([]);
+    const [messageUrl, setMessageUrl] = useState("");
 
     const { updateDescription } = props
 
@@ -129,7 +136,7 @@ const DescriptionInput = (props) => {
 
     return (
         <div className="PostInput post-form">
-            <form onSubmit={handleSubmit}  encType="multipart/form-data">
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="mb-3">
                     <label id="description" className="form-label">Descripción</label>
                     <input onChange={handleChange} id="description" type="text" name="description" className={`form-control ${messageError && 'is-invalid'}`} placeholder="Descripción..." value={description.description} onFocus={handleFocus} onBlur={handleBlur} />
@@ -175,10 +182,10 @@ const DescriptionInput = (props) => {
                         />
                         {urlsElem ? urlsElem.map((url, index) => (
                             <div className="d-flex mt-2" key={index}>
-                            <p>{url}</p>
-                            <button onClick={() => handleDeleteUrl(url)} className="btn btn-danger">Delete</button>
+                                <p>{url}</p>
+                                <button onClick={() => handleDeleteUrl(url)} className="btn btn-danger">Delete</button>
                             </div>
-                        )): (null)}
+                        )) : (null)}
                         <button type="button" className="btn btn-primary mt-2" onClick={handleAddUrl}>Agregar</button>
                     </div>
                 </div>
