@@ -61,8 +61,6 @@ const UserDetail = () => {
       });
   }, [id]);
 
-  console.log(chatList)
-
 
   /* RATINGS */
 
@@ -174,6 +172,10 @@ const UserDetail = () => {
     }
   }
 
+  const handleEventNavigate = () => {
+    navigate(`/user/event/${user.id}`);
+  }
+
   return (
     <div className="UserDetail">
       {!user ? (
@@ -189,6 +191,7 @@ const UserDetail = () => {
               <>
                 <button className="btn btn-secondary mt-4" onClick={handleChatClick}>Chatear con {user.name}</button>
                 <button className="btn btn-danger mt-4 ms-3" onClick={() => handleCancelFriendRequest(acceptedFriendRequest.id)}>Dejar de conectar con {user.name}</button>
+                <button className="btn btn-success mt-4" onClick={handleEventNavigate}>Agendar cita de estudio con {user.name}</button>
               </>
             ) : (
               <>

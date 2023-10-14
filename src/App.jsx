@@ -20,7 +20,8 @@ import ChatsView from './views/Chat/AllChats/AllChats';
 import Conversation from './views/Chat/Conversation/Conversation';
 import Mail from './views/Auth/Mail/Mail'
 import ActivateUser from './views/Auth/Mail/ActiveUser';
-
+import EventForm from './views/Calendar/EventForm/EventForm';
+import Calendar from './views/Calendar/CalendarView/Calendar';
 
 function App() {
 
@@ -64,6 +65,8 @@ function App() {
               <Route path="/user/friends" element={<Friends />} />
               <Route path="/user/chats" element={<ChatsView />} />
               <Route path="/user/chat/:id" element={<Conversation />} />
+              <Route path="/user/event/:id" element={<EventForm />} />
+              <Route path="/user/calendar" element={<Calendar />} />
               <Route path="/user/profile" element={<Profile />} />
               <Route path="/user/skills" element={<ChooseSkills />} />
               <Route path="/user/edit" element={<EditProfile />} />
