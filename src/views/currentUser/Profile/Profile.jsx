@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { deletePost, getCurrentUserPosts, editPost } from '../../../services/PostService';
 import PostInput from '../../../components/PostInput/PostInput';
 import DescriptionInput from '../../../components/DescriptionInput/DescriptionInput';
-import { currentUserDescription } from '../../../services/DescriptionService';
+import { currentUserDescription, editDescription } from '../../../services/DescriptionService';
 
 const Profile = () => {
   const { user } = useAuthContext();
@@ -47,6 +47,20 @@ const Profile = () => {
       })
   }
 
+  const handleEditDescription = (descriptionId) => {
+    editDescription(descriptionId, descriptionData)
+      .then(() => {
+        console.log('description editada')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  const handleShowEditForm = () => {
+    setShowForm(true)
+  }
+
   const handleShowForm = () => {
     setShowForm(true)
   }
@@ -83,12 +97,19 @@ const Profile = () => {
             <h4>Descripción</h4>
             <p>{userDescription.description}</p>
             {userDescription.images.map((image, index) => (
-              <img key={index} src={image} width={100}/>
+              <img key={index} src={image} width={100} />
             ))}
             <p>URLs</p>
             {userDescription.urls.map((url, index) => (
               <a className="me-4" key={index} href={url}>{url}</a>
             ))}
+            <button className="btn btn-success" onClick={handleShowForm}>Editar</button>
+            {showForm && (
+              <DescriptionInput
+                updateDescription={handleUpdateDescription}
+                initialValues={userDescription} // Pasa los valores iniciales al formulario de edición
+              />
+            )}
           </div>)}
         <h4>Habilidades que puedes enseñar:</h4>
         {user.teachSkills.map((skill) => (
@@ -107,12 +128,17 @@ const Profile = () => {
           </div >
         ))}
         <h4>Tus publicaciones</h4>
-        {userPostList.map((post) => (
+        {userPostList
+         .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .map((post) => (
           <div className="post-container" key={post.id}>
             <div className="post info">
               <p>{post.message}</p>
-              {post.multimedia.map((image) => (
+              {post.images.map((image) => (
                 <img className="me-2" src={image} width={100} key={image} />
+              ))}
+              {post.urls.map((url, index) => (
+                <a key={index} href={url}>{url}</a>
               ))}
               <p>{post.date}</p>
             </div>

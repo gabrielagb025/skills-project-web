@@ -5,7 +5,8 @@ import { createPost } from '../../services/PostService';
 
 const initialValues = {
     message: "",
-    multimedia: []
+    images: [],
+    urls: []
 }
 
 const PostInput = (props) => {
@@ -13,9 +14,12 @@ const PostInput = (props) => {
     const [post, setPost] = useState(initialValues);
     const [files, setFiles] = useState([]);
 
-    const [selectedFileType, setSelectedFileType] = useState(null);
+    //const [selectedFileType, setSelectedFileType] = useState(null);
 
     const [showInputFile, setShowInputFile] = useState(false);
+
+    const [urlInput, setUrlInput] = useState('');
+    const [urlsElem, setUrlsElem] = useState([]);
 
     const [isEditing, setIsEditing] = useState(false);
     const [postIdToEdit, setPostIdToEdit] = useState(null);
@@ -28,9 +32,10 @@ const PostInput = (props) => {
     useEffect(() => {
         setPost(prevPost => ({
             ...prevPost,
-            multimedia: files
+            images: files,
+            urls: urlsElem
         }));
-    }, [files]);
+    }, [files, urlsElem]);
 
     const handleChange = (ev) => {
         const key = ev.target.name;
@@ -52,16 +57,18 @@ const PostInput = (props) => {
 
         const formData = new FormData();
         formData.append('message', post.message);
-        post.multimedia.forEach((image) => {
+        post.images.forEach((image) => {
             formData.append('multimedia', image);
         })
-        formData.append('type', selectedFileType);
-        console.log(formData);
+        post.urls.forEach((url) => {
+            formData.append('urls', url);
+        })
         createPost(formData)
             .then(() => {
                 console.log('post creado')
                 setPost(initialValues)
                 setFiles([])
+                setUrlsElem([])
                 updatePost()
             })
             .catch(err => console.error(err))
@@ -81,12 +88,6 @@ const PostInput = (props) => {
         setShowInputFile(true);
     }
 
-    const handleFileSelect = (event, fileType) => {
-        event.preventDefault();
-        setSelectedFileType(fileType);
-        showInputHandler();
-    }
-
     const onDrop = useCallback(acceptedFiles => {
         if (acceptedFiles?.length) {
             setFiles(previousFiles => [
@@ -101,15 +102,28 @@ const PostInput = (props) => {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
         accept: {
-            ...(selectedFileType === 'image' && {'image/*': ['.jpeg', '.png'] }),
-            ...(selectedFileType === 'video' && {'video/*': ['.mp4', '.mov'] }),
-            ...(selectedFileType === 'document' && {'text/*': ['.pdf', '.doc', '.docx'] }),
-            ...(selectedFileType === 'audio' && {'audio/*': ['.mp3', '.wav'] })
+            'image/*': ['.jpeg', '.png']
         },
     });
 
     const removeFile = name => {
         setFiles(files => files.filter(file => file.name !== name))
+    }
+
+    const handleUrlInputChange = (event) => {
+        event.preventDefault()
+        setUrlInput(event.target.value);
+    };
+
+    const handleAddUrl = () => {
+        if (urlInput.trim() !== '') {
+            setUrlsElem(prevUrls => [...prevUrls, urlInput.trim()]);
+            setUrlInput('');
+        }
+    };
+
+    const handleDeleteUrl = (urlToDelete) => {
+        setUrlsElem(prevUrls => prevUrls.filter(url => url !== urlToDelete));
     }
 
     return (
@@ -122,10 +136,7 @@ const PostInput = (props) => {
                     {messageError && <div className="text-danger">{messageError}</div>}
                 </div>
                 <div className="multimedia-buttons d-flex justify-content-around">
-                    <button className="btn btn-primary" onClick={(e) => handleFileSelect(e, 'image')}>Imágenes</button>
-                    <button className="btn btn-primary" onClick={(e) => handleFileSelect(e,'video')}>Vídeo</button>
-                    <button className="btn btn-primary" onClick={(e) => handleFileSelect(e,'document')}>Documento</button>
-                    <button className="btn btn-primary" onClick={(e) => handleFileSelect(e,'audio')}>Audio</button>
+                    <button className="btn btn-primary" onClick={showInputHandler}>Imágenes</button>
                 </div>
                 <div className="mb-3">
                     {showInputFile &&
@@ -151,6 +162,24 @@ const PostInput = (props) => {
                                 </li>
                             ))}
                         </ul>
+                    </div>
+                    <div className="mb-3">
+                        <label id="urls" className="form-label">URLs</label>
+                        <input
+                            id="urls"
+                            type="text"
+                            className="form-control"
+                            placeholder="Ingrese la URL"
+                            value={urlInput}
+                            onChange={handleUrlInputChange}
+                        />
+                        {urlsElem ? urlsElem.map((url, index) => (
+                            <div className="d-flex mt-2" key={index}>
+                            <p>{url}</p>
+                            <button onClick={() => handleDeleteUrl(url)} className="btn btn-danger">Delete</button>
+                            </div>
+                        )): (null)}
+                        <button type="button" className="btn btn-primary mt-2" onClick={handleAddUrl}>Agregar</button>
                     </div>
                 </div>
                 <button type="submit" className="btn btn-primary">Publicar</button>

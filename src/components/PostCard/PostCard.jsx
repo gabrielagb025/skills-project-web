@@ -15,24 +15,12 @@ const PostCard = (props) => {
             <div className="post-content">
                 <NavLink style={{ textDecoration: 'none' }} to={post.user._id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user._id}`}><h5 id="post-user-name">{post.user.name}</h5></NavLink>
                 <p>{post.message}</p>
-                {post.type === 'image' ? (
-                    post.multimedia.map((img, index) => (
-                        <img key={index} src={img} width={100} />
-                    ))
-                ) : (null)}
-                {post.type === 'document' ? (
-                    post.multimedia.map((doc, index) => (
-                        <embed key={index} type="application/pdf" src={doc} width={500} />
-                    ))
-                ) : (null)}
-                {post.type === 'video' ? (
-                    post.multimedia.map((vid, index) => (
-                        <video key={index} width={400} controls>
-                            <source src={vid} type="video/mp4" />
-                            Tu navegador no soporta el elemento de video.
-                        </video>
-                    ))
-                ) : (null)}
+                {post.images.map((img, index) => (
+                    <img key={index} src={img} width={100} />
+                ))}
+                {post.urls.map((url, index) => (
+                    <a key={index} href={url}>{url}</a>
+                ))}
                 <p>{post.date}</p>
             </div>
             <div className="delete-btn">

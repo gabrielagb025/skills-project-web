@@ -7,6 +7,7 @@ import { useAuthContext } from "../../../contexts/AuthContext";
 import InputGroup from "../../../components/InputGroup/InputGroup";
 import { sendFriendRequest, getFriends, getPendingFriendRequests, cancelFriendRequest, getAcceptedFriendRequest } from "../../../services/FriendRequestService";
 import { NavLink, useNavigate } from "react-router-dom";
+import { getUserDescription } from "../../../services/DescriptionService";
 
 
 
@@ -17,7 +18,7 @@ const ratingInitialValues = {
 
 const friendRequestIntialValues = {
   message: ""
-} 
+}
 
 const UserDetail = () => {
   const [user, setUser] = useState(null);
@@ -30,19 +31,21 @@ const UserDetail = () => {
   const [madeRequest, setMadeRequest] = useState(false);
   const [haveRequest, setHaveRequest] = useState(false);
   const [acceptedFriendRequest, setAcceptedFriendRequest] = useState(null);
-  const [chatList, setChatList] = useState([]); 
+  const [userDescription, setUserDescription] = useState(null);
+  const [chatList, setChatList] = useState([]);
   const { id } = useParams();
   const { user: currentUser } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
-    Promise.all([getUser(id), getRatings(id), getFriends(), getPendingFriendRequests(), getAcceptedFriendRequest(id), getChats()])
-      .then(([user, ratings, friends, pendingFriendRequests, acceptedFriendReq, chats]) => {
+    Promise.all([getUser(id), getRatings(id), getFriends(), getPendingFriendRequests(), getAcceptedFriendRequest(id), getChats(), getUserDescription(id)])
+      .then(([user, ratings, friends, pendingFriendRequests, acceptedFriendReq, chats, description]) => {
         setUser(user);
         setRatingList(ratings);
         setIsFriend(friends.some(f => f.id === user.id));
         setAcceptedFriendRequest(acceptedFriendReq);
         setChatList(chats)
+        setUserDescription(description)
 
         const receivedRequest = pendingFriendRequests.find(request => request.userSend === user.id);
         const sentRequest = pendingFriendRequests.find(request => request.userReceive === user.id);
@@ -152,24 +155,24 @@ const UserDetail = () => {
 
   /* CHAT */
 
-const handleChatClick = () => {
+  const handleChatClick = () => {
 
-  const chat = chatList.find((chat) => {
-    return chat.users.some(userObj => userObj.id === user.id);
-  });
+    const chat = chatList.find((chat) => {
+      return chat.users.some(userObj => userObj.id === user.id);
+    });
 
-      if (chat) {
-        navigate(`/user/chat/${chat.id}`);
-      } else {
-        createChat(user.id)
-          .then((chat) => {
-            navigate(`/user/chat/${chat.id}`);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-}
+    if (chat) {
+      navigate(`/user/chat/${chat.id}`);
+    } else {
+      createChat(user.id)
+        .then((chat) => {
+          navigate(`/user/chat/${chat.id}`);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }
 
   return (
     <div className="UserDetail">
@@ -221,9 +224,21 @@ const handleChatClick = () => {
             )}
             <div className="mt-4 profile-info-container">
               <h1>{user.name}</h1>
-              <p>{user.description}</p>
               <p>{user.city}</p>
-              { isFriend ? <p>{user.phone}</p> : null}
+              {isFriend ? <p>{user.phone}</p> : null}
+              {userDescription ? (
+                <div className="user-description">
+                  <h4>Descripción</h4>
+                  <p>{userDescription.description}</p>
+                  {userDescription.images.map((image, index) => (
+                    <img key={index} src={image} width={100} />
+                  ))}
+                  <p>URLs</p>
+                  {userDescription.urls.map((url, index) => (
+                    <a className="me-4" key={index} href={url}>{url}</a>
+                  ))}
+                </div>
+              ) : (null)}
               <h4>Habilidades que {user.name} puede enseñar:</h4>
               {user.teachSkills.map((skill) => (
                 <div key={skill.id}>
