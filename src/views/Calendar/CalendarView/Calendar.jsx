@@ -2,9 +2,15 @@ import React, { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { getCurrentUserEvents } from "../../../services/EventService";
+import Modal from 'react-modal';
+import './CalendarView.css';
+
+Modal.setAppElement("#root");
 
 const Calendar = () => {
     const [events, setEvents] = useState([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [selectedEvent, setSelectedEvent] = useState(null);
 
     useEffect(() => {
         getCurrentUserEvents()
@@ -17,11 +23,13 @@ const Calendar = () => {
     }, []);
 
     const handleEventClick = (eventInfo) => {
-        // `eventInfo` contiene información sobre el evento clicado
-        // Puedes acceder a las propiedades del evento como eventInfo.event.title, eventInfo.event.start, etc.
-        // Aquí puedes mostrar un modal o una ventana emergente con la información del evento
-        alert(`Evento: ${eventInfo.event.title}\nFecha de inicio: ${eventInfo.event.start}`);
+        setSelectedEvent(eventInfo.event);
+        setModalIsOpen(true);
     };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    }
 
     return (
         <>
@@ -30,8 +38,30 @@ const Calendar = () => {
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
                 events={events}
+                eventColor="#166339"
+                eventBackgroundColor="#166339"
                 eventClick={handleEventClick}
             />
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Información del Evento"
+            >
+                {console.log(selectedEvent)}
+                <h2>{selectedEvent && selectedEvent.title}</h2>
+                <h2>{selectedEvent && selectedEvent._def.extendedProps.users.forEach((user) => (user.name))}</h2>
+                <p>
+                    {selectedEvent && selectedEvent.startTime && selectedEvent.endTime &&
+                        `Hora de inicio: ${new Date(selectedEvent.startTime).getHours()}:${new Date(selectedEvent.startTime).getMinutes()}`
+                    }
+                </p>
+                <p>
+                    {selectedEvent && selectedEvent.startTime && selectedEvent.endTime &&
+                        `Hora de fin: ${new Date(selectedEvent.endTime).getHours()}:${new Date(selectedEvent.endTime).getMinutes()}`
+                    }
+                </p>
+                <button className="btn btn-primary" onClick={closeModal}>Cerrar</button>
+            </Modal>
         </>
     )
 }
