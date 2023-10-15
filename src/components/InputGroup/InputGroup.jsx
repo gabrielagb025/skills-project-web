@@ -6,7 +6,7 @@ const InputGroup = (props) => {
             <label htmlFor={props.name} className="form-label">{props.label}</label>
             <input
                 type={props.type}
-                className={`form-control ${props.error ? "is-invalid" : ""}`}
+                className={`form-control no-focus-outline ${props.error ? "is-invalid" : ""}`}
                 id={props.name}
                 name={props.name}
                 placeholder={props.placeholder}

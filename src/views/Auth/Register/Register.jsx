@@ -74,10 +74,15 @@ const Register = () => {
     return user ? (
         <Navigate to="/user/profile" />
     ) : (
-        <div className="register-container container mt-5">
+        <div className="register-container container">
+            <div className="text-center mb-4">
+                <img src="src\assets\logo skillsync letras.png" alt="" width={200} />
+            </div>
             <h1>Registrarse</h1>
 
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
+            <hr />
+
+            <form className="form-container" onSubmit={handleSubmit} encType="multipart/form-data">
                 <InputGroup
                     label={
                         <>
@@ -177,11 +182,15 @@ const Register = () => {
                     placeholder="Valencia"
                 />
                 <div className="submit-button mt-4 d-flex justify-content-center align-items-center">
-                    <button type="submit" className={`submit-button btn`}>
+                    <button type="submit" className={`submit-btn btn`}>
                         {isSubmitting ? "Cargando" : "Registrarse"}
                     </button>
                 </div>
             </form>
+
+            <div>
+                <p className="mt-4 text-center">¿Ya tienes una cuenta? - <NavLink to="/login" style={{ textDecoration: 'none' }}><span>Iniciar sesión</span></NavLink></p>
+            </div>
         </div>
     )
 }

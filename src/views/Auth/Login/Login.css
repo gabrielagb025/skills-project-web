@@ -1,3 +1,43 @@
+.login-container {
+    margin-top: 20px !important;
+    padding-bottom: 40px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+.login-container .form-container {
+    width: 400px;
+}
+
+.login-container hr {
+    border: 2px solid #EA9F92; /* Color y grosor de la línea */
+    width: 40%; /* Ancho de la línea, 100% para cubrir todo el contenedor */ /* Espaciado superior para separar la línea del contenido */
+}
+
 .login-container i {
     margin-right: 5px;
+    color: #5e8039;
+}
+
+.login-container span {
+    color: #5e8039;
+}
+
+.login-container span:hover {
+    color: #8db760;
+}
+
+
+@media (max-width: 767px) {
+    .form-container {
+        width: 100%; /* Establecer el ancho al 100% para dispositivos móviles */
+        padding: 0 20px; /* Agregar algún espacio en los bordes izquierdo y derecho para que no esté pegado a los bordes de la pantalla */
+    }
+
+    .login-container hr {
+        width: 90%
+    }
 }

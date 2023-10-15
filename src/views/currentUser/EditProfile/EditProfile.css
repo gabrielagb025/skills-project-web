@@ -1,0 +1,14 @@
+.edit-profile {
+    margin-top: 20px;
+    padding-bottom: 40px !important;
+}
+
+.edit-profile hr {
+    border: 2px solid #EA9F92; /* Color y grosor de la línea */
+    width: 100%; /* Ancho de la línea, 100% para cubrir todo el contenedor */ /* Espaciado superior para separar la línea del contenido */
+}
+
+.edit-profile i {
+    margin-right: 5px;
+    color: #5e8039;
+}

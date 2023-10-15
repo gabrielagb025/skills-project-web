@@ -20,7 +20,7 @@ const Home = () => {
                     </div>
 
                     <div className="col-md-6 mt-4 home-buttons text-center">
-                        <p className="text-center">Conecta con otros usuarios, <br /> comparte tus conocimientos <br /> y adquiere nuevas perspectivas.</p>
+                        <p className="text-center fw-bold">Conecta con otros usuarios, <br /> comparte tus conocimientos <br /> y adquiere nuevas perspectivas.</p>
                         <NavLink className="" to="/register"><button className="mt-3 btn register-btn">Registrarse</button></NavLink>
                         <p className="mt-4">¿Ya tienes una cuenta? - <NavLink to="/login" style={{ textDecoration: 'none' }}><span>Iniciar sesión</span></NavLink></p>
                     </div>

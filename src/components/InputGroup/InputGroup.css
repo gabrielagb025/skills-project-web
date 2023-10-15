@@ -1,3 +1,16 @@
 .form-control {
     border-radius: 20px !important;
 }
+
+
+.form-control:hover,
+.no-focus-outline:hover {
+    outline: 1px solid #8db760 !important;
+    box-shadow: none !important;
+}
+
+.form-control:focus,
+.no-focus-outline:focus {
+    outline: 2px solid #8db760 !important;
+    box-shadow: none !important;
+}

@@ -5,6 +5,7 @@ import { useAuthContext } from "../../../contexts/AuthContext";
 import { useFormik } from "formik";
 import { editProfileSchema } from "../../../utils/yup.schemas";
 import { useNavigate } from "react-router-dom";
+import './EditProfile.css';
 
 const EditProfile = () => {
     const { user, getUser } = useAuthContext();
@@ -70,9 +71,15 @@ const EditProfile = () => {
         <div className="EditProfile edit-profile container mt-5">
             <h1>Editar perfil</h1>
 
+            <hr />
+
             <form onSubmit={handleSubmit} >
                 <InputGroup
-                    label="Nombre"
+                    label={
+                        <>
+                          <i className="bi bi-person-fill"></i> Nombre
+                        </>
+                    }
                     name="name"
                     type="text"
                     value={values.name}
@@ -82,7 +89,11 @@ const EditProfile = () => {
                     placeholder="Harry Potter"
                 />
                  <InputGroup
-                    label="Imagen de perfil"
+                    label={
+                        <>
+                          <i className="bi bi-card-image"></i> Imagen de perfil
+                        </>
+                    }
                     name="avatar"
                     type="file"
                     onChange={(event) => {
@@ -92,7 +103,11 @@ const EditProfile = () => {
                     placeholder=""
                 />
                 <InputGroup
-                    label="Teléfono"
+                   label={
+                    <>
+                      <i className="bi bi-telephone-fill"></i> Número de teléfono (Sólo tus contactos podrán ver el número de teléfono).
+                    </>
+                }
                     name="phone"
                     type="text"
                     value={values.phone}
@@ -102,7 +117,11 @@ const EditProfile = () => {
                     placeholder="999999999"
                 />
                 <InputGroup
-                    label="Ciudad"
+                    label={
+                        <>
+                          <i className="bi bi-geo-alt-fill"></i> Ciudad
+                        </>
+                    }
                     name="city"
                     type="text"
                     value={values.city}
@@ -111,8 +130,8 @@ const EditProfile = () => {
                     onBlur={handleBlur}
                     placeholder="Valencia"
                 />
-                <div className="submitButton mt-4 d-flex justify-content-center align-items-center">
-                    <button type="submit" className={`btn btn-${isSubmitting ? 'secondary' : 'primary'}`}>
+                <div className="submit-button mt-4 d-flex justify-content-center align-items-center">
+                    <button type="submit" className={`btn ${isSubmitting ? 'submitting' : ''}`}>
                         {isSubmitting ? "Cargando" : "Editar perfil"}
                     </button>
                 </div>
