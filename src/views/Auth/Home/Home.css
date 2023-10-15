@@ -1,4 +1,9 @@
+.home-container {
+    margin-top: 40px;
+}
+
 .home-buttons {
+    margin-top: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,23 +13,25 @@
     width: 200px;
     padding: 8px;
     border-radius: 20px;
-    border: 1.5px solid #166339 !important;
-    background-color: #166339 !important;
+    border: 1.5px solid #5e8039 !important;
+    background-color: #5e8039!important;
     color: #ffffff !important;
 }
 
 .register-btn:hover {
-    border: 1.5px solid #2e8957 !important;
-    background-color: #2e8957  !important;
+    border: 1.5px solid #8db760 !important;
+    background-color: #8db760  !important;
     color: #ffffff !important;
 }
 
 .home-buttons span {
-    color: #166339;
+    color: #5e8039;
 }
 
 .home-buttons span:hover {
-    color: #2e8957;
+    color: #8db760;
 }
+
+
 
 
