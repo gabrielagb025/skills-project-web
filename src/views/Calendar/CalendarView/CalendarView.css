@@ -15,10 +15,33 @@
 }
 
 .fc-view-harness a {
-    color: black;
+    color: #5e8039;
 }
 
 .fc-scrollgrid, .fc-dayGridMonth-view {
     border-radius: 20px;
     overflow: hidden;
+}
+
+.event-info-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-info-modal i {
+    color: #5e8039;
+}
+
+.delete-event {
+    color: #d27464;
+}
+
+.delete-event i {
+    color: #d27464;
+}
+
+.delete-event i:hover {
+    color: #EA9F92;
 }
