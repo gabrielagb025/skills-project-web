@@ -1,0 +1,8 @@
+.filtered-users-title h1 {
+    text-align: center;
+}
+
+.UsersList hr {
+    border: 2px solid #5e8039; /* Color y grosor de la línea */
+    width: 100%; 
+}

@@ -3,7 +3,7 @@
     background-color: white;
     padding: 20px !important;
     border-radius: 25px !important;
-    box-shadow: 0 0 20px 8px rgba(154, 196, 96, 0.5);
+    box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
     margin: 0 auto; /* Centra el contenedor horizontalmente */
 }
 
@@ -35,7 +35,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center; /* Centra el texto horizontalmente */
+    text-align: center;
 }
 
 .skills-user-card h5 {
