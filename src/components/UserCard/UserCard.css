@@ -1,7 +1,52 @@
+.card-user {
+    max-width: 400px;
+    background-color: white;
+    padding: 20px !important;
+    border-radius: 25px !important;
+    box-shadow: 0 0 20px 8px rgba(154, 196, 96, 0.5);
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+}
+
+.photo-name-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .user-img {
     height: 110px;
     width: 110px;
     object-fit: cover;
     border-radius: 50%;
-    padding: 10px;
+    border: 3px solid #EA9F92;
+}
+
+.card-title h3 {
+    white-space: nowrap;
+}
+
+.info-user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el texto horizontalmente */
+}
+
+.skills-user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Centra el texto horizontalmente */
+}
+
+.skills-user-card h5 {
+    white-space: nowrap;
+}
+
+.skills-user-card p {
+    margin: 0;
+}
+
+.info-user-card i {
+    margin-right: 5px;
+    color: #5e8039;
 }
