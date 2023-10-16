@@ -50,51 +50,53 @@ const Login = () => {
     return user ? (
         <Navigate to="/user/profile" />
     ) : (
-        <div className="Login login-container container my-5">
-            <div className="text-center mb-4">
-                <img src="src\assets\logo skillsync letras.png" alt="" width={200} />
-            </div>
-            <h1>Iniciar sesión</h1>
-
-            <hr />
-
-            <form className="form-container" onSubmit={handleSubmit}>
-                <InputGroup
-                    label={
-                        <>
-                            <i className="bi bi-envelope-fill"></i> Correo electrónico
-                        </>
-                    }
-                    name="email"
-                    type="email"
-                    value={values.email}
-                    error={touched.email && errors.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    placeholder="harry@hogwarts.es"
-                />
-                <InputGroup
-                    label={
-                        <>
-                            <i className="bi bi-lock-fill"></i> Contraseña
-                        </>
-                    }
-                    name="password"
-                    type="password"
-                    value={values.password}
-                    error={touched.password && errors.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    placeholder="************"
-                />
-                <div className="submit-button mt-4 d-flex justify-content-center align-items-center">
-                    <button type="submit" className={`btn ${isSubmitting ? 'submitting' : ''}`}>
-                        {isSubmitting ? "Cargando..." : "Iniciar sesión"}
-                    </button>
+        <div className="div-margin">
+            <div className="Login login-container container my-5">
+                <div className="text-center mb-4">
+                    <img src="src\assets\logo skillsync letras.png" alt="" width={200} />
                 </div>
-            </form>
-            <div>
-                <p className="mt-4">¿No tienes una cuenta? - <NavLink to="/register" style={{ textDecoration: 'none' }}><span>Registrarse</span></NavLink></p>
+                <h1>Iniciar sesión</h1>
+
+                <hr />
+
+                <form className="form-container" onSubmit={handleSubmit}>
+                    <InputGroup
+                        label={
+                            <>
+                                <i className="bi bi-envelope-fill"></i> Correo electrónico
+                            </>
+                        }
+                        name="email"
+                        type="email"
+                        value={values.email}
+                        error={touched.email && errors.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="harry@hogwarts.es"
+                    />
+                    <InputGroup
+                        label={
+                            <>
+                                <i className="bi bi-lock-fill"></i> Contraseña
+                            </>
+                        }
+                        name="password"
+                        type="password"
+                        value={values.password}
+                        error={touched.password && errors.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="************"
+                    />
+                    <div className="submit-button mt-4 d-flex justify-content-center align-items-center">
+                        <button type="submit" className={`btn ${isSubmitting ? 'submitting' : ''}`}>
+                            {isSubmitting ? "Cargando..." : "Iniciar sesión"}
+                        </button>
+                    </div>
+                </form>
+                <div>
+                    <p className="mt-4">¿No tienes una cuenta? - <NavLink to="/register" style={{ textDecoration: 'none' }}><span>Registrarse</span></NavLink></p>
+                </div>
             </div>
         </div>
     )

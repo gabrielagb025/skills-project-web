@@ -47,7 +47,7 @@ function App() {
         <p>Loading...</p>
       ) : (
         <>
-          {user ? <NavBar /> : null}
+          {user ? <NavBar /> : ''}
 
           <Routes>
             <Route path="/" element={<Home />} />

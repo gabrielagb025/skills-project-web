@@ -50,3 +50,32 @@
     margin-right: 5px;
     color: #5e8039;
 }
+
+
+@media (max-width: 768px) {
+    .card-user {
+        max-width: 300px;
+    }
+    .user-img {
+        height: 80px;
+        width: 80px;
+    }
+    .info-user-card {
+        margin-top: 10px;
+    }
+    .skills-user-card {
+        margin-top: 10px;
+        align-items: center;
+    }
+
+    .card-body {
+        padding: 0.5rem !important;
+        width: 200px;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .card-body h5 {
+        font-size: 24px !important;
+    }
+}

@@ -26,7 +26,7 @@ const FilteredUsersList = () => {
             <hr />
             <div className="row">
                 {filteredUsers.map((user) => (
-                    <div key={user.id} className="col-12 col-md-4">
+                    <div key={user.id} className="col-12 col-md-4 col-sm-6">
                         <UserCard  {...user} />
                     </div>
                 ))}

@@ -14,13 +14,13 @@ const UserCard = (user) => {
                         <p className="card-text"><i className="bi bi-geo-alt-fill"></i>{user.city}</p>
                     </div>
                 </div>
-                <div className="col-md-8">
+                <div className="col-md-8 d-flex flex-column align-items-center">
                     <div className="mt-2 skills-user-card card-body">
-                        <h5 className="card-text"><i class="bi bi-pen-fill"></i>{user.name} puede enseñar:</h5>
+                        <h5 className="card-text"><i className="bi bi-pen-fill"></i>{user.name}<br /> puede enseñar:</h5>
                         {user.teachSkills.map((skill) => (
                             <p key={skill.id}>- {skill.name}</p>
                         ))}
-                        <h5 className="card-text mt-4"><i class="bi bi-pen-fill"></i>{user.name} quiere aprender:</h5>
+                        <h5 className="card-text mt-4"><i className="bi bi-pen-fill"></i>{user.name}<br />  quiere aprender:</h5>
                         {user.learnSkills.map((skill) => (
                             <p key={skill.id}>- {skill.name}</p>
                         ))}

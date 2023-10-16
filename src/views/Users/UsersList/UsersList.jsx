@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import UserCard from "../../../components/UserCard/UserCard";
 import { getUsers } from "../../../services/UserService";
 import { useAuthContext } from "../../../contexts/AuthContext";
+import './UsersList.css'
 
 
 const UsersList = () => {
@@ -22,10 +23,17 @@ const UsersList = () => {
 
     return (
         <div className="UsersList container">
-            <h1>Encuentra usuarios</h1>
-            {users.map((user) => (
-                <UserCard key={user.id} {...user}/>
-            ))}
+            <div className="users-title mt-4">
+                <h1>Encuentra usuarios</h1>
+            </div>
+            <hr />
+            <div className="row">
+                {users.map((user) => (
+                    <div className="col-12 col-md-4 col-sm-6" key={user.id}>
+                        <UserCard {...user} />
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
