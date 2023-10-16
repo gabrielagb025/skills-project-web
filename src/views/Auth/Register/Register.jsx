@@ -76,7 +76,7 @@ const Register = () => {
     ) : (
         <div className="register-container container">
             <div className="text-center mb-4">
-                <img src="src\assets\logo skillsync letras.png" alt="" width={200} />
+                <img  className="" src="src\assets\logo skillsync letras.png" alt="" width={200} />
             </div>
             <h1>Registrarse</h1>
 

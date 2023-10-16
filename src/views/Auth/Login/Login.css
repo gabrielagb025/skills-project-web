@@ -1,11 +1,15 @@
 .login-container {
-    margin-top: 20px !important;
-    padding-bottom: 40px !important;
+    max-width: 600px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh; 
+    background-color: white;
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 0 20px 8px rgba(154, 196, 96, 0.5);
 }
 
 .login-container .form-container {

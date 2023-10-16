@@ -71,7 +71,7 @@ const Login = () => {
                     error={touched.email && errors.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Introduce tu correo electrónico"
+                    placeholder="harry@hogwarts.es"
                 />
                 <InputGroup
                     label={
@@ -85,7 +85,7 @@ const Login = () => {
                     error={touched.password && errors.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Introduce tu contraseña"
+                    placeholder="************"
                 />
                 <div className="submit-button mt-4 d-flex justify-content-center align-items-center">
                     <button type="submit" className={`btn ${isSubmitting ? 'submitting' : ''}`}>
