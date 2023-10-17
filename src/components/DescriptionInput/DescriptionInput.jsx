@@ -13,7 +13,6 @@ const DescriptionInput = (props) => {
     }
 
     const [description, setDescription] = useState(initialDescription);
-    console.log(description)
 
     const [isEditing, setIsEditing] = useState(false);
     const [postIdToEdit, setPostIdToEdit] = useState(null);
@@ -36,6 +35,12 @@ const DescriptionInput = (props) => {
     const { updateDescription } = props
 
     useEffect(() => {
+        if (props.initialValues) {
+            setFiles(props.initialValues.images.map(imageUrl => ({
+                name: imageUrl, // Puedes usar el nombre del archivo como identificador único
+                preview: imageUrl, // Usa la URL como vista previa
+            })));
+        }
         setDescription(prevDesc => ({
             ...prevDesc,
             images: files,
@@ -74,7 +79,7 @@ const DescriptionInput = (props) => {
         console.log(formData);
         createDescription(formData)
             .then(() => {
-                setDescription(initialValues)
+                setDescription(initialDescription)
                 setFiles([])
                 setUrlsElem([])
                 updateDescription()
