@@ -27,7 +27,7 @@ const Friends = () => {
                 {friendList.length <= 0 ? (
                     <div className="no-friends-container mt-4">
                         <h3>Todavía no has conectado con ningún usuario.</h3>
-                        <p>Pulsa aquí para encontrar usuarios con intereses similares a los tuyos</p>
+                        <p>Pulsa aquí para encontrar usuarios con intereses similares a los tuyos.</p>
                         <div className="submit-button">
                             <NavLink to="/user/users/filtered"><button className="btn btn-primary">Encontrar usuarios</button></NavLink>
                         </div>

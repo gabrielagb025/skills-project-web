@@ -118,6 +118,13 @@ const UserDetail = () => {
 
   const handleSubmitFriendRequest = (event) => {
     event.preventDefault()
+
+    const userMessage = friendRequest.message;
+
+    if(!userMessage) {
+      friendRequest.message = `¡Hola! Me gustaría conectar contigo.`
+    }
+
     sendFriendRequest(id, friendRequest)
       .then(() => {
         console.log('friend request enviado')

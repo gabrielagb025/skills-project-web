@@ -1,0 +1,69 @@
+.notifications-title h1 {
+    text-align: center;
+}
+
+.Notifications hr {
+    border: 2px solid #5e8039; /* Color y grosor de la línea */
+    width: 100%; 
+}
+
+.no-notifications-container {
+    max-width: 600px !important;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
+    text-align: center;
+}
+
+.friend-request-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
+    height: 100%;
+}
+
+.friend-request-container img {
+    height: 110px;
+    width: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #EA9F92;
+}
+
+.friend-request-buttons button {
+    width: 100px;
+    padding: 5px;
+    border-radius: 20px;
+    color: #ffffff !important;
+}
+
+.btn-accept {
+    border: 1.5px solid #9AC460 !important;
+    background-color: #9AC460 !important;
+}
+
+.btn-accept:hover {
+    border: 1.5px solid #C0DBA3 !important;
+    background-color: #C0DBA3 !important;
+}
+
+.btn-reject {
+    border: 1.5px solid #EA9F92 !important;
+    background-color: #EA9F92 !important;
+}
+
+.btn-reject:hover {
+    border: 1.5px solid #F4BFB3 !important;
+    background-color: #F4BFB3 !important;
+}
+
