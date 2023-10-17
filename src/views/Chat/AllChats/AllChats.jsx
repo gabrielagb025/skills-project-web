@@ -29,19 +29,25 @@ const Chats = () => {
                     <>
                         {chats.map((chat) => {
                             const otherUser = chat?.users.find((user) => user.id !== currentUser.id);
+                            const unreadMessages = chat.messages.filter(message => message.sender !== currentUser.id && message.status === 'unread').length;
                             return (
-                                <div className="chat-list-container my-3">
-                                    <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`/user/chat/${chat.id}`} key={chat.id}>
+                                <div className="chat-list-container my-3 mt-4" key={chat.id}>
+                                    <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`/user/chat/${chat.id}`}>
                                         <div className="d-flex align-items-center chat-container">
                                             <img src={otherUser.avatar} alt="" width={100} />
-                                            <div className="ms-4">
-                                                <h5>{otherUser.name}</h5>
+                                            <div className="ms-4 chat-container-text">
+                                                <h6>{otherUser.name}</h6>
                                                 {chat.messages.length > 0 ? (
-                                                    <p>{chat.messages[chat.messages.length - 1].text}</p>
+                                                    <p className={unreadMessages ? 'fw-bold' : ''}>{chat.messages[chat.messages.length - 1].text}</p>
                                                 ) : (
                                                     <p>No hay mensajes aún</p>
                                                 )}
                                             </div>
+                                            {unreadMessages > 0 && (
+                                                <div className="messages-number ms-4 mt-3">
+                                                    <span className="unread-circle">{unreadMessages}</span>
+                                                </div>
+                                            )}
                                         </div>
                                     </NavLink>
                                 </div>

@@ -26,10 +26,10 @@
 }
 
 .chat-list-container {
-    max-width: 800px !important;
+    max-width: 600px !important;
     margin: 0 auto;
     display: flex;
-    background-color: white;
+    background-color: #f4f8ee;
     padding: 20px;
     border-radius: 25px;
     box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
@@ -42,4 +42,25 @@
     object-fit: cover;
     border-radius: 50%;
     border: 3px solid #EA9F92;
+}
+
+.unread-circle {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #5e8039; /* Color de fondo del círculo (verde) */
+    color: #ffffff; /* Color del texto (blanco) */
+    text-align: center; /* Centra el número dentro del círculo */
+    line-height: 25px; /* Centra verticalmente el número dentro del círculo */ /* Hace que el número sea más visible */
+}
+
+.chat-container-text {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+@media (max-width: 767px) {
+
 }
