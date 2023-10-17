@@ -1,3 +1,31 @@
+.PostInput {
+    max-width: 800px !important;
+    margin: 0 auto;
+    background-color: #f2f8e9;
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
+}
+
+.btn-media i {
+    color: #5e8039;
+}
+
+.btn-media i:hover {
+    color: #8db760;
+}
+
+.btn-media button {
+    background-color: white;
+    border-radius: 50px;
+    border: 1px solid #5e8039;
+}
+
+.btn-media button:hover {
+    background-color: white;
+    border: 1px solid #8db760;
+}
+
 .multimedia-list {
     list-style-type: none;
 }
@@ -5,4 +33,96 @@
 .multimedia-preview img {
     max-width: 100px;
     height: auto
+}
+
+.post-input-media-container {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-around;
+    max-height: 300px;
+}
+
+.image-input-container {
+    max-width: 250px;
+}
+
+.url-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-url-button button {
+    width: 180px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1.5px solid #9AC460 !important;
+    background-color: #9AC460 !important;
+    color: #ffffff !important;
+}
+
+.add-url-button button:hover {
+    border: 1.5px solid #C0DBA3 !important;
+    background-color: #C0DBA3 !important;
+    color: #ffffff !important;
+}
+
+.delete-media i {
+    color: #e18473;
+}
+
+.delete-media i:hover {
+    color: #EA9F92;
+}
+
+.multimedia-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-gap: 8px;
+}
+
+.multimedia-preview {
+    background-color: white;
+    border-radius: 5px;
+    max-height: 300px;
+}
+
+.multimedia-list img {
+    width: 80px; /* Tamaño deseado para las imágenes */
+    height: 80px; /* Tamaño deseado para las imágenes */
+    object-fit: cover; /* Mantiene la relación de aspecto y cubre completamente el contenedor */
+}
+
+.url-preview {
+    background-color: white;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 8px;
+    align-items: center; /
+}
+
+.url-preview a {
+    color: #3F423B;
+}
+
+.delete-media:active {
+    border: none!important;
+}
+
+@media (max-width: 767px) {
+    .post-input-media-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-height: 300px;
+    }
+    .image-input-container {
+        width: 100%;
+    }
+    .url-input-container {
+        width: 100%;
+    }
 }

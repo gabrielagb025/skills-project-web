@@ -5,6 +5,8 @@ import { deletePost, getCurrentUserPosts, editPost } from '../../../services/Pos
 import PostInput from '../../../components/PostInput/PostInput';
 import DescriptionInput from '../../../components/DescriptionInput/DescriptionInput';
 import { currentUserDescription, editDescription } from '../../../services/DescriptionService';
+import PostCard from '../../../components/PostCard/PostCard';
+
 
 const Profile = () => {
   const { user } = useAuthContext();
@@ -12,6 +14,7 @@ const Profile = () => {
   const [postInput, setPostInput] = useState(false);
   const [userDescription, setUserDescription] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     Promise.all([getCurrentUserPosts(), currentUserDescription()])
@@ -30,17 +33,6 @@ const Profile = () => {
         console.log('post borrado')
         const filteredPosts = userPostList.filter((post) => post.id !== postId);
         setUserPostList(filteredPosts);
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-
-  const handleEditPost = (postId) => {
-    setPostInput(true)
-    editPost(postId, postData)
-      .then(() => {
-        console.log('post editado')
       })
       .catch(err => {
         console.log(err)
@@ -69,10 +61,16 @@ const Profile = () => {
     currentUserDescription()
       .then((description) => {
         setUserDescription(description)
+        setShowForm(false)
       })
       .catch(err => {
         console.log(err)
       })
+  }
+
+  const handleEditForm = () => {
+    setIsEditing(true)
+    setShowForm(true)
   }
 
   return (
@@ -103,11 +101,11 @@ const Profile = () => {
             {userDescription.urls.map((url, index) => (
               <a className="me-4" key={index} href={url}>{url}</a>
             ))}
-            <button className="btn btn-success" onClick={handleShowForm}>Editar</button>
+            <button className="btn btn-success" onClick={handleEditForm}>Editar</button>
             {showForm && (
               <DescriptionInput
                 updateDescription={handleUpdateDescription}
-                initialValues={userDescription} // Pasa los valores iniciales al formulario de edición
+                initialValues={isEditing ? userDescription : ''}
               />
             )}
           </div>)}

@@ -30,18 +30,16 @@
     justify-content: center;
 }
 
-.event-info-modal i {
-    color: #5e8039;
+.event-info-modal button {
+    background-color: #e18473;
+    border: 1px solid #e18473;
+    color: white;
+    border-radius: 25px;
 }
 
-.delete-event {
-    color: #d27464;
-}
-
-.delete-event i {
-    color: #d27464;
-}
-
-.delete-event i:hover {
-    color: #EA9F92;
+.event-info-modal button:hover {
+    background-color: #EA9F92;
+    border: 1px solid #EA9F92;
+    color: white;
+    border-radius: 25px;
 }

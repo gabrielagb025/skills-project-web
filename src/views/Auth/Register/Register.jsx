@@ -190,7 +190,7 @@ const Register = () => {
                 </form>
 
                 <div>
-                    <p className="mt-4 text-center">¿Ya tienes una cuenta? - <NavLink to="/login" style={{ textDecoration: 'none' }}><span>Iniciar sesión</span></NavLink></p>
+                    <p className="mt-4 text-center">¿Tienes una cuenta? - <NavLink to="/login" style={{ textDecoration: 'none' }}><span>Iniciar sesión</span></NavLink></p>
                 </div>
             </div>
         </div>

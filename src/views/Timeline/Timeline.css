@@ -1,4 +1,28 @@
+.timeline-margin {
+    padding: 20px;
+}
+
 .timeline-btns {
     display: flex;
     justify-content: space-around;
+}
+
+.timeline-btns button {
+    width: 100px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1.5px solid #5e8039 !important;
+    background-color: #5e8039 !important;
+    color: #ffffff !important;
+}
+
+.timeline-btns button:hover {
+    border: 1.5px solid #8db760 !important;
+    background-color: #8db760 !important;
+    color: #ffffff !important;
+}
+
+.Timeline hr {
+    border: 2px solid #5e8039; /* Color y grosor de la línea */
+    width: 100%; 
 }

@@ -15,50 +15,50 @@ const Timeline = () => {
 
     useEffect(() => {
         Promise.all([getPostsForYou(), getPostsFriends()])
-        .then(([postsForYou, postsFriends]) => {
-            setPostListForYou(postsForYou);
-            setPostListFriends(postsFriends);
-            setCurrentPosts(postsForYou);
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .then(([postsForYou, postsFriends]) => {
+                setPostListForYou(postsForYou);
+                setPostListFriends(postsFriends);
+                setCurrentPosts(postsForYou);
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, []);
 
     const handleDeletePost = (postId) => {
         deletePost(postId)
-          .then(() => {
-            const updatedForYouPosts = postListForYou.filter((post) => post.id !== postId);
-            const updatedFriendsPosts = postListFriends.filter((post) => post.id !== postId);
-            setPostListForYou(updatedForYouPosts);
-            setPostListFriends(updatedFriendsPosts);
+            .then(() => {
+                const updatedForYouPosts = postListForYou.filter((post) => post.id !== postId);
+                const updatedFriendsPosts = postListFriends.filter((post) => post.id !== postId);
+                setPostListForYou(updatedForYouPosts);
+                setPostListFriends(updatedFriendsPosts);
 
-            if (forYou) {
-                setCurrentPosts(updatedForYouPosts);
-            } else {
-                setCurrentPosts(updatedFriendsPosts);
-            }
-          })
-          .catch(err => {
-            console.log(err)
-          })
+                if (forYou) {
+                    setCurrentPosts(updatedForYouPosts);
+                } else {
+                    setCurrentPosts(updatedFriendsPosts);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     const handleUpdatePostList = () => {
         Promise.all([getPostsForYou(), getPostsFriends()])
-        .then(([postsForYou, postsFriends]) => {
-            setPostListForYou(postsForYou);
-            setPostListFriends(postsFriends);
+            .then(([postsForYou, postsFriends]) => {
+                setPostListForYou(postsForYou);
+                setPostListFriends(postsFriends);
 
-            if (forYou) {
-                setCurrentPosts(postsForYou);
-            } else {
-                setCurrentPosts(postsFriends);
-            }
-        })
-        .catch(err => {
-            console.log(err)
-        })
+                if (forYou) {
+                    setCurrentPosts(postsForYou);
+                } else {
+                    setCurrentPosts(postsFriends);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     const handleForYouPosts = () => {
@@ -72,20 +72,23 @@ const Timeline = () => {
     }
 
     return (
-        <div className="Timeline container">
-            <h1 className="mt-4">Timeline</h1>
-            <PostInput updatePost={handleUpdatePostList}/>
-            <hr />
-            <div className="posts-list mt-4">
-                <div className="timeline-btns">
-                    <button className="btn btn-primary" onClick={handleForYouPosts}>Para ti</button>
-                    <button className="btn btn-primary" onClick={handleFriendsPosts}>Amigos</button>
+        <div className="timeline-margin">
+            <div className="Timeline container">
+                <h1 className="mt-4">Publicaciones</h1>
+                <hr />
+                <PostInput updatePost={handleUpdatePostList} />
+                <hr />
+                <div className="posts-list mt-4">
+                    <div className="timeline-btns">
+                        <button className="btn btn-primary" onClick={handleForYouPosts}>Para ti</button>
+                        <button className="btn btn-primary" onClick={handleFriendsPosts}>Amigos</button>
+                    </div>
+                    {currentPosts
+                        .sort((a, b) => new Date(b.date) - new Date(a.date))
+                        .map((post) => (
+                            <PostCard key={post.id} post={post} onDeletePost={() => handleDeletePost(post.id)} />
+                        ))}
                 </div>
-                {currentPosts
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .map((post) => (
-                    <PostCard key={post.id} post={post} onDeletePost={() => handleDeletePost(post.id)}/>
-                ))}
             </div>
         </div>
     )

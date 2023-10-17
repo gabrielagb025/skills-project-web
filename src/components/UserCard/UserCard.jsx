@@ -24,9 +24,10 @@ const UserCard = (user) => {
                         {user.learnSkills.map((skill) => (
                             <p key={skill.id}>- {skill.name}</p>
                         ))}
-                        <div className="mt-4 submit-button">
-                        <Link to={`/user/users/detail/${user.id}`}><button className="btn">Ver perfil</button></Link>
-                        </div>
+                        
+                    </div>
+                    <div className="mt-4 submit-button d-flex align-items-end">
+                        <Link to={`/user/users/detail/${user.id}`}><button className="btn ">Ver perfil</button></Link>
                     </div>
                 </div>
             </div>

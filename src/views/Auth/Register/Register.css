@@ -3,10 +3,14 @@
 }
 
 .register-container {
-    margin-top: 20px !important;
-    margin-bottom: 20px !important;
+    max-width: 650px !important;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: white;
-    padding: 50px !important;
+    padding: 50px;
     border-radius: 25px;
     box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
 }
@@ -45,8 +49,8 @@
 }
 
 @media (max-width: 767px) {
-    .form-container {
-        width: 100%; /* Establecer el ancho al 100% para dispositivos móviles */
+    .register-container .form-container {
+        width: 300px; /* Establecer el ancho al 100% para dispositivos móviles */
         padding: 0 20px; /* Agregar algún espacio en los bordes izquierdo y derecho para que no esté pegado a los bordes de la pantalla */
     }
 }

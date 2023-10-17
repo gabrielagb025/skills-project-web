@@ -4,7 +4,7 @@
     padding: 20px !important;
     border-radius: 25px !important;
     box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    height: 100%!important;
 }
 
 .photo-name-container {

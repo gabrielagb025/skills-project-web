@@ -3,15 +3,17 @@ import { useDropzone } from "react-dropzone";
 import { useCallback, useState, useEffect } from "react";
 import { createDescription } from '../../services/DescriptionService';
 
-const initialValues = {
-    description: "",
-    images: [],
-    urls: []
-}
+
 
 const DescriptionInput = (props) => {
+    const initialDescription = props.initialValues || {
+        description: "",
+        images: [],
+        urls: []
+    }
 
-    const [description, setDescription] = useState(initialValues);
+    const [description, setDescription] = useState(initialDescription);
+    console.log(description)
 
     const [isEditing, setIsEditing] = useState(false);
     const [postIdToEdit, setPostIdToEdit] = useState(null);

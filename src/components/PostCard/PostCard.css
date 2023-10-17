@@ -2,3 +2,89 @@
     color: black;
     text-decoration: none;
 }
+
+.post-container {
+    max-width: 600px !important;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f8e9;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.post-user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.post-user-info img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #EA9F92;
+}
+
+#post-date {
+    color: #7f8775
+}
+
+.delete-btn button {
+    background-color: #e18473;
+    border: 1px solid #e18473;
+    color: white;
+    border-radius: 25px;
+}
+
+.delete-btn button:hover {
+    background-color: #EA9F92;
+    border: 1px solid #EA9F92;
+    color: white;
+    border-radius: 25px;
+}
+
+.post-images-container img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.post-images-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 16px;
+    justify-content: center;
+}
+
+.post-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Asegúrate de que el contenedor tenga un tamaño definido para que el centrado funcione */
+    height: 100%; /* Ajusta la altura según tus necesidades */
+}
+
+.post-img img {
+    max-width: 100%; /* Asegúrate de que la imagen no supere el tamaño del contenedor */
+    max-height: 100%; /* Asegúrate de que la imagen no supere el tamaño del contenedor */
+}
+
+.post-urls-container a {
+    color: #3F423B;
+}
+
+@media (max-width: 767px) {
+    .post-images-container img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+    }
+    .post-images-container {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+

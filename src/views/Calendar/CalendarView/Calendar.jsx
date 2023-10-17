@@ -46,8 +46,8 @@ const Calendar = () => {
                 setEvents(filteredEvents);
                 closeModal();
             })
-            .catch((err) => { 
-                console.error(err) 
+            .catch((err) => {
+                console.error(err)
             })
     }
 
@@ -58,8 +58,8 @@ const Calendar = () => {
             margin: "auto",  // Centra el modal horizontalmente
             borderRadius: "25px",  // Bordes redondeados
             border: "1px solid #5e8039",
-            padding: "20px", 
-            background: "linear-gradient(to bottom, #e6f4d8, #ffffff)"
+            padding: "20px",
+            backgroundColor: "#ffffff"
         }
     };
 
@@ -90,13 +90,16 @@ const Calendar = () => {
                 style={modalStyles}
             >
                 <div className="event-info-modal mt-3">
+                    <div className="modal-close-icon mb-2" onClick={closeModal}>
+                        <i class="bi bi-x-circle fs-5"></i>
+                    </div>
                     <div className="event-title d-flex align-items-center mt-2">
-                    <h5 className="me-2 mb-0">Nombre del evento:</h5>
+                        <h5 className="me-2 mb-0">Nombre del evento:</h5>
                         <h5 className="mb-0">{selectedEvent && selectedEvent.title}</h5>
                     </div>
 
                     <div className="event-user d-flex align-items-center mt-2">
-                    <h5 className="me-2 mb-0">Usuario:</h5>
+                        <h5 className="me-2 mb-0">Usuario:</h5>
                         <h5 className="mb-0">
                             {selectedEvent &&
                                 selectedEvent._def.extendedProps.users
@@ -107,7 +110,7 @@ const Calendar = () => {
                     </div>
 
                     <div className="event-start d-flex align-items-center mt-2">
-                    <h5 className="me-2 mb-0">Hora de inicio:</h5>
+                        <h5 className="me-2 mb-0">Hora de inicio:</h5>
                         <h5 className="mb-0">
                             {selectedEvent &&
                                 format(new Date(selectedEvent.start), "HH:mm")} hrs
@@ -115,13 +118,13 @@ const Calendar = () => {
                     </div>
 
                     <div className="event-end d-flex align-items-center mt-2">
-                    <h5 className="me-2 mb-0">Hora de finalización:</h5>
+                        <h5 className="me-2 mb-0">Hora de finalización:</h5>
                         <h5 className="mb-0">
                             {selectedEvent &&
                                 format(new Date(selectedEvent.end), "HH:mm")} hrs
                         </h5>
                     </div>
-                    <button className="btn delete-event" onClick={() => handleDeleteEvent(selectedEvent.id)}><i class="bi bi-trash fs-4"></i>Eliminar evento</button>
+                    <button className="btn delete-event mt-2" onClick={() => handleDeleteEvent(selectedEvent.id)}><i class="bi bi-trash fs-5 me-2"></i>Eliminar evento</button>
                     <div className="submit-button mt-3">
                         <button className="btn" onClick={closeModal}>Cerrar</button>
                     </div>

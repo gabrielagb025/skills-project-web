@@ -10,6 +10,7 @@ const Home = () => {
         user ? (
             <Navigate to="/user/profile" />
         ) : (
+            <div className="home-margin">
             <div className="Home home-container container my-5">
                 <img src="src\assets\logo skillsync letras.png" alt="" width={200} />
                 <div className="row justify-content-around align-items-center">
@@ -25,6 +26,7 @@ const Home = () => {
                         <p className="mt-4">¿Ya tienes una cuenta? - <NavLink to="/login" style={{ textDecoration: 'none' }}><span>Iniciar sesión</span></NavLink></p>
                     </div>
                 </div>
+            </div>
             </div>
         )
 

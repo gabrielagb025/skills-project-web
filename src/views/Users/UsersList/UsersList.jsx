@@ -22,17 +22,19 @@ const UsersList = () => {
 
 
     return (
-        <div className="UsersList container">
-            <div className="users-title mt-4">
-                <h1>Encuentra usuarios</h1>
-            </div>
-            <hr />
-            <div className="row">
-                {users.map((user) => (
-                    <div className="col-12 col-md-4 col-sm-6" key={user.id}>
-                        <UserCard {...user} />
-                    </div>
-                ))}
+        <div className="users-list-margin">
+            <div className="UsersList container">
+                <div className="users-title mt-4">
+                    <h1>Encuentra usuarios</h1>
+                </div>
+                <hr />
+                <div className="row">
+                    {users.map((user) => (
+                        <div className="col-12 col-md-4 col-sm-6 my-3" key={user.id}>
+                            <UserCard {...user} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )
