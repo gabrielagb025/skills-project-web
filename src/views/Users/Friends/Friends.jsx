@@ -35,7 +35,7 @@ const Friends = () => {
                         </div>
                     ) : (
                         friendList.map((friend) => (
-                            <div key={friend.id} className="col-12 col-md-4 col-sm-6">
+                            <div key={friend.id} className="col-12 col-md-4 col-sm-6 my-3">
                                 <UserCard {...friend} />
                             </div>
                         ))

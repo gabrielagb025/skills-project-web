@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../../../contexts/AuthContext";
 import { createMessage, updateMessages } from "../../../services/Message.Service";
+import { NavLink } from "react-router-dom";
+import { format } from "date-fns";
 import './Conversation.css';
 
 const initialValues = {
@@ -13,6 +15,7 @@ const Chat = () => {
     const [chat, setChat] = useState(null);
     const [message, setMessage] = useState(initialValues);
     const [chatMessages, setChatMessages] = useState([]);
+    const [messageError, setMessageError] = useState(''); 
     const { id } = useParams();
     const { user: currentUser } = useAuthContext();
 
@@ -40,6 +43,16 @@ const Chat = () => {
                     })
             }
         });
+    };
+
+    const handleFocus = () => {
+        setMessageError(""); // Ocultar el mensaje de error cuando el campo de entrada recibe foco
+    };
+
+    const handleBlur = () => {
+        if (!message.text) {
+            setMessageError("Debes escribir un mensaje"); // Mostrar el mensaje de error si el campo de entrada está vacío cuando el usuario deja el campo
+        }
     };
 
     const handleMessageChange = (e) => {
@@ -89,32 +102,44 @@ const Chat = () => {
 
     return (
         chat ? (
-            <div className="Chat container mt-4">
-                <div className="user-info d-flex">
-                    <img src={otherUser.avatar} alt="" width={100} />
-                    <h2 className="ms-4">{otherUser.name}</h2>
-                </div>
-                <hr />
-                <div className="chat-box">
-                    {chatMessages.map((msg) => (
-                        <div className={`message d-flex ${msg.sender.id === currentUser.id ? 'message-right' : 'message-left'}`} key={msg.id}>
-                            <div>
-                            {msg.sender && <img src={msg.sender.avatar} width={40}/>}
-                            </div>
-                            <div className={`ms-3`}>
-                            {msg.text}
-                            {msg.sender.id === currentUser.id ? (<i className={`bi bi-check-all ${msg.status === 'unread' ? 'grey' : 'green'} ms-2`}></i>) : (null)}
+            <div className="chat-margin">
+                <div className="Chat container">
+                    <NavLink style={{ textDecoration: 'none', color: '#3F423B' }} to={`/user/users/detail/${otherUser.id}`}>
+                        <div className="chat-user-info d-flex align-items-center">
+                            <img src={otherUser.avatar} alt="" width={100} />
+                            <div className="chat-user-name d-flex flex-column align-items-center">
+                            <h2 className="ms-4">{otherUser.name}</h2>
+                            <button className="btn">Ver perfil</button>
                             </div>
                         </div>
-                    ))}
-                </div>
-
-                <form onSubmit={handleSubmitMessage}>
-                    <div className="form-group">
-                        <input onChange={handleMessageChange} type="text" name="text" className="form-control" placeholder="Escribe un mensaje..." value={message.text} />
+                    </NavLink>
+                    <hr />
+                    <div className="chat-box">
+                        {chatMessages.map((msg) => (
+                            <div className={`message d-flex align-items-center ${msg.sender.id === currentUser.id ? 'message-right' : 'message-left'}`} key={msg.id}>
+                                <div className="img-msg">
+                                    {msg.sender && <img src={msg.sender.avatar} width={40} />}
+                                </div>
+                                <div className="chat-message-content ms-3 d-flex align-items-center justify-content-between">
+                                    <div className="d-flex align-items-center">
+                                        <p>{msg.text}</p>
+                                        {msg.sender.id === currentUser.id ? (<i className={`bi bi-check-all ${msg.status === 'unread' ? 'grey' : 'green'} ms-2`}></i>) : (null)}
+                                    </div>
+                                    <div className="d-flex align-items-center message-time mt-4">
+                                        {<p className="ms-2">{format(new Date(msg.date), "HH:mm")}</p>}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                    <button type="submit" className="btn btn-primary mt-2">Enviar</button>
-                </form>
+
+                    <form onSubmit={handleSubmitMessage}>
+                        <div className="form-group d-flex align-items-center">
+                            <input onChange={handleMessageChange} type="text" name="text" className="form-control" placeholder="Escribe un mensaje..." value={message.text} onFocus={handleFocus} onBlur={handleBlur}/>
+                            <button type="submit" className="btn-circle ms-2"><i className="bi bi-send"></i></button>
+                        </div>
+                    </form>
+                </div>
             </div>
         ) : (
             <p>Loading</p>

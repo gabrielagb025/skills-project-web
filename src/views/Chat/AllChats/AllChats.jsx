@@ -2,6 +2,7 @@ import { getChats } from "../../../services/Chat.service";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../../../contexts/AuthContext";
 import { NavLink } from "react-router-dom";
+import { format } from "date-fns";
 import './AllChats.css';
 
 const Chats = () => {
@@ -31,14 +32,17 @@ const Chats = () => {
                             const otherUser = chat?.users.find((user) => user.id !== currentUser.id);
                             const unreadMessages = chat.messages.filter(message => message.sender !== currentUser.id && message.status === 'unread').length;
                             return (
-                                <div className="chat-list-container my-3 mt-4" key={chat.id}>
-                                    <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`/user/chat/${chat.id}`}>
-                                        <div className="d-flex align-items-center chat-container">
+                                <NavLink style={{ textDecoration: 'none', color: '#3F423B' }} to={`/user/chat/${chat.id}`}>
+                                    <div className="chat-list-container my-3 mt-4" key={chat.id}>
+                                        <div className="d-flex align-items-center ms-3">
                                             <img src={otherUser.avatar} alt="" width={100} />
                                             <div className="ms-4 chat-container-text">
-                                                <h6>{otherUser.name}</h6>
+                                                <h6 className="fw-bold">{otherUser.name}</h6>
                                                 {chat.messages.length > 0 ? (
-                                                    <p className={unreadMessages ? 'fw-bold' : ''}>{chat.messages[chat.messages.length - 1].text}</p>
+                                                    <div className="conversation-text-content d-flex align-items-center">
+                                                        <p className={unreadMessages ? 'fw-bold' : ''}>{chat.messages[chat.messages.length - 1].text}</p>
+                                                        <p id="message-time-conversation" className="ms-4 mt-1">{format(new Date(chat.messages[chat.messages.length - 1].date), "HH:mm")}</p>
+                                                    </div>
                                                 ) : (
                                                     <p>No hay mensajes aún</p>
                                                 )}
@@ -49,8 +53,8 @@ const Chats = () => {
                                                 </div>
                                             )}
                                         </div>
-                                    </NavLink>
-                                </div>
+                                    </div>
+                                </NavLink>
                             );
                         })}
                     </>
@@ -64,7 +68,7 @@ const Chats = () => {
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     );
 
 }

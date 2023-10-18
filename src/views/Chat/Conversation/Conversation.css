@@ -1,28 +1,67 @@
+.chat-margin {
+    padding: 30px;
+}
+
 .chat-container {
     max-width: 500px;
     margin: 0 auto;
 }
 
+.Chat hr {
+    border: 2px solid #5e8039; /* Color y grosor de la línea */
+    width: 100%; 
+}
+
+.chat-user-info img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #EA9F92;
+}
+
 .chat-box {
-    border: 1px solid #ccc;
+    border: 1px solid #5e8039;
     padding: 20px;
     margin-bottom: 20px;
+    background-color: #f9fcf3;
+    border-radius: 8px;
 }
 
 .message {
     margin-bottom: 10px;
+    max-width: fit-content !important;
 }
 
 .message .user {
     font-weight: bold;
 }
 
-.message img {
+.img-msg {
+    order: 1;
+}
+
+.img-msg img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-right: 10px;
     object-fit: cover;
+}
+
+.chat-message-content {
+    order: 2;
+    width: 100%;
+}
+
+.chat-message-content p {
+    margin-bottom: 0;
+}
+
+.message-time p {
+    margin-bottom: 0;
+    font-size: 12px;
+    color: #63695c;
 }
 
 .grey {
@@ -34,7 +73,7 @@
 }
 
 .message-left {
-    background-color: #f7c8bc; /* Color de fondo para mensajes del otro usuario */
+    background-color: #F4BFB3; /* Color de fondo para mensajes del otro usuario */
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
@@ -43,10 +82,57 @@
 
 .message-right {
     margin-left: auto;
-    background-color: #a5debe; /* Color de fondo para mensajes del usuario actual */
+    background-color: #C0DBA3; /* Color de fondo para mensajes del usuario actual */
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
     max-width: 60%;
     align-self: flex-end;
+}
+
+.message-right .img-msg {
+    order: 2;
+    margin-left: 10px;
+}
+
+.message-right .chat-message-content {
+    order: 1;
+}
+
+.chat-user-name button {
+    background-color: #5e8039;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.chat-user-name button:hover {
+    background-color: #8db760;
+    color: white;
+}
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Hace que el botón sea circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5e8039; /* Color de fondo del círculo */
+    color: white; /* Color del icono */
+    border: none; /* Sin borde para el botón */
+    cursor: pointer;
+}
+
+.btn-circle:hover {
+    background-color: #8db760; /* Color de fondo del círculo */
+}
+
+@media (max-width: 767px) {
+    .message {
+        max-width: fit-content !important;
+    }
 }

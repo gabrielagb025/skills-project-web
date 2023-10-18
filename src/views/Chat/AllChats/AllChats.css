@@ -11,6 +11,11 @@
     width: 100%; 
 }
 
+#message-time-conversation {
+    font-size: 15px;
+    color: #63695c;
+}
+
 .no-conversations-container {
     max-width: 600px !important;
     margin: 0 auto;
@@ -29,11 +34,11 @@
     max-width: 600px !important;
     margin: 0 auto;
     display: flex;
-    background-color: #f4f8ee;
+    align-items: start;
+    background-color: white;
     padding: 20px;
     border-radius: 25px;
     box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
-    text-align: center;
 }
 
 .chat-list-container img {
@@ -55,12 +60,24 @@
     line-height: 25px; /* Centra verticalmente el número dentro del círculo */ /* Hace que el número sea más visible */
 }
 
+.unread-circle:active {
+    background-color: #5e8039; /* Color de fondo del círculo (verde) */
+    color: #ffffff; /* Color del texto (blanco) */
+}
+
 .chat-container-text {
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
-@media (max-width: 767px) {
 
+@media (max-width: 767px) {
+    .chat-list-container img {
+        height: 80px;
+        width: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #EA9F92;
+    }
 }
