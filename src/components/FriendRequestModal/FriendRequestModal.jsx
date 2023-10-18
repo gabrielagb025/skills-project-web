@@ -2,12 +2,19 @@ import './FriendRequestModal.css';
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
+const modalStyle = {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  };
+
 const FriendRequestModal = ({ show, handleClose, handleSubmit, handleChange, message }) => {
     console.log('FriendRequestModal')
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal className="friend-modal-container" show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Enviar solicitud de amistad</Modal.Title>
+        <Modal.Title>Envía una solicitud de amistad</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -21,9 +28,11 @@ const FriendRequestModal = ({ show, handleClose, handleSubmit, handleChange, mes
               onChange={handleChange}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <div className="d-flex justify-content-center">
+          <Button className="submit-btn" variant="primary" type="submit">
             Enviar solicitud
           </Button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>

@@ -1,0 +1,20 @@
+.submit-btn {
+    margin-top: 20px !important;
+    width: 50% !important;
+    padding: 10px 20px !important;
+    border-radius: 25px !important;
+    background-color: #5e8039 !important;
+    border: none !important;
+    color: white !important;
+    cursor: pointer !important;
+    justify-content: center;
+}
+
+.submit-btn:hover {
+    background-color: #8db760 !important;
+    color: white !important;
+}
+
+.modal-content {
+    border: 2px solid #5e8039 !important;
+}

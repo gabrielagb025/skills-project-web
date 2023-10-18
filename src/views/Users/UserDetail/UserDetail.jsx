@@ -9,6 +9,7 @@ import { sendFriendRequest, getFriends, getPendingFriendRequests, cancelFriendRe
 import { NavLink, useNavigate } from "react-router-dom";
 import { getUserDescription } from "../../../services/DescriptionService";
 import FriendRequestModal from "../../../components/FriendRequestModal/FriendRequestModal";
+import RatingModal from "../../../components/RatingModal/RatingModal";
 import './UserDetail.css';
 
 
@@ -27,6 +28,7 @@ const UserDetail = () => {
   const [newRating, setNewRating] = useState(ratingInitialValues);
   const [friendRequest, setFriendRequest] = useState(friendRequestIntialValues);
   const [ratingList, setRatingList] = useState([]);
+  const [showRatingModal, setShowRatingModal] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [requestSent, setRequestSent] = useState(false);
   const [isFriend, setIsFriend] = useState(false);
@@ -35,7 +37,7 @@ const UserDetail = () => {
   const [acceptedFriendRequest, setAcceptedFriendRequest] = useState(null);
   const [userDescription, setUserDescription] = useState(null);
   const [chatList, setChatList] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showFriendModal, setShowFriendModal] = useState(false);
   const { id } = useParams();
   const { user: currentUser } = useAuthContext();
   const navigate = useNavigate();
@@ -67,6 +69,14 @@ const UserDetail = () => {
 
   /* RATINGS */
 
+  const handleShowRatingModal = () => {
+    setShowRatingModal(true);
+  };
+
+  const handleCloseRatingModal = () => {
+    setShowRatingModal(false);
+  };
+
   const handleChangeRating = (ev) => {
     const key = ev.target.name;
     const value = ev.target.value;
@@ -83,6 +93,7 @@ const UserDetail = () => {
       .then(() => {
         console.log('rating creado')
         setNewRating(ratingInitialValues)
+        setShowRatingModal(false)
         getRatings(id)
           .then(ratings => {
             setRatingList(ratings)
@@ -105,12 +116,12 @@ const UserDetail = () => {
 
   /* FRIEND REQUESTS */
 
-  const handleShowModal = () => {
-    setShowModal(true);
+  const handleShowFriendModal = () => {
+    setShowFriendModal(true);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleCloseFriendModal = () => {
+    setShowFriendModal(false);
   };
 
   /*const handleShowInput = () => {
@@ -140,7 +151,7 @@ const UserDetail = () => {
       .then(() => {
         console.log('friend request enviado')
         setFriendRequest(friendRequestIntialValues)
-        setShowModal(false)
+        setShowFriendModal(false)
         setRequestSent(true)
         setMadeRequest(true)
       })
@@ -235,15 +246,15 @@ const UserDetail = () => {
                           </div>
                         ) : (
                           !madeRequest && (
-                            <button className="btn btn-connect" onClick={handleShowModal}>Conectar con {user.name}</button>
+                            <button className="btn btn-connect" onClick={handleShowFriendModal}>Conectar con {user.name}</button>
                           )
                         )}
                       </div>
-                      {showModal &&
-                        <div>
+                      {showFriendModal &&
+                        <div className="friend-request-modal">
                           <FriendRequestModal
-                            show={showModal}
-                            handleClose={handleCloseModal}
+                            show={showFriendModal}
+                            handleClose={handleCloseFriendModal}
                             handleSubmit={handleSubmitFriendRequest}
                             handleChange={(e) => setFriendRequest({ ...friendRequest, [e.target.name]: e.target.value })}
                             message={friendRequest.message}
@@ -251,6 +262,21 @@ const UserDetail = () => {
                         </div>}
                     </>
                   )}
+                  <div className="rating-form mt-4 ms-2">
+                    <button className="btn btn-rating" onClick={handleShowRatingModal}>
+                      Deja una reseña del usuario
+                    </button>
+                  </div>
+                  {/* ... otros elementos */}
+                  <RatingModal
+                    show={showRatingModal}
+                    handleClose={handleCloseRatingModal}
+                    handleSubmit={handleSubmitRating}
+                    handleChange={(e) =>
+                      setNewRating({ ...newRating, [e.target.name]: e.target.value })
+                    }
+                    newRating={newRating}
+                  />
                 </div>
               </div>
               <hr />
@@ -268,23 +294,34 @@ const UserDetail = () => {
                     ))}
                   </div>
                 ) : (null)}
-                <h4>Habilidades que {user.name} puede enseñar:</h4>
-                {user.teachSkills.map((skill) => (
-                  <div key={skill.id}>
-                    <h5>{skill.name}</h5>
-                    <p>{skill.category}</p>
-                    <p>{skill.description}</p>
+                <div className="user-detail-skills d-flex justify-content-around">
+                  <div className="skills-info-container d-flex flex-column mt-2">
+                    <h5>{user.name} puede enseñar:</h5>
+                    {user.teachSkills.map((skill) => (
+                      <div key={skill.id}>
+                        <div className="skill-name d-flex align-items-center">
+                          <p className="fw-bold me-2">{skill.name}</p>-<p className="ms-2">{skill.category}</p>
+                        </div>
+                        <p>{skill.description}</p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-                <h4>Habilidades que {user.name} quiere aprender:</h4>
-                {user.learnSkills.map((skill) => (
-                  <div key={skill.id}>
-                    <h5>{skill.name}</h5>
-                    <p>{skill.description}</p>
-                  </div >
-                ))}
+                  <div className="skills-info-container d-flex flex-column">
+                    <h5>{user.name} quiere aprender:</h5>
+                    {user.learnSkills.map((skill) => (
+                      <div key={skill.id}>
+                        <div className="skill-name d-flex align-items-center">
+                          <p className="fw-bold me-2">{skill.name}</p>-<p className="ms-2">{skill.category}</p>
+                        </div>
+                        <p>{skill.description}</p>
+                      </div >
+                    ))}
+                  </div>
+                </div>
               </div>
+              <hr />
               {/* PUBLICACIONES */}
+              <h3>Publicaciones</h3>
               <div className="posts-container">
                 {user.posts?.length > 0 ? (
                   <>
@@ -301,23 +338,10 @@ const UserDetail = () => {
               </div>
               <hr />
               {/* FORMULARIO DE RESEÑAS */}
-              <div className="rating-form">
-                <form onSubmit={handleSubmitRating}>
-                  <h4>Deja una reseña sobre {user.name}</h4>
-                  <div className="mb-3">
-                    <label id="rating-message" className="form-label">Comentario</label>
-                    <input onChange={handleChangeRating} id="rating-message" type="text" name="message" className="form-control" value={newRating.message} placeholder="Comentario" />
-                  </div>
-                  <div className="mb-3">
-                    <label id="rating-score" className="form-label">Valoración</label>
-                    <input onChange={handleChangeRating} id="rating-score" type="number" name="score" className="form-control" value={newRating.score} />
-                  </div>
-                  <button type="submit" className="btn btn-primary">Enviar</button>
-                </form>
-              </div>
             </div>
             {/* LISTA DE RESEÑAS */}
             <div className="rating-list container mt-4">
+              <h3>Reseñas</h3>
               {ratingList.length > 0 ? (
                 <>
                   <h4>Reseñas acerca de {user.name}</h4>

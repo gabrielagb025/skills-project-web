@@ -19,7 +19,7 @@
     border-radius: 50%;
     margin-right: 20px;
     object-fit: cover;
-    border: 2px solid #EA9F92;
+    border: 3px solid #EA9F92;
 }
 
 .user-detail-text i {
@@ -46,13 +46,13 @@
     border-radius: 25px;
 }
 
-.btn-connect, .btn-notifications, .btn-chat {
+.btn-connect, .btn-notifications, .btn-chat, .btn-rating {
     border: 1.5px solid #5e8039 !important;
     background-color: #5e8039 !important;
     color: #ffffff !important;
 }
 
-.btn-connect:hover, .btn-notifications:hover, .btn-chat:hover{
+.btn-connect:hover, .btn-notifications:hover, .btn-chat:hover, .btn-rating:hover{
     border: 1.5px solid #8db760 !important;
     background-color: #8db760 !important;
     color: #ffffff !important;
@@ -80,6 +80,39 @@
     border: 1.5px solid #7dac9b !important;
     background-color: #7dac9b !important;
     color: #ffffff !important;
+}
+
+/* SKILLS CONTAINER */
+
+.skill-name p {
+    margin-bottom: 0;
+}
+
+.skills-info-container {
+    max-width: 400px;
+}
+
+@media (max-width: 768px) {
+    .user-detail-info img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .user-detail-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .friend-buttons {
+        margin-right: 0;
+        margin-left: 40px;
+    }
+
+    .btn-connect {
+        margin-right: 35px;
+    }
 }
 
 
