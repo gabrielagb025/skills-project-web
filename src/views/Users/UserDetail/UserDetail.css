@@ -46,16 +46,41 @@
     border-radius: 25px;
 }
 
-.btn-connect, .btn-notifications {
+.btn-connect, .btn-notifications, .btn-chat {
     border: 1.5px solid #5e8039 !important;
     background-color: #5e8039 !important;
     color: #ffffff !important;
 }
 
-.btn-connect:hover, .btn-notifications:hover {
+.btn-connect:hover, .btn-notifications:hover, .btn-chat:hover{
     border: 1.5px solid #8db760 !important;
     background-color: #8db760 !important;
     color: #ffffff !important;
 }
+
+.btn-noconnect {
+    border: 1.5px solid #db7a69 !important;
+    background-color: #db7a69 !important;
+    color: #ffffff !important;
+}
+
+.btn-noconnect:hover {
+    border: 1.5px solid #EA9F92 !important;
+    background-color: #EA9F92 !important;
+    color: #ffffff !important;
+}
+
+.btn-event {
+    border: 1.5px solid #5e8376 !important;
+    background-color: #5e8376  !important;
+    color: #ffffff !important;
+}
+
+.btn-event:hover {
+    border: 1.5px solid #7dac9b !important;
+    background-color: #7dac9b !important;
+    color: #ffffff !important;
+}
+
 
 

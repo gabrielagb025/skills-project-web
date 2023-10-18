@@ -202,7 +202,7 @@ const UserDetail = () => {
         ) : (
           <>
             {/* INFORMACIÓN DEL USUARIO */}
-            <div className="UserDetail detail-container container">
+            <div className="UserDetail detail-container container mt-4">
               <div className="user-detail-header">
                 <div className="user-detail-info">
                   <div className="user-detail-img">
@@ -213,15 +213,15 @@ const UserDetail = () => {
                     <div className="d-flex align-items-center">
                       <i className="bi bi-geo-alt-fill"></i><p>{user.city}</p>
                     </div>
-                    {isFriend ? <div className="d-flex align-items-center"><i className="bi bi-telephone-fill"></i><p>{user.phone}</p></div> : null}
+                    {isFriend ? <div className="d-flex align-items-center mt-2"><i className="bi bi-telephone-fill"></i><p>{user.phone}</p></div> : null}
                   </div>
                 </div>
                 <div className="friend-buttons">
                   {isFriend ? (
                     <>
-                      <button className="btn btn-chat mt-4" onClick={handleChatClick}>Chatear con {user.name}</button>
-                      <button className="btn btn-noconnect mt-4 ms-3" onClick={() => handleCancelFriendRequest(acceptedFriendRequest.id)}>Dejar de conectar con {user.name}</button>
-                      <button className="btn btn-event mt-4" onClick={handleEventNavigate}>Agendar cita de estudio con {user.name}</button>
+                      <button className="btn btn-chat mt-4" onClick={handleChatClick}>Chatear</button>
+                      <button className="btn btn-noconnect mt-4 ms-3" onClick={() => handleCancelFriendRequest(acceptedFriendRequest.id)}>Dejar de conectar</button>
+                      <button className="btn btn-event mt-4 ms-3" onClick={handleEventNavigate}>Agendar cita de estudio</button>
                     </>
                   ) : (
                     <>
