@@ -4,15 +4,12 @@
 
 .friends-title {
     max-width: fit-content;
-}
-
-.friends-title h1 {
-    text-align: center;
+    margin: 0 auto;
 }
 
 .Friends hr {
     border: 2px solid #5e8039; /* Color y grosor de la línea */
-    width: 100%; 
+    width: 100%;
 }
 
 .no-friends-container {

@@ -8,6 +8,7 @@ import InputGroup from "../../../components/InputGroup/InputGroup";
 import { sendFriendRequest, getFriends, getPendingFriendRequests, cancelFriendRequest, getAcceptedFriendRequest } from "../../../services/FriendRequestService";
 import { NavLink, useNavigate } from "react-router-dom";
 import { getUserDescription } from "../../../services/DescriptionService";
+import FriendRequestModal from "../../../components/FriendRequestModal/FriendRequestModal";
 import './UserDetail.css';
 
 
@@ -34,6 +35,7 @@ const UserDetail = () => {
   const [acceptedFriendRequest, setAcceptedFriendRequest] = useState(null);
   const [userDescription, setUserDescription] = useState(null);
   const [chatList, setChatList] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
   const { user: currentUser } = useAuthContext();
   const navigate = useNavigate();
@@ -103,9 +105,17 @@ const UserDetail = () => {
 
   /* FRIEND REQUESTS */
 
-  const handleShowInput = () => {
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  /*const handleShowInput = () => {
     setShowInput(true)
-  }
+  }*/
 
   const handleChangeFriendRequest = (ev) => {
     const key = ev.target.name;
@@ -130,7 +140,7 @@ const UserDetail = () => {
       .then(() => {
         console.log('friend request enviado')
         setFriendRequest(friendRequestIntialValues)
-        setShowInput(false)
+        setShowModal(false)
         setRequestSent(true)
         setMadeRequest(true)
       })
@@ -193,55 +203,57 @@ const UserDetail = () => {
           <>
             {/* INFORMACIÓN DEL USUARIO */}
             <div className="UserDetail detail-container container">
-              <div className="user-detail-info">
-                <div className="user-detail-img">
-                  <img src={user.avatar} alt="" width="300" />
+              <div className="user-detail-header">
+                <div className="user-detail-info">
+                  <div className="user-detail-img">
+                    <img src={user.avatar} alt="" width="300" />
+                  </div>
+                  <div className="user-detail-text">
+                    <h1>{user.name}</h1>
+                    <div className="d-flex align-items-center">
+                      <i className="bi bi-geo-alt-fill"></i><p>{user.city}</p>
+                    </div>
+                    {isFriend ? <div className="d-flex align-items-center"><i className="bi bi-telephone-fill"></i><p>{user.phone}</p></div> : null}
+                  </div>
                 </div>
-                <div className="user-detail-text">
-                  <h1>{user.name}</h1>
-                  <p>{user.city}</p>
-                  {isFriend ? <p>{user.phone}</p> : null}
+                <div className="friend-buttons">
+                  {isFriend ? (
+                    <>
+                      <button className="btn btn-chat mt-4" onClick={handleChatClick}>Chatear con {user.name}</button>
+                      <button className="btn btn-noconnect mt-4 ms-3" onClick={() => handleCancelFriendRequest(acceptedFriendRequest.id)}>Dejar de conectar con {user.name}</button>
+                      <button className="btn btn-event mt-4" onClick={handleEventNavigate}>Agendar cita de estudio con {user.name}</button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="mt-4">
+                        {madeRequest ? (
+                          <p>Has enviado una solicitud de amistad a {user.name}.</p>
+                        ) : haveRequest ? (
+                          <div className="d-flex flex-column align-items-center">
+                            <p>Tienes una solicitud de amistad pendiente de {user.name}.</p>
+                            <NavLink to="/user/notifications"><button className="btn btn-notifications">Ver solicitudes</button></NavLink>
+                          </div>
+                        ) : (
+                          !madeRequest && (
+                            <button className="btn btn-connect" onClick={handleShowModal}>Conectar con {user.name}</button>
+                          )
+                        )}
+                      </div>
+                      {showModal &&
+                        <div>
+                          <FriendRequestModal
+                            show={showModal}
+                            handleClose={handleCloseModal}
+                            handleSubmit={handleSubmitFriendRequest}
+                            handleChange={(e) => setFriendRequest({ ...friendRequest, [e.target.name]: e.target.value })}
+                            message={friendRequest.message}
+                          />
+                        </div>}
+                    </>
+                  )}
                 </div>
               </div>
               <hr />
-              {isFriend ? (
-                <>
-                  <button className="btn btn-secondary mt-4" onClick={handleChatClick}>Chatear con {user.name}</button>
-                  <button className="btn btn-danger mt-4 ms-3" onClick={() => handleCancelFriendRequest(acceptedFriendRequest.id)}>Dejar de conectar con {user.name}</button>
-                  <button className="btn btn-success mt-4" onClick={handleEventNavigate}>Agendar cita de estudio con {user.name}</button>
-                </>
-              ) : (
-                <>
-                  <div className="mt-4">
-                    {madeRequest ? (
-                      <p>Has enviado una solicitud de amistad a {user.name}.</p>
-                    ) : haveRequest ? (
-                      <>
-                        <p>Tienes una solicitud de amistad pendiente de {user.name}.</p>
-                        <NavLink to="/user/notifications"><button className="btn btn-primary">Ver solicitudes</button></NavLink>
-                      </>
-                    ) : (
-                      !madeRequest && (
-                        <button className="btn btn-success" onClick={handleShowInput}>Conectar con {user.name}</button>
-                      )
-                    )}
-                  </div>
-                  {showInput &&
-                    <div>
-                      <form onSubmit={handleSubmitFriendRequest}>
-                        <InputGroup
-                          label={`Envía un mensaje a ${user.name}`}
-                          type="text"
-                          id="message"
-                          name="message"
-                          placeholder="!Hola! Me gustaría conectar contigo."
-                          value={friendRequest.message}
-                          onChange={handleChangeFriendRequest} />
-                        <button type="submit" className="btn btn-primary">Enviar petición</button>
-                      </form>
-                    </div>}
-                </>
-              )}
               <div className="mt-4 profile-info-container">
                 {userDescription ? (
                   <div className="user-description">

@@ -19,7 +19,7 @@ const Friends = () => {
 
     return (
         <div className="friends-margin">
-            <div className="Friends container d-flex flex-column align-items-center">
+            <div className="Friends container">
                 <div className="friends-title mt-4">
                     <h1>Usuarios con los que has conectado</h1>
                     <hr />

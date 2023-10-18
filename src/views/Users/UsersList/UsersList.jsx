@@ -23,7 +23,7 @@ const UsersList = () => {
 
     return (
         <div className="users-list-margin">
-            <div className="UsersList container d-flex flex-column align-items-center">
+            <div className="UsersList container">
                 <div className="users-title mt-4">
                     <h1>Encuentra usuarios</h1>
                     <hr />

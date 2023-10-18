@@ -4,6 +4,7 @@
 
 .notifications-title {
     max-width: fit-content;
+    margin: 0 auto;
 }
 
 .notifications-title h1 {

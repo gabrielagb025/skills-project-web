@@ -20,7 +20,7 @@ const FilteredUsersList = () => {
 
     return (
         <div className="users-filtered-margin">
-            <div className="UsersList container d-flex flex-column align-items-center">
+            <div className="UsersList container">
                 <div className="filtered-users-title mt-4">
                     <h1>Encuentra usuarios según tus intereses</h1>
                     <hr />

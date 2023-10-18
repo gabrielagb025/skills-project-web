@@ -21,7 +21,7 @@ const Chats = () => {
 
     return (
         <div className="chats-margin">
-            <div className="Chats container d-flex flex-column align-items-center">
+            <div className="Chats container">
                 <div className="chat-title mt-4">
                     <h1>Tus conversaciones</h1>
                     <hr />
