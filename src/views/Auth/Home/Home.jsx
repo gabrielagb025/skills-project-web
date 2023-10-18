@@ -1,6 +1,8 @@
 import { useAuthContext } from '../../../contexts/AuthContext';
 import './Home.css'
 import { NavLink, Navigate } from "react-router-dom";
+import Logo from '../../../assets/logo-skillsync-letras.png';
+import SkillSyncImage from '../../../assets/imagen-skillsync-01.png';
 
 const Home = () => {
 
@@ -12,12 +14,12 @@ const Home = () => {
         ) : (
             <div className="home-margin">
             <div className="Home home-container container my-5">
-                <img src="src\assets\logo skillsync letras.png" alt="" width={200} />
+                <img src={Logo} alt="" width={200} />
                 <div className="row justify-content-around align-items-center">
                     <div className="col-md-6 text-cetner">
                         <h2 className="ms-3 mt-3">Bienvenido a <br /><span className="fw-bold">SkillSync.</span></h2>
-                        <img className="mt-3 me-2 img-fluid d-none d-md-block" src="src\assets\imagen skillsync-01.png" alt="" width={600} />
-                        <img className="mt-3 me-2 img-fluid d-md-none" src="src\assets\imagen skillsync-01.png" alt="" width={400} />
+                        <img className="mt-3 me-2 img-fluid d-none d-md-block" src={SkillSyncImage} alt="" width={600} />
+                        <img className="mt-3 me-2 img-fluid d-md-none" src={SkillSyncImage} alt="" width={400} />
                     </div>
 
                     <div className="col-md-6 mt-4 home-buttons text-center">
