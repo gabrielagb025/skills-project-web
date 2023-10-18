@@ -7,6 +7,7 @@ import InputGroup from '../../../components/InputGroup/InputGroup'
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuthContext } from "../../../contexts/AuthContext";
 import { NavLink } from "react-router-dom";
+import Logo from '../../../assets/logo-skillsync-letras.png';
 import './Register.css'
 
 
@@ -77,7 +78,7 @@ const Register = () => {
         <div className="div-margin">
             <div className="register-container container">
                 <div className="text-center mb-4">
-                    <img className="" src="src\assets\logo skillsync letras.png" alt="" width={200} />
+                    <img className="" src={Logo} alt="" width={200} />
                 </div>
                 <h1>Registrarse</h1>
 

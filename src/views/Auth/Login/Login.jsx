@@ -4,6 +4,7 @@ import { loginSchema } from '../../../utils/yup.schemas';
 import { login as loginRequest } from '../../../services/AuthService';
 import { useNavigate, Navigate, NavLink } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
+import Logo from '../../../assets/logo-skillsync-letras.png';
 import './Login.css';
 
 const initialValues = {
@@ -53,7 +54,7 @@ const Login = () => {
         <div className="div-margin">
             <div className="Login login-container container my-5">
                 <div className="text-center mb-4">
-                    <img src="src\assets\logo skillsync letras.png" alt="" width={200} />
+                    <img src={Logo} alt="" width={200} />
                 </div>
                 <h1>Iniciar sesión</h1>
 
