@@ -2,6 +2,10 @@
     padding: 20px;
 }
 
+.notifications-title {
+    max-width: fit-content;
+}
+
 .notifications-title h1 {
     text-align: center;
 }

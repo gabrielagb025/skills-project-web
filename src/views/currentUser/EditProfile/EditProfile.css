@@ -1,14 +1,21 @@
-.edit-profile {
-    margin-top: 20px;
-    padding-bottom: 40px !important;
+.edit-profile-margin {
+    padding: 20px;
+}
+
+.edit-profile-title {
+    max-width: fit-content;
 }
 
 .edit-profile hr {
-    border: 2px solid #EA9F92; /* Color y grosor de la línea */
-    width: 100%; /* Ancho de la línea, 100% para cubrir todo el contenedor */ /* Espaciado superior para separar la línea del contenido */
+    border: 2px solid #5e8039; /* Color y grosor de la línea */
+    width: 100%; 
 }
 
 .edit-profile i {
     margin-right: 5px;
     color: #5e8039;
+}
+
+.edit-profile-form {
+    max-width: 400px !important;
 }

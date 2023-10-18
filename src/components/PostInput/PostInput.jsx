@@ -42,6 +42,7 @@ const PostInput = (props) => {
     }, [files, urlsElem]);
 
     const handleChange = (ev) => {
+        console.log('handleChange', ev)
         const key = ev.target.name;
         const value = ev.target.value;
 
@@ -174,7 +175,7 @@ const PostInput = (props) => {
                 <div className="post-input-media-container">
                     {/* Images */}
                     <div className="image-input-container">
-                        {showImgBtn && <div className="btn-media"><button className="btn" onClick={showInputHandler}><i class="bi bi-card-image fs-3"></i></button></div>} {files.length >= 4 && <p>{messageImg}</p>}
+                        {showImgBtn && <div className="btn-media"><button type="button" className="btn" onClick={showInputHandler}><i className="bi bi-card-image fs-3"></i></button></div>} {files.length >= 4 && <p>{messageImg}</p>}
                         <div className="image-input">
                             {showInputFile &&
                                 <div {...getRootProps()}>
@@ -196,7 +197,7 @@ const PostInput = (props) => {
                                                 }}
                                                 width={80}
                                             />
-                                            <button className="btn delete-media ms-3" onClick={() => removeFile(file.name)}><i class="bi bi-x-circle-fill"></i></button>
+                                            <button className="btn delete-media ms-3" onClick={() => removeFile(file.name)}><i className="bi bi-x-circle-fill"></i></button>
                                         </li>
                                     ))}
                                 </ul>
@@ -205,7 +206,7 @@ const PostInput = (props) => {
                     </div>
                     {/* Urls */}
                     <div className="url-input-container mb-3">
-                        {showUrlBtn && <div className="btn-media"><button className="btn" onClick={showUrlInputHandler}><i class="bi bi-link-45deg fs-3"></i></button></div>}
+                        {showUrlBtn && <div className="btn-media"><button type="button" className="btn" onClick={showUrlInputHandler}><i className="bi bi-link-45deg fs-3"></i></button></div>}
                         <div className="url-input mt-2">
                             {showUrlInput && <>
                                 <input
@@ -223,7 +224,7 @@ const PostInput = (props) => {
                                 {urlsElem ? urlsElem.map((url, index) => (
                                     <div className="d-flex align-items-center" key={index}>
                                         <a className="mb-0 ms-4" href={url}>{url}</a>
-                                        <button id='delete-media' onClick={() => handleDeleteUrl(url)} className="btn delete-media"><i class="bi bi-x-circle-fill"></i></button>
+                                        <button id='delete-media' onClick={() => handleDeleteUrl(url)} className="btn delete-media"><i className="bi bi-x-circle-fill"></i></button>
                                     </div>
                                 )) : (null)}
                             </div>

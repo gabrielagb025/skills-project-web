@@ -2,6 +2,10 @@
     padding: 20px;
 }
 
+.friends-title {
+    max-width: fit-content;
+}
+
 .friends-title h1 {
     text-align: center;
 }

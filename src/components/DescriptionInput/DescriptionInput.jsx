@@ -35,12 +35,6 @@ const DescriptionInput = (props) => {
     const { updateDescription } = props
 
     useEffect(() => {
-        if (props.initialValues) {
-            setFiles(props.initialValues.images.map(imageUrl => ({
-                name: imageUrl, // Puedes usar el nombre del archivo como identificador único
-                preview: imageUrl, // Usa la URL como vista previa
-            })));
-        }
         setDescription(prevDesc => ({
             ...prevDesc,
             images: files,

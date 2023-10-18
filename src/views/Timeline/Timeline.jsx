@@ -71,6 +71,13 @@ const Timeline = () => {
         setCurrentPosts(postListFriends)
     }
 
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
     return (
         <div className="timeline-margin">
             <div className="Timeline container">
@@ -88,6 +95,9 @@ const Timeline = () => {
                         .map((post) => (
                             <PostCard key={post.id} post={post} onDeletePost={() => handleDeletePost(post.id)} />
                         ))}
+                </div>
+                <div className="arrow-icon" onClick={scrollToTop}>
+                    <i className="bi bi-arrow-up-circle-fill fs-1"></i>
                 </div>
             </div>
         </div>

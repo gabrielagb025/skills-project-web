@@ -1,0 +1,40 @@
+.event-form-margin {
+    padding: 20px;
+}
+
+.event-form {
+    max-width: 600px;
+}
+
+.event-form h1 {
+    text-align: center;
+}
+
+.event-form hr {
+    border: 2px solid #5e8039; /* Color y grosor de la línea */
+    width: 100%; 
+}
+
+.event-form input {
+    width: 300px;
+}
+
+.button-form-event button {
+    width: 200px;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1.5px solid #5e8039 !important;
+    background-color: #5e8039 !important;
+    color: #ffffff !important;
+}
+
+.button-form-event button:hover {
+    border: 1.5px solid #8db760 !important;
+    background-color: #8db760 !important;
+    color: #ffffff !important;
+}
+
+.button-form-event {
+    display: flex;
+    justify-content: center;
+}

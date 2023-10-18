@@ -8,6 +8,7 @@ import InputGroup from "../../../components/InputGroup/InputGroup";
 import { sendFriendRequest, getFriends, getPendingFriendRequests, cancelFriendRequest, getAcceptedFriendRequest } from "../../../services/FriendRequestService";
 import { NavLink, useNavigate } from "react-router-dom";
 import { getUserDescription } from "../../../services/DescriptionService";
+import './UserDetail.css';
 
 
 
@@ -121,7 +122,7 @@ const UserDetail = () => {
 
     const userMessage = friendRequest.message;
 
-    if(!userMessage) {
+    if (!userMessage) {
       friendRequest.message = `¡Hola! Me gustaría conectar contigo.`
     }
 
@@ -184,145 +185,152 @@ const UserDetail = () => {
   }
 
   return (
-    <div className="UserDetail">
-      {!user ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          {/* INFORMACIÓN DEL USUARIO */}
-          <div className="UserDetail detail-container container">
-            <div className="mt-5">
-              <img src={user.avatar} alt="" width="300" />
-            </div>
-            {isFriend ? (
-              <>
-                <button className="btn btn-secondary mt-4" onClick={handleChatClick}>Chatear con {user.name}</button>
-                <button className="btn btn-danger mt-4 ms-3" onClick={() => handleCancelFriendRequest(acceptedFriendRequest.id)}>Dejar de conectar con {user.name}</button>
-                <button className="btn btn-success mt-4" onClick={handleEventNavigate}>Agendar cita de estudio con {user.name}</button>
-              </>
-            ) : (
-              <>
-                <div className="mt-4">
-                  {madeRequest ? (
-                    <p>Has enviado una solicitud de amistad a {user.name}.</p>
-                  ) : haveRequest ? (
-                    <>
-                      <p>Tienes una solicitud de amistad pendiente de {user.name}.</p>
-                      <NavLink to="/user/notifications"><button className="btn btn-primary">Ver solicitudes</button></NavLink>
-                    </>
-                  ) : (
-                    !madeRequest && (
-                      <button className="btn btn-success" onClick={handleShowInput}>Conectar con {user.name}</button>
-                    )
-                  )}
+    <div className="user-detail-margin">
+      <div className="UserDetail">
+        {!user ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            {/* INFORMACIÓN DEL USUARIO */}
+            <div className="UserDetail detail-container container">
+              <div className="user-detail-info">
+                <div className="user-detail-img">
+                  <img src={user.avatar} alt="" width="300" />
                 </div>
-                {showInput &&
-                  <div>
-                    <form onSubmit={handleSubmitFriendRequest}>
-                      <InputGroup
-                        label={`Envía un mensaje a ${user.name}`}
-                        type="text"
-                        id="message"
-                        name="message"
-                        placeholder="!Hola! Me gustaría conectar contigo."
-                        value={friendRequest.message}
-                        onChange={handleChangeFriendRequest} />
-                      <button type="submit" className="btn btn-primary">Enviar petición</button>
-                    </form>
-                  </div>}
-              </>
-            )}
-            <div className="mt-4 profile-info-container">
-              <h1>{user.name}</h1>
-              <p>{user.city}</p>
-              {isFriend ? <p>{user.phone}</p> : null}
-              {userDescription ? (
-                <div className="user-description">
-                  <h4>Descripción</h4>
-                  <p>{userDescription.description}</p>
-                  {userDescription.images.map((image, index) => (
-                    <img key={index} src={image} width={100} />
-                  ))}
-                  <p>URLs</p>
-                  {userDescription.urls.map((url, index) => (
-                    <a className="me-4" key={index} href={url}>{url}</a>
-                  ))}
+                <div className="user-detail-text">
+                  <h1>{user.name}</h1>
+                  <p>{user.city}</p>
+                  {isFriend ? <p>{user.phone}</p> : null}
                 </div>
-              ) : (null)}
-              <h4>Habilidades que {user.name} puede enseñar:</h4>
-              {user.teachSkills.map((skill) => (
-                <div key={skill.id}>
-                  <h5>{skill.name}</h5>
-                  <p>{skill.category}</p>
-                  <p>{skill.description}</p>
-                </div>
-              ))}
-              <h4>Habilidades que {user.name} quiere aprender:</h4>
-              {user.learnSkills.map((skill) => (
-                <div key={skill.id}>
-                  <h5>{skill.name}</h5>
-                  <p>{skill.description}</p>
-                </div >
-              ))}
-            </div>
-            {/* PUBLICACIONES */}
-            <div className="posts-container">
-              {user.posts?.length > 0 ? (
+              </div>
+              <hr />
+              {isFriend ? (
                 <>
-                  <h4>Publicaciones de {user.name}</h4>
-                  {user.posts.map((post) => (
-                    <div className="post-container" key={post.id}>
-                      <p>{post.message}</p>
+                  <button className="btn btn-secondary mt-4" onClick={handleChatClick}>Chatear con {user.name}</button>
+                  <button className="btn btn-danger mt-4 ms-3" onClick={() => handleCancelFriendRequest(acceptedFriendRequest.id)}>Dejar de conectar con {user.name}</button>
+                  <button className="btn btn-success mt-4" onClick={handleEventNavigate}>Agendar cita de estudio con {user.name}</button>
+                </>
+              ) : (
+                <>
+                  <div className="mt-4">
+                    {madeRequest ? (
+                      <p>Has enviado una solicitud de amistad a {user.name}.</p>
+                    ) : haveRequest ? (
+                      <>
+                        <p>Tienes una solicitud de amistad pendiente de {user.name}.</p>
+                        <NavLink to="/user/notifications"><button className="btn btn-primary">Ver solicitudes</button></NavLink>
+                      </>
+                    ) : (
+                      !madeRequest && (
+                        <button className="btn btn-success" onClick={handleShowInput}>Conectar con {user.name}</button>
+                      )
+                    )}
+                  </div>
+                  {showInput &&
+                    <div>
+                      <form onSubmit={handleSubmitFriendRequest}>
+                        <InputGroup
+                          label={`Envía un mensaje a ${user.name}`}
+                          type="text"
+                          id="message"
+                          name="message"
+                          placeholder="!Hola! Me gustaría conectar contigo."
+                          value={friendRequest.message}
+                          onChange={handleChangeFriendRequest} />
+                        <button type="submit" className="btn btn-primary">Enviar petición</button>
+                      </form>
+                    </div>}
+                </>
+              )}
+              <div className="mt-4 profile-info-container">
+                {userDescription ? (
+                  <div className="user-description">
+                    <h4>Descripción</h4>
+                    <p>{userDescription.description}</p>
+                    {userDescription.images.map((image, index) => (
+                      <img key={index} src={image} width={100} />
+                    ))}
+                    <p>URLs</p>
+                    {userDescription.urls.map((url, index) => (
+                      <a className="me-4" key={index} href={url}>{url}</a>
+                    ))}
+                  </div>
+                ) : (null)}
+                <h4>Habilidades que {user.name} puede enseñar:</h4>
+                {user.teachSkills.map((skill) => (
+                  <div key={skill.id}>
+                    <h5>{skill.name}</h5>
+                    <p>{skill.category}</p>
+                    <p>{skill.description}</p>
+                  </div>
+                ))}
+                <h4>Habilidades que {user.name} quiere aprender:</h4>
+                {user.learnSkills.map((skill) => (
+                  <div key={skill.id}>
+                    <h5>{skill.name}</h5>
+                    <p>{skill.description}</p>
+                  </div >
+                ))}
+              </div>
+              {/* PUBLICACIONES */}
+              <div className="posts-container">
+                {user.posts?.length > 0 ? (
+                  <>
+                    <h4>Publicaciones de {user.name}</h4>
+                    {user.posts.map((post) => (
+                      <div className="post-container" key={post.id}>
+                        <p>{post.message}</p>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <p>{user.name} todavía no ha hecho ninguna publicación.</p>
+                )}
+              </div>
+              <hr />
+              {/* FORMULARIO DE RESEÑAS */}
+              <div className="rating-form">
+                <form onSubmit={handleSubmitRating}>
+                  <h4>Deja una reseña sobre {user.name}</h4>
+                  <div className="mb-3">
+                    <label id="rating-message" className="form-label">Comentario</label>
+                    <input onChange={handleChangeRating} id="rating-message" type="text" name="message" className="form-control" value={newRating.message} placeholder="Comentario" />
+                  </div>
+                  <div className="mb-3">
+                    <label id="rating-score" className="form-label">Valoración</label>
+                    <input onChange={handleChangeRating} id="rating-score" type="number" name="score" className="form-control" value={newRating.score} />
+                  </div>
+                  <button type="submit" className="btn btn-primary">Enviar</button>
+                </form>
+              </div>
+            </div>
+            {/* LISTA DE RESEÑAS */}
+            <div className="rating-list container mt-4">
+              {ratingList.length > 0 ? (
+                <>
+                  <h4>Reseñas acerca de {user.name}</h4>
+                  {ratingList.map((rating) => (
+                    <div key={rating.id} className="rating-container mt-4">
+                      <img src={rating.currentUser.avatar} alt="" width="100" />
+                      <p>{rating.currentUser.name}</p>
+                      <p>{rating.message}</p>
+                      <p>{rating.score}</p>
+                      <p>{rating.date}</p>
+                      {rating.currentUser.id === currentUser.id ? (
+                        <button className="btn btn-danger" onClick={() => handleDeleteRating(rating.id)}>Borrar</button>
+                      ) : (
+                        null
+                      )}
                     </div>
                   ))}
                 </>
               ) : (
-                <p>{user.name} todavía no ha hecho ninguna publicación.</p>
+                <p>{user.name} todavía no tiene reseñas.</p>
               )}
             </div>
-            <hr />
-            {/* FORMULARIO DE RESEÑAS */}
-            <div className="rating-form">
-              <form onSubmit={handleSubmitRating}>
-                <h4>Deja una reseña sobre {user.name}</h4>
-                <div className="mb-3">
-                  <label id="rating-message" className="form-label">Comentario</label>
-                  <input onChange={handleChangeRating} id="rating-message" type="text" name="message" className="form-control" value={newRating.message} placeholder="Comentario" />
-                </div>
-                <div className="mb-3">
-                  <label id="rating-score" className="form-label">Valoración</label>
-                  <input onChange={handleChangeRating} id="rating-score" type="number" name="score" className="form-control" value={newRating.score} />
-                </div>
-                <button type="submit" className="btn btn-primary">Enviar</button>
-              </form>
-            </div>
-          </div>
-          {/* LISTA DE RESEÑAS */}
-          <div className="rating-list container mt-4">
-            {ratingList.length > 0 ? (
-              <>
-                <h4>Reseñas acerca de {user.name}</h4>
-                {ratingList.map((rating) => (
-                  <div key={rating.id} className="rating-container mt-4">
-                    <img src={rating.currentUser.avatar} alt="" width="100" />
-                    <p>{rating.currentUser.name}</p>
-                    <p>{rating.message}</p>
-                    <p>{rating.score}</p>
-                    <p>{rating.date}</p>
-                    {rating.currentUser.id === currentUser.id ? (
-                      <button className="btn btn-danger" onClick={() => handleDeleteRating(rating.id)}>Borrar</button>
-                    ) : (
-                      null
-                    )}
-                  </div>
-                ))}
-              </>
-            ) : (
-              <p>{user.name} todavía no tiene reseñas.</p>
-            )}
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
   )
 }

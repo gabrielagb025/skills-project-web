@@ -21,11 +21,11 @@ const Chats = () => {
 
     return (
         <div className="chats-margin">
-            <div className="Chats container">
+            <div className="Chats container d-flex flex-column align-items-center">
                 <div className="chat-title mt-4">
                     <h1>Tus conversaciones</h1>
+                    <hr />
                 </div>
-                <hr />
                 {chats.length > 0 ? (
                     <>
                         {chats.map((chat) => {
@@ -59,7 +59,7 @@ const Chats = () => {
                         })}
                     </>
                 ) : (
-                    <div className="no-conversations-container">
+                    <div className="no-conversations-container mt-4">
                         <h3>Aún no has iniciado ninguna conversación.</h3>
                         <p>¡No esperes más e inicia conversaciones con tus conexiones!</p>
                         <div className="submit-button">

@@ -19,11 +19,11 @@ const Friends = () => {
 
     return (
         <div className="friends-margin">
-            <div className="Friends container">
+            <div className="Friends container d-flex flex-column align-items-center">
                 <div className="friends-title mt-4">
                     <h1>Usuarios con los que has conectado</h1>
+                    <hr />
                 </div>
-                <hr />
                 <div className="row">
                     {friendList.length <= 0 ? (
                         <div className="no-friends-container mt-4">

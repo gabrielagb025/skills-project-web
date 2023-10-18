@@ -1,7 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { createEvent } from "../../../services/EventService";
 import { useState } from "react";
+import moment from "moment";
+import "moment/locale/es"; 
+import './EventForm.css';
 import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
+
+moment.locale("es");
 
 const EventForm = () => {
 
@@ -14,15 +20,15 @@ const EventForm = () => {
     const { id } = useParams();
     // const [newEvent, setNewEvent] = useState(initialValues);
 
-   /* const handleChangeEvent = (ev) => {
-        const key = ev.target.name;
-        const value = ev.target.value;
-
-        setNewEvent(prevEvent => ({
-            ...prevEvent,
-            [key]: value
-        }))
-    }*/
+    /* const handleChangeEvent = (ev) => {
+         const key = ev.target.name;
+         const value = ev.target.value;
+ 
+         setNewEvent(prevEvent => ({
+             ...prevEvent,
+             [key]: value
+         }))
+     }*/
 
     const handleSubmitEvent = (e) => {
         e.preventDefault();
@@ -43,31 +49,44 @@ const EventForm = () => {
 
 
     return (
-        <div className="event-form container">
-            <h1>Crea el evento de estudio</h1>
-            <form onSubmit={handleSubmitEvent}>
+        <div className="event-form-margin">
+            <div className="event-form d-flex align-items-center flex-column container mt-4">
                 <div>
-                    <label htmlFor="title" className="form-label">Título del evento:</label>
-                    <input
-                        onChange={e => setTitle(e.target.value)}
-                        className="form-control"
-                        type="text"
-                        id="title"
-                        name="title"
-                        placeholder="Escribe el título del evento"
-                        value={title}
-                    />
+                    <h1>Crea el evento de estudio</h1>
+                    <hr />
                 </div>
-                <div>
-                    <label>Inicio:</label>
-                    <Datetime value={start} onChange={date => setStart(date)}/>
-                </div>
-                <div>
-                    <label>Finalización:</label>
-                    <Datetime value={end} onChange={date => setEnd(date)}/>
-                </div>
-                <button type="submit" className="btn btn-primary mt-3">Guardar evento</button>
-            </form>
+                <form onSubmit={handleSubmitEvent}>
+                    <div className="input-form-event mt-3">
+                        <label htmlFor="title" className="form-label"><h5>Título del evento:</h5></label>
+                        <input
+                            onChange={e => setTitle(e.target.value)}
+                            className="form-control"
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Fotografía nocturna"
+                            value={title}
+                        />
+                    </div>
+                    <div className="input-form-event mt-3">
+                        <label><h5>Inicio:</h5></label>
+                        <Datetime 
+                        value={start} 
+                        open={false}
+                        onChange={date => setStart(date)}/>
+                    </div>
+                    <div className="input-form-event mt-3">
+                        <label><h5>Finalización:</h5></label>
+                        <Datetime 
+                        value={end} 
+                        open={false}
+                        onChange={date => setEnd(date)} />
+                    </div>
+                    <div className="button-form-event mt-3">
+                        <button type="submit" className="btn mt-3">Guardar evento</button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

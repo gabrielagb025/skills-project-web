@@ -26,8 +26,8 @@ const PostCard = (props) => {
     return (
         <div className="PostCard post-container mt-4 d-flex">
             <div className="post-user-info me-3">
-                <NavLink to={post.user._id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user._id}`}><img src={post.user.avatar} alt="" width={80} /></NavLink>
-                <NavLink style={{ textDecoration: 'none' }} to={post.user._id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user._id}`}><h5 className="ms-3" id="post-user-name">{post.user.name}</h5></NavLink>
+                <NavLink to={post.user._id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user.id}`}><img src={post.user.avatar} alt="" width={80} /></NavLink>
+                <NavLink style={{ textDecoration: 'none' }} to={post.user._id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user.id}`}><h5 className="ms-3" id="post-user-name">{post.user.name}</h5></NavLink>
             </div>
             <div className="post-content row mt-4">
                 <p>{post.message}</p>
@@ -42,14 +42,14 @@ const PostCard = (props) => {
                 <div className="post-urls-container mt-3">
                     {post.urls.map((url, index) => (
                         <div key={index}>
-                        <i class="bi bi-link-45deg me-2"></i><a href={url}>{url}</a>
+                        <i className="bi bi-link-45deg me-2"></i><a href={url}>{url}</a>
                         </div>
                     ))}
                 </div>
                 <div className="delete-btn d-flex justify-content-between mt-4">
                     <p id="post-date">{format(new Date(post.date), "dd/MM/yyyy HH:mm")}</p>
                     {post.user.id === currentUser.id ? (
-                        <button className="btn" onClick={() => onDeletePost(post._id)}><i class="bi bi-trash fs-6 me-2"></i>Borrar</button>
+                        <button className="btn" onClick={() => onDeletePost(post._id)}><i className="bi bi-trash fs-6 me-2"></i>Borrar</button>
                     ) : (
                         null
                     )}

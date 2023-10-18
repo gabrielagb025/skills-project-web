@@ -30,11 +30,11 @@ const Notifications = () => {
 
     return (
         <div className="notifications-margin">
-            <div className="Notifications container mt-4">
-                <div className="notifications-title mt-4">
+            <div className="Notifications container d-flex flex-column align-items-center mt-4">
+                <div className="notifications-title">
                     <h1>Solicitudes de conexión</h1>
+                    <hr />
                 </div>
-                <hr />
                 <div className="row">
                     {friendRequestList.length <= 0 ?
                         (
@@ -49,7 +49,7 @@ const Notifications = () => {
                         :
                         (friendRequestList.map((friendRequest) => (
                             <div className="mt-3 col-12 col-sm-6 col-md-4" key={friendRequest.id}>
-                                <div className="friend-request-container">
+                                <div className="friend-request-container d-flex flex-column justify-content-between">
                                     <div className="d-flex align-items-center justify-content-start">
                                         <NavLink to={`/user/users/detail/${friendRequest.userSend.id}`}><img className="mb-3 me-3 img-fluid" src={friendRequest.userSend.avatar} alt="" width={100} /></NavLink>
                                         <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`/user/users/detail/${friendRequest.userSend.id}`}><h5>{friendRequest.userSend.name}</h5></NavLink>
