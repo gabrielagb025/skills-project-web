@@ -1,0 +1,31 @@
+.rating-container {
+    max-width: fit-content;
+}
+
+.rating-user-info img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1.5px solid #EA9F92
+}
+
+.rating-date-deletebtn p {
+    margin-bottom: 0;
+    font-size: 15px;
+    color: #7f8775
+}
+
+.rating-date-deletebtn button {
+    background-color: #e18473;
+    border: 1px solid #e18473;
+    color: white;
+    border-radius: 25px;
+}
+
+.rating-date-deletebtn button:hover {
+    background-color: #EA9F92;
+    border: 1px solid #EA9F92;
+    color: white;
+    border-radius: 25px;
+}

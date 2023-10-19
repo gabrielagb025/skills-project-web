@@ -2,8 +2,8 @@
     max-width: 400px;
     background-color: white;
     padding: 20px !important;
-    border-radius: 25px !important;
-    box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
+    border-radius: 15px !important;
+    box-shadow: 0 0 20px 8px rgba(182, 219, 130, 0.5);
     height: 100%!important;
 }
 
@@ -38,7 +38,7 @@
     text-align: center;
 }
 
-.skills-user-card h5 {
+.skills-user-card  {
     white-space: nowrap;
 }
 

@@ -132,7 +132,7 @@ const EditProfile = () => {
                         placeholder="Valencia"
                     />
                     <div className="submit-button mt-4 d-flex justify-content-center align-items-center">
-                        <button type="submit" className={`btn ${isSubmitting ? 'submitting' : ''}`}>
+                        <button type="submit" className={`mt-2 btn ${isSubmitting ? 'cargando...' : ''}`}>
                             {isSubmitting ? "Cargando" : "Editar perfil"}
                         </button>
                     </div>

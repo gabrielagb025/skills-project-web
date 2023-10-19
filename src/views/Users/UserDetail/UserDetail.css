@@ -92,6 +92,24 @@
     max-width: 400px;
 }
 
+.skills-info-container i {
+    margin-right: 10px;
+    color: #5e8039;
+}
+
+/* POSTS Y RATINGS */
+.posts-ratings-container .nav-item a {
+    background-color: #5e8039;
+    color: white;
+    font-size: 18px;
+}
+
+.green-background {
+    background-color: #8db760 !important;
+    color: white !important;
+}
+
+
 @media (max-width: 768px) {
     .user-detail-info img {
         width: 100px;
@@ -112,6 +130,20 @@
 
     .btn-connect {
         margin-right: 35px;
+    }
+
+    .user-detail-skills {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .posts-ratings-container {
+        width: 100%;
+    }
+
+    .posts-ratings-buttons {
+        display: flex;
     }
 }
 

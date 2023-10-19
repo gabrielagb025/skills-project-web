@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const UserCard = (user) => {
     return (
-        <div className="card card-user mt-4" style={{ width: '100%' }}>
+        <div className="card card-user mt-2" style={{ width: '100%' }}>
             <div className="info-user-card row no-gutters">
                 <div className="photo-name-container">
                     <div className="card-img-container">

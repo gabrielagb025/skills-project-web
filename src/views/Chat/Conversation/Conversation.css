@@ -24,8 +24,10 @@
     border: 1px solid #5e8039;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: #f9fcf3;
+    background-color: #fcfef7;
     border-radius: 8px;
+    height: 60vh;
+    overflow: auto;
 }
 
 .message {
@@ -75,6 +77,7 @@
 .message-left {
     background-color: #F4BFB3; /* Color de fondo para mensajes del otro usuario */
     border-radius: 10px;
+    border-bottom-left-radius: 0PX;
     padding: 10px;
     margin-bottom: 10px;
     max-width: 60%;
@@ -84,6 +87,7 @@
     margin-left: auto;
     background-color: #C0DBA3; /* Color de fondo para mensajes del usuario actual */
     border-radius: 10px;
+    border-bottom-right-radius: 0px;
     padding: 10px;
     margin-bottom: 10px;
     max-width: 60%;
@@ -131,7 +135,45 @@
     background-color: #8db760; /* Color de fondo del círculo */
 }
 
+
+/* >>>>>>>>>>>>>>>>>> */
+
+.chat-box::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  .chat-box::-webkit-scrollbar-track {
+    background: #e3f3d2;        /* color of the tracking area */
+  }
+  
+  .chat-box::-webkit-scrollbar-thumb {
+    background-color: #c2dfa8;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #e3f3d2;  /* creates padding around scroll thumb */
+  }
+
+  body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: #e3f3d2;        /* color of the tracking area */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: #c2dfa8;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #e3f3d2;  /* creates padding around scroll thumb */
+  }
+
+
+
+
+
 @media (max-width: 767px) {
+    .chat-box {
+        width: 310px;
+    }
     .message {
         max-width: fit-content !important;
     }

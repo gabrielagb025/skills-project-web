@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getUser } from "../../../services/UserService";
+import { getUserPosts } from "../../../services/PostService";
 import { createRating, getRatings, deleteRating } from "../../../services/RatingService";
 import { getChats, createChat, deleteChat } from "../../../services/Chat.service";
 import { useAuthContext } from "../../../contexts/AuthContext";
-import InputGroup from "../../../components/InputGroup/InputGroup";
 import { sendFriendRequest, getFriends, getPendingFriendRequests, cancelFriendRequest, getAcceptedFriendRequest } from "../../../services/FriendRequestService";
 import { NavLink, useNavigate } from "react-router-dom";
 import { getUserDescription } from "../../../services/DescriptionService";
 import FriendRequestModal from "../../../components/FriendRequestModal/FriendRequestModal";
 import RatingModal from "../../../components/RatingModal/RatingModal";
+import RatingCard from "../../../components/RatingCard/RatingCard";
+import PostCard from "../../../components/PostCard/PostCard";
 import './UserDetail.css';
 
 
@@ -38,19 +40,23 @@ const UserDetail = () => {
   const [userDescription, setUserDescription] = useState(null);
   const [chatList, setChatList] = useState([]);
   const [showFriendModal, setShowFriendModal] = useState(false);
+  const [userPosts , setUserPosts] = useState([]);
   const { id } = useParams();
   const { user: currentUser } = useAuthContext();
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("postList");
+
 
   useEffect(() => {
-    Promise.all([getUser(id), getRatings(id), getFriends(), getPendingFriendRequests(), getAcceptedFriendRequest(id), getChats(), getUserDescription(id)])
-      .then(([user, ratings, friends, pendingFriendRequests, acceptedFriendReq, chats, description]) => {
+    Promise.all([getUser(id), getRatings(id), getFriends(), getPendingFriendRequests(), getAcceptedFriendRequest(id), getChats(), getUserDescription(id), getUserPosts(id)])
+      .then(([user, ratings, friends, pendingFriendRequests, acceptedFriendReq, chats, description, userPostList]) => {
         setUser(user);
         setRatingList(ratings);
         setIsFriend(friends.some(f => f.id === user.id));
         setAcceptedFriendRequest(acceptedFriendReq);
         setChatList(chats)
         setUserDescription(description)
+        setUserPosts(userPostList)
 
         const receivedRequest = pendingFriendRequests.find(request => request.userSend === user.id);
         const sentRequest = pendingFriendRequests.find(request => request.userReceive === user.id);
@@ -66,7 +72,9 @@ const UserDetail = () => {
       });
   }, [id]);
 
-
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+  }
   /* RATINGS */
 
   const handleShowRatingModal = () => {
@@ -231,8 +239,8 @@ const UserDetail = () => {
                   {isFriend ? (
                     <>
                       <button className="btn btn-chat mt-4" onClick={handleChatClick}>Chatear</button>
-                      <button className="btn btn-noconnect mt-4 ms-3" onClick={() => handleCancelFriendRequest(acceptedFriendRequest.id)}>Dejar de conectar</button>
-                      <button className="btn btn-event mt-4 ms-3" onClick={handleEventNavigate}>Agendar cita de estudio</button>
+                      <button className="btn btn-noconnect mt-4 ms-3 me-3" onClick={() => handleCancelFriendRequest(acceptedFriendRequest.id)}>Dejar de conectar</button>
+                      <button className="btn btn-event mt-4" onClick={handleEventNavigate}>Agendar cita de estudio</button>
                     </>
                   ) : (
                     <>
@@ -262,9 +270,9 @@ const UserDetail = () => {
                         </div>}
                     </>
                   )}
-                  <div className="rating-form mt-4 ms-2">
+                  <div className="rating-form mt-4">
                     <button className="btn btn-rating" onClick={handleShowRatingModal}>
-                      Deja una reseña del usuario
+                      Escribir una reseña
                     </button>
                   </div>
                   {/* ... otros elementos */}
@@ -296,36 +304,110 @@ const UserDetail = () => {
                 ) : (null)}
                 <div className="user-detail-skills d-flex justify-content-around">
                   <div className="skills-info-container d-flex flex-column mt-2">
-                    <h5>{user.name} puede enseñar:</h5>
+                    <h5><i class="bi bi-diamond-fill"></i>{user.name} puede enseñar:</h5>
                     {user.teachSkills.map((skill) => (
                       <div key={skill.id}>
                         <div className="skill-name d-flex align-items-center">
                           <p className="fw-bold me-2">{skill.name}</p>-<p className="ms-2">{skill.category}</p>
                         </div>
-                        <p>{skill.description}</p>
+                        <p className="mt-2">{skill.description}</p>
                       </div>
                     ))}
                   </div>
-                  <div className="skills-info-container d-flex flex-column">
-                    <h5>{user.name} quiere aprender:</h5>
+                  <div className="skills-info-container d-flex flex-column mt-2">
+                    <h5><i class="bi bi-diamond-fill"></i>{user.name} quiere aprender:</h5>
                     {user.learnSkills.map((skill) => (
                       <div key={skill.id}>
                         <div className="skill-name d-flex align-items-center">
                           <p className="fw-bold me-2">{skill.name}</p>-<p className="ms-2">{skill.category}</p>
                         </div>
-                        <p>{skill.description}</p>
+                        <p className="mt-2">{skill.description}</p>
                       </div >
                     ))}
                   </div>
                 </div>
               </div>
               <hr />
-              {/* PUBLICACIONES */}
-              <h3>Publicaciones</h3>
+            </div>
+            <div className="card-body posts-ratings-container p-4 text-black mt-3">
+              <ul className="nav nav-tabs posts-ratings-buttons border-0" id="myTab">
+                <li className="nav-item">
+                  <a
+                    className={`me-3 nav-link text-uppercase ${activeTab === "postList" ? "active green-background" : ""}`}
+                    onClick={() => handleTabClick("postList")}
+                    id="post-list-tab"
+                    data-bs-toggle="tab"
+                    href="#postList"
+                    role="tab"
+                    aria-controls="postList"
+                    aria-selected={activeTab === "postList"}
+                  >
+                    Publicaciones
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link text-uppercase ${activeTab === "ratings" ? "active green-background" : ""}`}
+                    onClick={() => handleTabClick("ratings")}
+                    id="ratings-tab"
+                    data-bs-toggle="tab"
+                    href="#ratings"
+                    role="tab"
+                    aria-controls="ratings"
+                    aria-selected={activeTab === "ratings"}
+                  >
+                    Reseñas
+                  </a>
+                </li>
+              </ul>
+              <div className="tab-content user-detail-posts-container mb-5 mt-3" id="myTabContent">
+                <div className={`tab-pane fade ${activeTab === "postList" ? "active show" : ""}`} id="postList" role="tabpanel" aria-labelledby="postList-tab">
+                  <h4>Publicaciones de {user.name}</h4>
+                  <div className="posts-container">
+                    {userPosts?.length > 0 ? (
+                      <>
+                        {userPosts.map((post) => (
+                          <PostCard post={post} key={post.id} />
+                        ))}
+                      </>
+                    ) : (
+                      <p>{user.name} todavía no ha hecho ninguna publicación.</p>
+                    )}
+                  </div>
+                  <hr />
+                </div>
+
+                <div className={`tab-pane fade ${activeTab === "ratings" ? "active show" : ""}`} id="ratings" role="tabpanel" aria-labelledby="ratings-tab">
+                  <h4>Reseñas acerca de {user.name}</h4>
+                  {ratingList.length > 0 ? (
+                    <>
+                      {ratingList.map((rating) => (
+                        <div className="ratings-container" key={rating.id} >
+                          <RatingCard rating={rating} handleDeleteRating={handleDeleteRating} />
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    <p>{user.name} todavía no tiene reseñas.</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </div >
+  )
+}
+
+export default UserDetail;
+
+
+{/* PUBLICACIONES
+              <h4>Publicaciones de {user.name}</h4>
               <div className="posts-container">
                 {user.posts?.length > 0 ? (
                   <>
-                    <h4>Publicaciones de {user.name}</h4>
                     {user.posts.map((post) => (
                       <div className="post-container" key={post.id}>
                         <p>{post.message}</p>
@@ -337,38 +419,19 @@ const UserDetail = () => {
                 )}
               </div>
               <hr />
-              {/* FORMULARIO DE RESEÑAS */}
             </div>
-            {/* LISTA DE RESEÑAS */}
+            LISTA DE RESEÑAS
             <div className="rating-list container mt-4">
-              <h3>Reseñas</h3>
+              <h4>Reseñas acerca de {user.name}</h4>
               {ratingList.length > 0 ? (
                 <>
-                  <h4>Reseñas acerca de {user.name}</h4>
                   {ratingList.map((rating) => (
-                    <div key={rating.id} className="rating-container mt-4">
-                      <img src={rating.currentUser.avatar} alt="" width="100" />
-                      <p>{rating.currentUser.name}</p>
-                      <p>{rating.message}</p>
-                      <p>{rating.score}</p>
-                      <p>{rating.date}</p>
-                      {rating.currentUser.id === currentUser.id ? (
-                        <button className="btn btn-danger" onClick={() => handleDeleteRating(rating.id)}>Borrar</button>
-                      ) : (
-                        null
-                      )}
+                    <div className="ratings-container" key={rating.id} >
+                      <RatingCard rating={rating} handleDeleteRating={handleDeleteRating} />
                     </div>
                   ))}
                 </>
               ) : (
                 <p>{user.name} todavía no tiene reseñas.</p>
               )}
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-  )
-}
-
-export default UserDetail;
+            </div> */}

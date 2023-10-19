@@ -23,11 +23,13 @@ const PostCard = (props) => {
         setModalIsOpen(false);
     };
 
+    console.log(post.user)
+
     return (
         <div className="PostCard post-container mt-4 d-flex">
             <div className="post-user-info me-3">
-                <NavLink to={post.user._id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user.id}`}><img src={post.user.avatar} alt="" width={80} /></NavLink>
-                <NavLink style={{ textDecoration: 'none' }} to={post.user._id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user.id}`}><h5 className="ms-3" id="post-user-name">{post.user.name}</h5></NavLink>
+                <NavLink to={post.user.id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user.id}`}><img src={post.user.avatar} alt="" width={80} /></NavLink>
+                <NavLink style={{ textDecoration: 'none' }} to={post.user.id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user.id}`}><h5 className="ms-3" id="post-user-name">{post.user.name}</h5></NavLink>
             </div>
             <div className="post-content row mt-4">
                 <p>{post.message}</p>

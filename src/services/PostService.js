@@ -13,3 +13,7 @@ export const editPost = (postId, body) => http.patch(`/post/edit/${postId}`);
 export const getPostsForYou = () => http.get('/post/timeline/foryou');
 
 export const getPostsFriends = () => http.get('/post/timeline/friends');
+
+export const getAllPosts = () => http.get('/posts');
+
+export const getUserPosts = (id) => http.get(`/posts/${id}`);

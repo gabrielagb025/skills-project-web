@@ -73,6 +73,8 @@ const Profile = () => {
     setShowForm(true)
   }
 
+  console.log(userPostList)
+
   return (
     <div className="Profile profile-container container">
       <div className="mt-5">
@@ -130,21 +132,7 @@ const Profile = () => {
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((post) => (
           <div className="post-container" key={post.id}>
-            <div className="post info">
-              <p>{post.message}</p>
-              {post.images.map((image) => (
-                <img className="me-2" src={image} width={100} key={image} />
-              ))}
-              {post.urls.map((url, index) => (
-                <a key={index} href={url}>{url}</a>
-              ))}
-              <p>{post.date}</p>
-            </div>
-            {postInput && <PostInput />}
-            <div className="post-buttons d-flex">
-              <button className="btn btn-success me-4" onClick={() => handleEditPost(post.id)}>Editar</button>
-              <button className="btn btn-danger" onClick={() => handleDeletePost(post.id)}>Borrar</button>
-            </div>
+            <PostCard post={post} />
           </div>
         ))}
       </div>
