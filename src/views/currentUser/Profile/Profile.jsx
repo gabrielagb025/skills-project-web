@@ -5,7 +5,9 @@ import { deletePost, getCurrentUserPosts, editPost } from '../../../services/Pos
 import PostInput from '../../../components/PostInput/PostInput';
 import DescriptionInput from '../../../components/DescriptionInput/DescriptionInput';
 import { currentUserDescription, editDescription } from '../../../services/DescriptionService';
+import DescriptionModal from '../../../components/DescriptionModal/DescriptionModal';
 import PostCard from '../../../components/PostCard/PostCard';
+import { set } from 'date-fns';
 
 
 const Profile = () => {
@@ -15,6 +17,7 @@ const Profile = () => {
   const [userDescription, setUserDescription] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isDescriptionModalOpen, setIsDescriptionModalOpen] = useState(false)
   const [activeTab, setActiveTab] = useState("postList");
 
   useEffect(() => {
@@ -45,21 +48,8 @@ const Profile = () => {
   }
 
   const handleEditDescription = (descriptionId) => {
-    editDescription(descriptionId, descriptionData)
-      .then(() => {
-        console.log('description editada')
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-
-  const handleShowEditForm = () => {
-    setShowForm(true)
-  }
-
-  const handleShowForm = () => {
-    setShowForm(true)
+    setIsDescriptionModalOpen(true);
+    setIsEditing(true);
   }
 
   const handleUpdateDescription = () => {
@@ -73,52 +63,67 @@ const Profile = () => {
       })
   }
 
-  const handleEditForm = () => {
-    setIsEditing(true)
-    setShowForm(true)
-  }
+  const handleShowDescriptionModal = () => {
+    setIsDescriptionModalOpen(true);
+  };
+
+  const handleCloseDescriptionModal = () => {
+    setIsDescriptionModalOpen(false);
+  };
+
 
   return (
     <div className="profile-margin">
-      <div className="Profile profile-container container">
+      <div className="Profile profile-container container mt-4">
         <div className="profile-header-container">
-          <div className="profile-info-img">
-            <img src={user.avatar} alt="" width="300" />
-          </div>
-          <div className="profile-info-text">
-            <h1>{user.name}</h1>
-            <p>{user.phone}</p>
-            <p>{user.city}</p>
-          </div>
-        </div>
-        <div className="description-container">
-          {!userDescription ? (
-            <div className="no-description">
-              <p>Añade información detallada sobre tus conocimientos en intereses para poder conectar mejor con otros usuarios.</p>
-              <button onClick={handleShowForm} className="btn btn-primary">Añadir</button>
-              {showForm && (
-                <DescriptionInput updateDescription={handleUpdateDescription} />
-              )}
+          <div className="user-content d-flex align-items-center">
+            <div className="profile-info-img">
+              <img src={user.avatar} alt="" width="300" />
             </div>
-          ) : (
-            <div className="user-description">
-              <h4>Descripción</h4>
-              <p>{userDescription.description}</p>
-              {userDescription.images.map((image, index) => (
-                <img key={index} src={image} width={100} />
-              ))}
-              <p>URLs</p>
-              {userDescription.urls.map((url, index) => (
-                <a className="me-4" key={index} href={url}>{url}</a>
-              ))}
-              <button className="btn btn-success" onClick={handleEditForm}>Editar</button>
-              {showForm && (
-                <DescriptionInput
-                  updateDescription={handleUpdateDescription}
-                  initialValues={isEditing ? userDescription : ''}
-                />
-              )}
-            </div>)}
+            <div className="profile-info-text">
+              <h1>{user.name}</h1>
+              <div className="d-flex align-items-center">
+                <i className="bi bi-geo-alt-fill"></i><p>{user.city}</p>
+              </div>
+              <div className="d-flex align-items-center mt-2">
+                <i className="bi bi-telephone-fill"></i><p>{user.phone}</p>
+              </div>
+            </div>
+          </div>
+          <div className="description-container">
+            {!userDescription ? (
+              <div className="no-description">
+                <p className="text-center">Añade información detallada sobre tus conocimientos e intereses para poder conectar mejor con otros usuarios.</p>
+                <div className="submit-button">
+                  <button onClick={handleShowForm} className="btn btn-primary">Añadir</button>
+                </div>
+                {isDescriptionModalOpen && (
+                  <DescriptionModal updateDescription={handleUpdateDescription} initialValues={isEditing ? userDescription : ''} />
+                )}
+              </div>
+            ) : (
+              <div className="user-description">
+                <h4>Descripción</h4>
+                <p>{userDescription.description}</p>
+                {userDescription.images.map((image, index) => (
+                  <img key={index} src={image} width={100} />
+                ))}
+                <p>URLs</p>
+                {userDescription.urls.map((url, index) => (
+                  <a className="me-4" key={index} href={url}>{url}</a>
+                ))}
+                <button className="btn btn-success" onClick={handleEditForm}>Editar</button>
+                {showForm && (
+                  <DescriptionInput
+                    handleSubmit={handleUpdateDescription}
+                    initialValues={isEditing ? userDescription : ''}
+                    show={handleShowDescriptionModal}
+                    close={handleCloseDescriptionModal}
+                    handleChange={handleChange}
+                  />
+                )}
+              </div>)}
+          </div>
         </div>
         <hr />
         <div className="user-profile-skills d-flex justify-content-around">
@@ -145,7 +150,7 @@ const Profile = () => {
             ))}
           </div>
         </div>
-        
+
         {/* <h4>Tus publicaciones</h4>
         {userPostList
           .sort((a, b) => new Date(b.date) - new Date(a.date))

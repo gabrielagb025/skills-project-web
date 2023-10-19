@@ -51,8 +51,8 @@ const Login = () => {
     return user ? (
         <Navigate to="/user/profile" />
     ) : (
-        <div className="div-margin">
-            <div className="Login login-container container my-5">
+        <div className="login-margin d-flex flex-column align-items-center justify-content-center">
+            <div className="Login login-container container">
                 <div className="text-center mb-4">
                     <img src={Logo} alt="" width={200} />
                 </div>

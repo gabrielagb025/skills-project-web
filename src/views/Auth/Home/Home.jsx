@@ -12,12 +12,12 @@ const Home = () => {
         user ? (
             <Navigate to="/user/profile" />
         ) : (
-            <div className="home-margin">
+            <div className="home-margin d-flex flex-column align-items-center justify-content-center">
             <div className="Home home-container container my-5">
                 <img src={Logo} alt="" width={200} />
                 <div className="row justify-content-around align-items-center">
                     <div className="col-md-6 text-cetner">
-                        <h2 className="ms-3 mt-3">Bienvenido a <br /><span className="fw-bold">SkillSync.</span></h2>
+                        <h2 className="ms-3 mt-3 mb-4">Te damos la bienvenida a <br /><span className="fw-bold">SkillSync.</span></h2>
                         <img className="mt-3 me-2 img-fluid d-none d-md-block" src={SkillSyncImage} alt="" width={600} />
                         <img className="mt-3 me-2 img-fluid d-md-none" src={SkillSyncImage} alt="" width={400} />
                     </div>

@@ -1,5 +1,9 @@
-.div-margin {
-    padding: 20px;
+.register-margin {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
 }
 
 .register-container {
@@ -9,10 +13,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    padding: 50px;
-    border-radius: 25px;
-    box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
+    padding: 20px;
 }
 
 .register-container i {

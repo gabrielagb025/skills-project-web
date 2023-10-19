@@ -75,7 +75,7 @@ const Register = () => {
     return user ? (
         <Navigate to="/user/profile" />
     ) : (
-        <div className="div-margin">
+        <div className="register-margin">
             <div className="register-container container">
                 <div className="text-center mb-4">
                     <img className="" src={Logo} alt="" width={200} />

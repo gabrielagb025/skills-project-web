@@ -234,7 +234,7 @@ const UserDetail = () => {
         ) : (
           <>
             {/* INFORMACIÓN DEL USUARIO */}
-            <div className="UserDetail detail-container container mt-4">
+            <div className="UserDetail container mt-4">
               <div className="user-detail-header">
                 <div className="user-detail-info">
                   <div className="user-detail-img">
@@ -382,8 +382,8 @@ const UserDetail = () => {
                     {userPosts?.length > 0 ? (
                       <div className="row">
                         {userPosts.map((post) => (
-                          <div className="detail-posts-container">
-                          <PostCard post={post} key={post.id} />
+                          <div key={post.id} className="detail-posts-container">
+                          <PostCard post={post} />
                           </div>
                         ))}
                       </div>
