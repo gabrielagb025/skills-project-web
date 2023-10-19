@@ -6,5 +6,7 @@ export const createRating = (id, body) => http.post(`/rating/create/${id}`, body
 
 export const getRatings = (id) => http.get(`/rating/list/${id}`);
 
-export const deleteRating = (ratingId) => http.delete(`/rating/delete/${ratingId}`)
+export const deleteRating = (ratingId) => http.delete(`/rating/delete/${ratingId}`);
+
+export const getCurrentUserRating = () => http.get('/rating/me');
   

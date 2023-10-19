@@ -69,5 +69,9 @@
         align-items: center;
     }
 
+    .posts-ratings-buttons {
+        flex-wrap: nowrap !important;
+    }
+
 }
 

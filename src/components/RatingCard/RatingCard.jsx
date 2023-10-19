@@ -1,6 +1,7 @@
 import { useAuthContext } from '../../contexts/AuthContext';
 import { format } from 'date-fns';
 import Star from '../Star/Star';
+import { NavLink } from 'react-router-dom';
 import './RatingCard.css';
 
 const RatingCard = ({ rating, handleDeleteRating }) => {
@@ -10,8 +11,10 @@ const RatingCard = ({ rating, handleDeleteRating }) => {
     return (
         <div key={rating.id} className="rating-container mt-4">
             <div className="rating-user-info d-flex align-items-center">
-                <img className="me-4" src={rating.currentUser.avatar} alt="" width="100" />
-                <h5>{rating.currentUser.name}</h5>
+                {/* <img className="me-4" src={rating.currentUser.avatar} alt="" width="100" />
+                <h5>{rating.currentUser.name}</h5> */}
+                <NavLink to={rating.currentUser.id === currentUser.id ? '/user/profile' : `/user/users/detail/${rating.currentUser.id}`}><img src={rating.currentUser.avatar} className="me-4" alt="" width="100"/></NavLink>
+                <NavLink style={{ textDecoration: 'none', color: "#3F423B" }} to={rating.currentUser.id === currentUser.id ? '/user/profile' : `/user/users/detail/${rating.currentUser.id}`}><h5>{rating.currentUser.name}</h5></NavLink>
             </div>
             <hr />
             <div className="rating-message-score">
