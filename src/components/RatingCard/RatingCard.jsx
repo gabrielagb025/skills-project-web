@@ -10,11 +10,11 @@ const RatingCard = ({ rating, handleDeleteRating }) => {
     return (
         <div key={rating.id} className="rating-container mt-4">
             <div className="rating-user-info d-flex align-items-center">
-                <img src={rating.currentUser.avatar} alt="" width="100" />
-                <h5 className="ms-3">{rating.currentUser.name}</h5>
+                <img className="me-4" src={rating.currentUser.avatar} alt="" width="100" />
+                <h5>{rating.currentUser.name}</h5>
             </div>
             <hr />
-            <div className="rating-message-score mt-3">
+            <div className="rating-message-score">
                 <div className="rating-message">
                 <p>{rating.message}</p>
                 </div>

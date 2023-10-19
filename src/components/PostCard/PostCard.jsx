@@ -24,13 +24,16 @@ const PostCard = (props) => {
     };
 
     return (
-        <div className="PostCard post-container mt-4 d-flex">
-            <div className="post-user-info me-3">
+        <div className="PostCard post-container mt-4">
+            <div className="post-user-info d-flex align-items-center">
                 <NavLink to={post.user.id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user.id}`}><img src={post.user.avatar} alt="" width={80} /></NavLink>
                 <NavLink style={{ textDecoration: 'none' }} to={post.user.id === currentUser.id ? '/user/profile' : `/user/users/detail/${post.user.id}`}><h5 className="ms-3" id="post-user-name">{post.user.name}</h5></NavLink>
             </div>
+            <hr />
             <div className="post-content row mt-4">
-                <p>{post.message}</p>
+                <div className="post-message">
+                    <p>{post.message}</p>
+                </div>
                 <div className="post-images-container">
                     {post.images.map((img, index) => (
                         <div className="post-img m-2" key={index} onClick={() => openModal(img)}>
@@ -42,7 +45,7 @@ const PostCard = (props) => {
                 <div className="post-urls-container mt-3">
                     {post.urls.map((url, index) => (
                         <div key={index}>
-                        <i className="bi bi-link-45deg me-2"></i><a href={url}>{url}</a>
+                            <i className="bi bi-link-45deg me-2"></i><a href={url}>{url}</a>
                         </div>
                     ))}
                 </div>

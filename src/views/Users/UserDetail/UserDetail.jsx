@@ -299,7 +299,7 @@ const UserDetail = () => {
                   />
                 </div>
               </div>
-              <hr />
+              <hr className="mt-4"/>
               <div className="mt-4 profile-info-container">
                 {userDescription ? (
                   <div className="user-description">
@@ -316,7 +316,7 @@ const UserDetail = () => {
                 ) : (null)}
                 <div className="user-detail-skills d-flex justify-content-around">
                   <div className="skills-info-container d-flex flex-column mt-2">
-                    <h5><i class="bi bi-diamond-fill"></i>{user.name} puede enseñar:</h5>
+                    <h5><i class="bi bi-diamond-fill fs-6"></i>{user.name} puede enseñar:</h5>
                     {user.teachSkills.map((skill) => (
                       <div key={skill.id}>
                         <div className="skill-name d-flex align-items-center">
@@ -327,14 +327,14 @@ const UserDetail = () => {
                     ))}
                   </div>
                   <div className="skills-info-container d-flex flex-column mt-2">
-                    <h5><i class="bi bi-diamond-fill"></i>{user.name} quiere aprender:</h5>
+                    <h5><i class="bi bi-diamond-fill fs-6"></i>{user.name} quiere aprender:</h5>
                     {user.learnSkills.map((skill) => (
                       <div key={skill.id}>
                         <div className="skill-name d-flex align-items-center">
                           <p className="fw-bold me-2">{skill.name}</p>-<p className="ms-2">{skill.category}</p>
                         </div>
                         <p className="mt-2">{skill.description}</p>
-                      </div >
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -376,26 +376,27 @@ const UserDetail = () => {
                 <div className={`tab-pane fade ${activeTab === "postList" ? "active show" : ""}`} id="postList" role="tabpanel" aria-labelledby="postList-tab">
                 <div className="detail-posts-title">
                     <h4>Publicaciones</h4>
-                    <hr />
+                    <hr className="border-bottom-title"/>
                   </div>
                   <div className="posts-container">
                     {userPosts?.length > 0 ? (
-                      <>
+                      <div className="row">
                         {userPosts.map((post) => (
+                          <div className="detail-posts-container">
                           <PostCard post={post} key={post.id} />
+                          </div>
                         ))}
-                      </>
+                      </div>
                     ) : (
-                      <p>{user.name} todavía no ha hecho ninguna publicación.</p>
+                      <p className="mt-4">{user.name} todavía no ha hecho ninguna publicación.</p>
                     )}
                   </div>
-                  <hr />
                 </div>
 
                 <div className={`tab-pane fade ${activeTab === "ratings" ? "active show" : ""}`} id="ratings" role="tabpanel" aria-labelledby="ratings-tab">
                   <div className="detail-ratings-title">
                     <h4>Reseñas</h4>
-                    <hr />
+                    <hr className="border-bottom-title"/>
                   </div>
                   {ratingList.length > 0 ? (
                     <div className="row">
@@ -408,7 +409,7 @@ const UserDetail = () => {
                       ))}
                     </div>
                   ) : (
-                    <p>{user.name} todavía no tiene reseñas.</p>
+                    <p className="mt-4">{user.name} todavía no tiene reseñas.</p>
                   )}
                 </div>
               </div>

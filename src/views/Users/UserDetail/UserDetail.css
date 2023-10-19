@@ -118,6 +118,16 @@
     color: #3F423B;
 }
 
+.detail-posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.border-bottom-title {
+    margin-bottom: 0px !important;
+}
+
 @media (max-width: 768px) {
     .user-detail-info img {
         width: 100px;
