@@ -109,6 +109,14 @@
     color: white !important;
 }
 
+.user-detail-posts-container hr {
+    border: 1px solid #5e8039; /* Color y grosor de la línea */
+    width: 100%; 
+}
+
+.user-detail-posts-container {
+    color: #3F423B;
+}
 
 @media (max-width: 768px) {
     .user-detail-info img {
@@ -119,13 +127,12 @@
     .user-detail-header {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: start;
         justify-content: center;
     }
 
     .friend-buttons {
         margin-right: 0;
-        margin-left: 40px;
     }
 
     .btn-connect {
@@ -146,6 +153,29 @@
         display: flex;
     }
 }
+
+@media (min-width: 768px) {
+
+    .ratings-container {
+        height: 100% !important;
+    }
+
+    .detail-ratings-title {
+        text-align: center;
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+
+    .detail-posts-title {
+        text-align: center;
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+    
+}
+
+
+
 
 
 

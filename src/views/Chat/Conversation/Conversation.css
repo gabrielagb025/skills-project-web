@@ -94,13 +94,17 @@
     align-self: flex-end;
 }
 
-.message-right .img-msg {
-    order: 2;
-    margin-left: 10px;
+.message-right .chat-message-content {
+    flex-direction: row-reverse !important; /* Invierte la dirección de los elementos */
 }
 
-.message-right .chat-message-content {
-    order: 1;
+.message-right .chat-message-content .message-time {
+    order: 2; /* Coloca la hora a la izquierda */
+    margin-right: 10px; /* Agrega un margen derecho para separar la hora del texto */
+}
+
+.message-right .chat-message-content .message-text {
+    order: 1; /* Coloca el texto a la derecha */
 }
 
 .chat-user-name button {
@@ -172,9 +176,15 @@
 
 @media (max-width: 767px) {
     .chat-box {
-        width: 310px;
+        width: 100%;
     }
     .message {
-        max-width: fit-content !important;
+        flex-direction: column;
+        max-width: 90% !important;
     }
+
+    .chat-message-content {
+        max-width: 90%;
+    }
+
 }

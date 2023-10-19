@@ -342,7 +342,7 @@ const UserDetail = () => {
               <hr />
             </div>
             <div className="card-body posts-ratings-container p-4 text-black mt-3">
-              <ul className="nav nav-tabs posts-ratings-buttons border-0" id="myTab">
+              <ul className="nav nav-tabs d-flex align-items-center justify-content-center posts-ratings-buttons border-0" id="myTab">
                 <li className="nav-item">
                   <a
                     className={`me-3 nav-link text-uppercase ${activeTab === "postList" ? "active green-background" : ""}`}
@@ -374,7 +374,10 @@ const UserDetail = () => {
               </ul>
               <div className="tab-content user-detail-posts-container mb-5 mt-3" id="myTabContent">
                 <div className={`tab-pane fade ${activeTab === "postList" ? "active show" : ""}`} id="postList" role="tabpanel" aria-labelledby="postList-tab">
-                  <h4>Publicaciones</h4>
+                <div className="detail-posts-title">
+                    <h4>Publicaciones</h4>
+                    <hr />
+                  </div>
                   <div className="posts-container">
                     {userPosts?.length > 0 ? (
                       <>
@@ -390,15 +393,20 @@ const UserDetail = () => {
                 </div>
 
                 <div className={`tab-pane fade ${activeTab === "ratings" ? "active show" : ""}`} id="ratings" role="tabpanel" aria-labelledby="ratings-tab">
-                  <h4>Reseñas</h4>
+                  <div className="detail-ratings-title">
+                    <h4>Reseñas</h4>
+                    <hr />
+                  </div>
                   {ratingList.length > 0 ? (
-                    <>
+                    <div className="row">
                       {ratingList.map((rating) => (
-                        <div className="ratings-container" key={rating.id} >
-                          <RatingCard rating={rating} handleDeleteRating={handleDeleteRating} />
+                        <div key={rating.id} className="col-12 col-md-6 col-lg-4">
+                          <div className="ratings-container">
+                            <RatingCard rating={rating} handleDeleteRating={handleDeleteRating} className="" />
+                          </div>
                         </div>
                       ))}
-                    </>
+                    </div>
                   ) : (
                     <p>{user.name} todavía no tiene reseñas.</p>
                   )}

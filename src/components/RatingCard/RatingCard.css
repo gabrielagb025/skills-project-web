@@ -1,6 +1,9 @@
 .rating-container {
-    max-width: 50%;
+    max-width: 100%;
+    height: 100% !important;
     background-color: #f2f8e9;
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .rating-user-info img {
@@ -9,6 +12,10 @@
     object-fit: cover;
     border-radius: 50%;
     border: 1.5px solid #EA9F92
+}
+
+.rating-message {
+    text-align: left;
 }
 
 .rating-date-deletebtn p {
@@ -29,4 +36,14 @@
     border: 1px solid #EA9F92;
     color: white;
     border-radius: 25px;
+}
+
+@media (max-width: 768px) {
+    .rating-container {
+        max-width: 100%;
+    }
+
+    .rating-user-info h5 {
+        margin-left: 0px !important;
+    }
 }

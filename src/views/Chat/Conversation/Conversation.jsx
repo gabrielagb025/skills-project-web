@@ -15,7 +15,7 @@ const Chat = () => {
     const [chat, setChat] = useState(null);
     const [message, setMessage] = useState(initialValues);
     const [chatMessages, setChatMessages] = useState([]);
-    const [messageError, setMessageError] = useState(''); 
+    const [messageError, setMessageError] = useState('');
     const { id } = useParams();
     const { user: currentUser } = useAuthContext();
 
@@ -108,20 +108,17 @@ const Chat = () => {
                         <div className="chat-user-info d-flex align-items-center">
                             <img src={otherUser.avatar} alt="" width={100} />
                             <div className="chat-user-name d-flex flex-column align-items-center">
-                            <h2 className="ms-4">{otherUser.name}</h2>
-                            <button className="btn">Ver perfil</button>
+                                <h2 className="ms-4">{otherUser.name}</h2>
+                                <button className="btn">Ver perfil</button>
                             </div>
                         </div>
                     </NavLink>
                     <hr />
                     <div className="chat-box">
                         {chatMessages.map((msg) => (
-                            <div className={`message d-flex align-items-center ${msg.sender.id === currentUser.id ? 'message-right' : 'message-left'}`} key={msg.id}>
-                                <div className="img-msg">
-                                    {msg.sender && <img src={msg.sender.avatar} width={40} />}
-                                </div>
+                            <div className={`message d-flex ${msg.sender.id === currentUser.id ? 'message-right' : 'message-left'}`} key={msg.id}>
                                 <div className="chat-message-content ms-3 d-flex align-items-center justify-content-between">
-                                    <div className="d-flex align-items-center">
+                                    <div className="d-flex message-text align-items-center">
                                         <p>{msg.text}</p>
                                         {msg.sender.id === currentUser.id ? (<i className={`bi bi-check-all ${msg.status === 'unread' ? 'grey' : 'green'} ms-2`}></i>) : (null)}
                                     </div>
@@ -135,7 +132,7 @@ const Chat = () => {
 
                     <form onSubmit={handleSubmitMessage}>
                         <div className="form-group d-flex align-items-center">
-                            <input onChange={handleMessageChange} type="text" name="text" className="form-control" placeholder="Escribe un mensaje..." value={message.text} onFocus={handleFocus} onBlur={handleBlur}/>
+                            <input onChange={handleMessageChange} type="text" name="text" className="form-control" placeholder="Escribe un mensaje..." value={message.text} onFocus={handleFocus} onBlur={handleBlur} />
                             <button type="submit" className="btn-circle ms-2"><i className="bi bi-send"></i></button>
                         </div>
                     </form>
