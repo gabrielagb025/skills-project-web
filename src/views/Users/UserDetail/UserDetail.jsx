@@ -18,7 +18,7 @@ import './UserDetail.css';
 
 const ratingInitialValues = {
   message: "",
-  score: "1"
+  score: "0"
 }
 
 const friendRequestIntialValues = {
@@ -40,11 +40,13 @@ const UserDetail = () => {
   const [userDescription, setUserDescription] = useState(null);
   const [chatList, setChatList] = useState([]);
   const [showFriendModal, setShowFriendModal] = useState(false);
-  const [userPosts , setUserPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
   const { id } = useParams();
   const { user: currentUser } = useAuthContext();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("postList");
+
+  const [rating, setRating] = useState(0);
 
 
   useEffect(() => {
@@ -85,15 +87,26 @@ const UserDetail = () => {
     setShowRatingModal(false);
   };
 
-  const handleChangeRating = (ev) => {
-    const key = ev.target.name;
-    const value = ev.target.value;
+  const handleChangeRating = (e) => {
+    const { name, value } = e.target;
+    setNewRating({ ...newRating, [name]: value });
 
-    setNewRating(prevRating => ({
-      ...prevRating,
-      [key]: value
-    }))
-  }
+  };
+
+  const handleStarClick = (starValue) => {
+    console.log('click')
+    setNewRating({ ...newRating, score: starValue });
+  };
+
+  // const handleChangeRating = (ev) => {
+  //   const key = ev.target.name;
+  //   const value = ev.target.value;
+
+  //   setNewRating(prevRating => ({
+  //     ...prevRating,
+  //     [key]: value
+  //   }))
+  // }
 
   const handleSubmitRating = (event) => {
     event.preventDefault()
@@ -280,10 +293,9 @@ const UserDetail = () => {
                     show={showRatingModal}
                     handleClose={handleCloseRatingModal}
                     handleSubmit={handleSubmitRating}
-                    handleChange={(e) =>
-                      setNewRating({ ...newRating, [e.target.name]: e.target.value })
-                    }
+                    handleChange={handleChangeRating}
                     newRating={newRating}
+                    handleStarClick={handleStarClick}
                   />
                 </div>
               </div>
@@ -362,7 +374,7 @@ const UserDetail = () => {
               </ul>
               <div className="tab-content user-detail-posts-container mb-5 mt-3" id="myTabContent">
                 <div className={`tab-pane fade ${activeTab === "postList" ? "active show" : ""}`} id="postList" role="tabpanel" aria-labelledby="postList-tab">
-                  <h4>Publicaciones de {user.name}</h4>
+                  <h4>Publicaciones</h4>
                   <div className="posts-container">
                     {userPosts?.length > 0 ? (
                       <>
@@ -378,7 +390,7 @@ const UserDetail = () => {
                 </div>
 
                 <div className={`tab-pane fade ${activeTab === "ratings" ? "active show" : ""}`} id="ratings" role="tabpanel" aria-labelledby="ratings-tab">
-                  <h4>Reseñas acerca de {user.name}</h4>
+                  <h4>Reseñas</h4>
                   {ratingList.length > 0 ? (
                     <>
                       {ratingList.map((rating) => (

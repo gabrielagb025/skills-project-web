@@ -1,5 +1,6 @@
 import { useAuthContext } from '../../contexts/AuthContext';
 import { format } from 'date-fns';
+import Star from '../Star/Star';
 import './RatingCard.css';
 
 const RatingCard = ({ rating, handleDeleteRating }) => {
@@ -14,7 +15,14 @@ const RatingCard = ({ rating, handleDeleteRating }) => {
             </div>
             <div className="rating-message-score mt-3">
                 <p>{rating.message}</p>
-                <p>{rating.score}</p>
+                <div className="star-rating">
+                {[...Array(rating.score)].map((_, index) => (
+                                <Star
+                                    key={index}
+                                    selected={true}
+                                />
+                            ))}
+                </div>
             </div>
             <div className="rating-date-deletebtn d-flex justify-content-between align-items-center">
                 <p>{format(new Date(rating.date), "dd/MM/yyyy HH:mm")}</p>

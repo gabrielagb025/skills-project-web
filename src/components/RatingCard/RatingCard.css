@@ -1,5 +1,6 @@
 .rating-container {
-    max-width: fit-content;
+    max-width: 50%;
+    background-color: #f2f8e9;
 }
 
 .rating-user-info img {

@@ -23,8 +23,6 @@ const PostCard = (props) => {
         setModalIsOpen(false);
     };
 
-    console.log(post.user)
-
     return (
         <div className="PostCard post-container mt-4 d-flex">
             <div className="post-user-info me-3">

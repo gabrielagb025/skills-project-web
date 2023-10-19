@@ -1,8 +1,12 @@
 import './RatingModal.css';
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import Star from '../Star/Star';
 
-const RatingModal = ({ show, handleClose, handleSubmit, handleChange, newRating }) => {
+const RatingModal = ({ show, handleClose, handleSubmit, handleChange, newRating, handleStarClick }) => {
+
+    console.log(newRating)
+
     return (
         <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
@@ -22,12 +26,15 @@ const RatingModal = ({ show, handleClose, handleSubmit, handleChange, newRating 
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="ratingScore">
                         <Form.Label>Valoración</Form.Label>
-                        <Form.Control
-                            type="number"
-                            name="score"
-                            value={newRating.score}
-                            onChange={handleChange}
-                        />
+                        <div className="star-rating">
+                            {[...Array(5)].map((_, index) => (
+                                <Star
+                                    key={index}
+                                    selected={index < newRating.score}
+                                    onSelect={() => handleStarClick(index + 1)}
+                                />
+                            ))}
+                        </div>
                     </Form.Group>
                     <div className="d-flex justify-content-center">
                         <Button className="submit-btn" variant="primary" type="submit">
