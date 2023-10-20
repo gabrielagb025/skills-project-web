@@ -25,7 +25,7 @@ const UsersList = () => {
         <div className="users-list-margin">
             <div className="UsersList container">
                 <div className="users-title mt-4">
-                    <h1>Encuentra usuarios</h1>
+                    <h1>Encuentra usuarios con otros intereses</h1>
                     <hr />
                 </div>
                 <div className="row">

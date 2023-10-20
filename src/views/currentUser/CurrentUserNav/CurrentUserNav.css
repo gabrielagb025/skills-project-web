@@ -4,11 +4,26 @@
     width: 100%;
     height: 100vh;
     background-color: rgb(255, 255, 255);
+    padding: 20px;
+}
+
+.current-user-nav hr {
+    border: 1.5px solid #5e8039;
+    /* Color y grosor de la línea */
+    width: 100%;
+
+}
+
+.current-user-nav i {
+    margin-right: 10px;
+    color: #5e8039;
 }
 
 .current-user-nav {
     padding: 20px;
-    /* Espaciado interno del menú */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .current-user-nav h1 {
@@ -30,18 +45,22 @@
     /* Espaciado inferior entre elementos de la lista */
 }
 
-.current-user-nav a {
-    color: #333;
+.current-user-nav a, .close-session button {
+    color: #3F423B;
     /* Color del texto del enlace */
     text-decoration: none;
     /* Quita el subrayado del enlace */
-    font-size: 16px;
+    font-size: 20px;
     /* Tamaño de fuente del enlace */
     transition: color 0.3s ease;
     /* Transición de color suave al pasar el mouse sobre el enlace */
 }
 
+.close-session button {
+    color: #d77766 !important;
+}
+
 .current-user-nav a:hover {
-    color: #007bff;
-    /* Cambia el color del texto al pasar el mouse sobre el enlace */
+    color: #5e8039;
+    /* Color del texto del enlace */
 }

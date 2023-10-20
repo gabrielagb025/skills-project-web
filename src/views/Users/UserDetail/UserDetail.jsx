@@ -230,7 +230,7 @@ const UserDetail = () => {
     <div className="user-detail-margin">
       <div className="UserDetail">
         {!user ? (
-          <p>Loading...</p>
+          <></>
         ) : (
           <>
             {/* INFORMACIÓN DEL USUARIO */}

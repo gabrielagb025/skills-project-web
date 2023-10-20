@@ -34,7 +34,7 @@ const Chats = () => {
                             return (
                                 <NavLink style={{ textDecoration: 'none', color: '#3F423B' }} to={`/user/chat/${chat.id}`}>
                                     <div className="chat-list-container my-3 mt-4" key={chat.id}>
-                                        <div className="d-flex align-items-center ms-3">
+                                        <div className="d-flex align-items-center">
                                             <img src={otherUser.avatar} alt="" width={100} />
                                             <div className="ms-4 chat-container-text">
                                                 <h6 className="fw-bold">{otherUser.name}</h6>
