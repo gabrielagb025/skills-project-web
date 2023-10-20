@@ -70,6 +70,10 @@
 
 @media (min-width: 767px) {
 
+    .container-fluid {
+        width: 100% !important;
+    }
+
     .selected-icon {
         color: #5e8039 !important;
     }
@@ -114,7 +118,8 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        align-items: center;
+        align-items: flex-end !important;
+        margin-left: 200px !important;
     }
 
     .mobile-navbar {

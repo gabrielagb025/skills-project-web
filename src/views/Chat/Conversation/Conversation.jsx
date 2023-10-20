@@ -5,6 +5,7 @@ import { useAuthContext } from "../../../contexts/AuthContext";
 import { createMessage, updateMessages } from "../../../services/Message.Service";
 import { NavLink } from "react-router-dom";
 import { format } from "date-fns";
+import { useRef } from "react";
 import './Conversation.css';
 
 const initialValues = {
@@ -12,6 +13,7 @@ const initialValues = {
 }
 
 const Chat = () => {
+    const chatContainerRef = useRef(null);
     const [chat, setChat] = useState(null);
     const [message, setMessage] = useState(initialValues);
     const [chatMessages, setChatMessages] = useState([]);
@@ -21,6 +23,10 @@ const Chat = () => {
 
 
     useEffect(() => {
+        if (chatContainerRef.current) {
+            // Desplaza el scroll hacia abajo del contenedor del chat
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
         const fetchData = async () => {
             try {
                 const chatData = await getCurrentChat(id);
@@ -40,7 +46,7 @@ const Chat = () => {
         return () => {
             clearInterval(intervalId);
         };
-    }, [id]);
+    }, [id, chatMessages.length]);
 
     // useEffect(() => {
     //     getCurrentChat(id)
@@ -138,7 +144,7 @@ const Chat = () => {
                         </div>
                     </NavLink>
                     <hr />
-                    <div className="chat-box">
+                    <div className="chat-box" ref={chatContainerRef}>
                         {chatMessages.map((msg) => (
                             <div className={`message d-flex ${msg.sender.id === currentUser.id ? 'message-right' : 'message-left'}`} key={msg.id}>
                                 <div className="chat-message-content ms-3 d-flex align-items-center justify-content-between">

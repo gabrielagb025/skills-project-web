@@ -51,7 +51,7 @@ const NavBar = () => {
             </div>
 
             <nav className="desktop-navbar navbar navbar-expand-lg bg-body-tertiary">
-                <div className="container-fluid">
+                <div className="ms-3 container-fluid">
                     <NavLink className="navbar-brand" to="/user/timeline"><img src={Logo} alt="" width={120} /></NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
