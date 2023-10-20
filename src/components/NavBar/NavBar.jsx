@@ -9,7 +9,7 @@ import './NavBar.css';
 const NavBar = () => {
 
     const { user } = useAuthContext();
-    const [selectedIcon, setSelectedIcon] = useState('bi-house');
+    const [selectedIcon, setSelectedIcon] = useState('profile');
     const [selectedIconDesktop, setSelectedIconDesktop] = useState('timeline');
 
 
