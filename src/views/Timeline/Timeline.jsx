@@ -88,14 +88,18 @@ const Timeline = () => {
                 <hr />
                 <div className="posts-list mt-4">
                     <div className="timeline-btns">
-                        <button className="btn btn-primary" onClick={handleForYouPosts}>Para ti</button>
-                        <button className="btn btn-primary" onClick={handleFriendsPosts}>Amigos</button>
+                        <button className="btn btn-primary" onClick={handleForYouPosts}>PARA TI</button>
+                        <button className="btn btn-primary" onClick={handleFriendsPosts}>CONEXIONES</button>
                     </div>
-                    {currentPosts
-                        .sort((a, b) => new Date(b.date) - new Date(a.date))
-                        .map((post) => (
-                            <PostCard key={post.id} post={post} onDeletePost={() => handleDeletePost(post.id)} />
-                        ))}
+                    <div className="timeline-posts-container row">
+                        {currentPosts
+                            .sort((a, b) => new Date(b.date) - new Date(a.date))
+                            .map((post) => (
+                                <div className="col-12 col-md-6 my-3" key={post.id}>
+                                    <PostCard post={post} onDeletePost={() => handleDeletePost(post.id)} />
+                                </div>
+                            ))}
+                    </div>
                 </div>
                 <div className="arrow-icon" onClick={scrollToTop}>
                     <i className="bi bi-arrow-up-circle-fill fs-1"></i>

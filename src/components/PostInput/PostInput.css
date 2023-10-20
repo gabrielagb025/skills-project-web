@@ -1,10 +1,10 @@
 .PostInput {
     max-width: 800px !important;
     margin: 0 auto;
-    background-color: #f8fdf2;
+    background-color: #fbfef7;
     padding: 50px;
     border-radius: 8px;
-    box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
+    box-shadow: 0 0 20px 8px rgba(187, 224, 135, 0.5);
 }
 
 .btn-media i {

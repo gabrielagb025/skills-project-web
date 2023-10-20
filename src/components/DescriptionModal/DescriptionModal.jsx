@@ -2,13 +2,12 @@ import './DescriptionModal.css';
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-const DescriptionModal = ({ show, handleClose, handleSubmit, handleChange, description}) => {
+const DescriptionModal = ({ show, handleClose, handleSubmit, handleChange, description, operationType }) => {
 
-    console.log(description)
     return (
         <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
-                <Modal.Title>Publica una descripción</Modal.Title>
+                <Modal.Title>{operationType === "create" ? "Publica una descripción" : "Edita tu descripción"}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
@@ -35,7 +34,7 @@ const DescriptionModal = ({ show, handleClose, handleSubmit, handleChange, descr
                     </Form.Group>
                     <div className="d-flex justify-content-center">
                         <Button className="submit-btn" variant="primary" type="submit">
-                            Guardar
+                            {operationType === "create" ? "Guardar" : "Editar"}
                         </Button>
                     </div>
                 </Form>

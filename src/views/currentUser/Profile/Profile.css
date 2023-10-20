@@ -51,9 +51,30 @@
     width: 50%;
 }
 
+.description-submit-button button {
+    background-color: #5e8039;
+    border: 1px solid #5e8039;
+    color: white;
+    border-radius: 25px;
+}
+
+.description-submit-button button:hover {
+    background-color: #8db760;
+    border: 1px solid #8db760;
+    color: white;
+    border-radius: 25px;
+}
+
 @media (min-width: 768px) {
     .settings-button-container {
         display: none;
+    }
+
+    .user-description {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        margin-left: 30px;
     }
 }
 

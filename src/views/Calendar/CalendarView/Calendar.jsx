@@ -116,7 +116,7 @@ const Calendar = () => {
                                 <h5 className="me-2 mb-0">Hora de inicio:</h5>
                                 <h5 className="mb-0">
                                     {selectedEvent &&
-                                        format(new Date(selectedEvent.start), "HH:mm")} hrs
+                                        format(new Date(selectedEvent.start), "HH:mm")} PM
                                 </h5>
                             </div>
 
@@ -124,7 +124,7 @@ const Calendar = () => {
                                 <h5 className="me-2 mb-0">Hora de finalización:</h5>
                                 <h5 className="mb-0">
                                     {selectedEvent &&
-                                        format(new Date(selectedEvent.end), "HH:mm")} hrs
+                                        format(new Date(selectedEvent.end), "HH:mm")} PM
                                 </h5>
                             </div>
                             <button className="btn delete-event mt-4" onClick={() => handleDeleteEvent(selectedEvent.id)}><i className="bi bi-trash fs-5 me-2"></i>Eliminar evento</button>

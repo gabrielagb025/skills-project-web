@@ -12,6 +12,7 @@ const initialValues = {
 const PostInput = (props) => {
 
     const [post, setPost] = useState(initialValues);
+    const [isPosting, setIsPosting] = useState(false);
 
     /*IMAGES*/
     const [showInputFile, setShowInputFile] = useState(false);
@@ -55,6 +56,8 @@ const PostInput = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        setIsPosting(true)
+
         if (!post.message) {
             setMessageError("El comentario es obligatorio");
             return;
@@ -77,6 +80,9 @@ const PostInput = (props) => {
                 updatePost()
             })
             .catch(err => console.error(err))
+            .finally(() => {
+                setIsPosting(false)
+            })
     }
 
     const handleFocus = () => {
@@ -232,7 +238,7 @@ const PostInput = (props) => {
                     </div>
                 </div>
                 <div className="submit-button d-flex justify-content-center mt-5">
-                    <button type="submit" className="btn">Publicar</button>
+                    <button type="submit" className="btn">{isPosting ? 'Publicando...' : 'Publicar'}</button>
                 </div>
             </form>
         </div>

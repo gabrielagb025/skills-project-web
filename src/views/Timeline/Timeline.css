@@ -8,9 +8,9 @@
 }
 
 .timeline-btns button {
-    width: 100px;
-    padding: 4px 10px;
-    border-radius: 20px;
+    width: fit-content;
+    padding: 10px 15px;
+    border-radius: 10px;
     border: 1.5px solid #5e8039 !important;
     background-color: #5e8039 !important;
     color: #ffffff !important;
@@ -56,7 +56,11 @@
 }
 
 @media (max-width: 768px) {
+    
+    .arrow-icon {
+        padding-bottom: 120px;
+    }
     .timeline-margin {
-        padding-bottom: 80px;
+        padding-bottom: 100px;
     }
 }
