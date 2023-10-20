@@ -343,7 +343,7 @@ const UserDetail = () => {
               </div>
               <hr />
             </div>
-            <div className="card-body posts-ratings-container p-4 text-black mt-3">
+            <div className="card-body posts-ratings-container text-black mt-3">
               <ul className="nav nav-tabs d-flex align-items-center justify-content-center posts-ratings-buttons border-0" id="myTab">
                 <li className="nav-item">
                   <a
@@ -384,7 +384,7 @@ const UserDetail = () => {
                     {userPosts?.length > 0 ? (
                       <div className="row">
                         {userPosts.map((post) => (
-                          <div key={post.id} className="detail-posts-container">
+                          <div key={post.id} className="detail-posts-container col-12 col-md-6 my-3">
                           <PostCard post={post} />
                           </div>
                         ))}

@@ -221,7 +221,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="card-body posts-ratings-container p-4 text-black mt-3">
+        <div className="card-body posts-ratings-container text-black mt-3">
           <ul className="nav nav-tabs d-flex align-items-center justify-content-center posts-ratings-buttons border-0" id="myTab">
             <li className="nav-item">
               <a
