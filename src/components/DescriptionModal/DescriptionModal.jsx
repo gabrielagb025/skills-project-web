@@ -2,7 +2,9 @@ import './DescriptionModal.css';
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-const DescriptionModal = ({ show, handleClose, handleSubmit, handleChange, description, urls }) => {
+const DescriptionModal = ({ show, handleClose, handleSubmit, handleChange, description}) => {
+
+    console.log(description)
     return (
         <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
@@ -16,7 +18,7 @@ const DescriptionModal = ({ show, handleClose, handleSubmit, handleChange, descr
                             as="textarea"
                             rows={3}
                             name="description"
-                            value={description}
+                            value={description?.description || ""}
                             onChange={handleChange}
                             placeholder="Agrega una descripción..."
                         />
@@ -26,7 +28,7 @@ const DescriptionModal = ({ show, handleClose, handleSubmit, handleChange, descr
                         <Form.Control
                             type="text"
                             name="urls"
-                            value={urls}
+                            value={description?.urls || ""}
                             onChange={handleChange}
                             placeholder="Agrega URLs separadas por comas..."
                         />

@@ -1,9 +1,9 @@
 .PostInput {
     max-width: 800px !important;
     margin: 0 auto;
-    background-color: #f2f8e9;
+    background-color: #f8fdf2;
     padding: 50px;
-    border-radius: 25px;
+    border-radius: 8px;
     box-shadow: 0 0 20px 8px rgba(156, 190, 107, 0.5);
 }
 

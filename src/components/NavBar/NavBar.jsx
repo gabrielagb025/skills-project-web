@@ -1,6 +1,7 @@
 import { useAuthContext } from "../../contexts/AuthContext";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../stores/AccessTokenStore";
+import './NavBar.css';
 
 const NavBar = () => {
 

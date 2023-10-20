@@ -1,0 +1,73 @@
+.skills-margin {
+    padding: 20px !important;
+}
+
+.choose-skills-title {
+    text-align: center;
+}
+
+.choose-skills-title hr {
+    border: 2px solid #5e8039; /* Color y grosor de la línea */
+    width: 100%; 
+}
+
+.choose-skills-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.skills-category-button {
+    margin: 10px;
+    width: 100%;
+    text-align: center;
+    background-color: #77a14b;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px;
+}
+
+.skills-category-button:hover {
+    background-color: #a7d772;
+    color: white;
+}
+
+.skills-category-button h5 {
+    margin-bottom: 0;
+}
+
+.choose-category-title {
+    text-align: center;
+}
+
+.choose-category-title hr {
+    border: 1.5px solid #5e8039; /* Color y grosor de la línea */
+    width: 100%; 
+}
+
+.skills-submit-button button {
+    font-size: 20px;
+    border-radius: 25px;
+}
+
+
+@media (max-width : 768px) {
+
+    .category-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (min-width : 768px) {
+
+    /* .teachSkills {
+        width: 100% !important;
+    } */
+
+    .choose-skills-container {
+        width: 100%;
+    }
+}
