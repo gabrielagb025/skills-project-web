@@ -7,6 +7,7 @@ import DescriptionModal from '../../../components/DescriptionModal/DescriptionMo
 import { getCurrentUserRating } from '../../../services/RatingService';
 import PostCard from '../../../components/PostCard/PostCard';
 import RatingCard from '../../../components/RatingCard/RatingCard';
+import { NavLink } from 'react-router-dom';
 import { set } from 'date-fns';
 
 const initialValues = {
@@ -110,6 +111,9 @@ const Profile = () => {
 
   return (
     <div className="profile-margin">
+      <div className="settings-button-container">
+        <NavLink style={{color: " #3F423B"}} to="/user/nav"><i class="bi bi-gear fs-3"></i></NavLink>
+      </div>
       <div className="Profile profile-container container mt-4">
         <div className="profile-header-container">
           <div className="user-content d-flex align-items-center">

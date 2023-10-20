@@ -22,6 +22,7 @@ import Mail from './views/Auth/Mail/Mail'
 import ActivateUser from './views/Auth/Mail/ActiveUser';
 import EventForm from './views/Calendar/EventForm/EventForm';
 import Calendar from './views/Calendar/CalendarView/Calendar';
+import CurrentUserNav from './views/currentUser/CurrentUserNav/CurrentUserNav';
 
 function App() {
 
@@ -57,6 +58,7 @@ function App() {
             <Route path="/activate/:id" element={<ActivateUser />} />
 
             <Route path="/user" element={<ProtectedRoute />}>
+              <Route path="/user/nav" element={<CurrentUserNav />} />
               <Route path="/user/timeline" element={<Timeline />} />
               <Route path="/user/users" element={<UsersList />} />
               <Route path="/user/users/filtered" element={<FilteredUsersList />} />

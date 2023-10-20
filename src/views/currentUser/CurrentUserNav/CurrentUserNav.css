@@ -1,0 +1,47 @@
+.current-user-nav-margin {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+}
+
+.current-user-nav {
+    padding: 20px;
+    /* Espaciado interno del menú */
+}
+
+.current-user-nav h1 {
+    font-size: 18px;
+    /* Tamaño de fuente del título del menú */
+    margin-bottom: 20px;
+    /* Espaciado inferior para el título del menú */
+}
+
+.current-user-nav ul {
+    list-style: none;
+    /* Quita los puntos de la lista */
+    padding: 0;
+    margin: 0;
+}
+
+.current-user-nav li {
+    margin-bottom: 15px;
+    /* Espaciado inferior entre elementos de la lista */
+}
+
+.current-user-nav a {
+    color: #333;
+    /* Color del texto del enlace */
+    text-decoration: none;
+    /* Quita el subrayado del enlace */
+    font-size: 16px;
+    /* Tamaño de fuente del enlace */
+    transition: color 0.3s ease;
+    /* Transición de color suave al pasar el mouse sobre el enlace */
+}
+
+.current-user-nav a:hover {
+    color: #007bff;
+    /* Cambia el color del texto al pasar el mouse sobre el enlace */
+}
