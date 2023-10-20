@@ -16,32 +16,32 @@ const NavBar = () => {
 
     return (
         <nav>
-            <div class="navbar-container">
-                <nav class="mobile-navbar navbar navbar-expand-lg bg-body-tertiary">
-                    <div class="container-fluid">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <NavLink class="nav-link" to="/user/timeline" onClick={() => setSelectedIcon('bi-house')}>
-                                    <i class={`bi ${selectedIcon === 'bi-house' ? 'bi-house-fill' : 'bi-house'} fs-1`}></i>
+            <div className="navbar-container">
+                <nav className="mobile-navbar navbar navbar-expand-lg bg-body-tertiary">
+                    <div className="container-fluid">
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/user/timeline" onClick={() => setSelectedIcon('bi-house')}>
+                                    <i className={`bi ${selectedIcon === 'bi-house' ? 'bi-house-fill' : 'bi-house'} fs-1`}></i>
                                 </NavLink>
                             </li>
-                            <li class="nav-item">
-                                <NavLink class="nav-link" to="/user/users/filtered" onClick={() => setSelectedIcon('bi-people')}>
-                                    <i class={`bi ${selectedIcon === 'bi-people' ? 'bi-people-fill' : 'bi-people'} fs-1`}></i>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/user/users/filtered" onClick={() => setSelectedIcon('bi-people')}>
+                                    <i className={`bi ${selectedIcon === 'bi-people' ? 'bi-people-fill' : 'bi-people'} fs-1`}></i>
                                 </NavLink>
                             </li>
-                            <li class="nav-item">
-                                <NavLink class="nav-link" to="/user/chats" onClick={() => setSelectedIcon('bi-chat')}>
-                                    <i class={`bi ${selectedIcon === 'bi-chat' ? 'bi-chat-fill' : 'bi-chat'} fs-1`}></i>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/user/chats" onClick={() => setSelectedIcon('bi-chat')}>
+                                    <i className={`bi ${selectedIcon === 'bi-chat' ? 'bi-chat-fill' : 'bi-chat'} fs-1`}></i>
                                 </NavLink>
                             </li>
-                            <li class="nav-item">
-                                <NavLink class="nav-link" to="/user/notifications" onClick={() => setSelectedIcon('bi-bell')}>
-                                    <i class={`bi ${selectedIcon === 'bi-bell' ? 'bi-bell-fill' : 'bi-bell'} fs-1`}></i>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/user/notifications" onClick={() => setSelectedIcon('bi-bell')}>
+                                    <i className={`bi ${selectedIcon === 'bi-bell' ? 'bi-bell-fill' : 'bi-bell'} fs-1`}></i>
                                 </NavLink>
                             </li>
-                            <li class="nav-item nav-mobile-image">
-                                <NavLink class="nav-link" to="/user/profile" onClick={() => setSelectedIcon('profile')}>
+                            <li className="nav-item nav-mobile-image">
+                                <NavLink className="nav-link" to="/user/profile" onClick={() => setSelectedIcon('profile')}>
                                     <img src={user.avatar} alt="" width={40} className={selectedIcon === 'profile' ? 'profile-border' : ''} />
                                 </NavLink>
                             </li>
