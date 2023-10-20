@@ -175,9 +175,20 @@
 
 
 @media (max-width: 767px) {
+
+    .chat-margin {
+        padding-bottom: 80px;
+    }
+
+    .chat-user-name {
+        align-items: start !important;
+    }
+
     .chat-box {
         width: 100%;
+        max-height: 450px !important
     }
+
     .message {
         flex-direction: column;
         max-width: 90% !important;

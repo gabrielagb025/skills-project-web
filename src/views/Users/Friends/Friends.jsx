@@ -19,6 +19,7 @@ const Friends = () => {
 
     return (
         <div className="friends-margin">
+            <div className="top-div-header"></div>
             <div className="Friends container">
                 <div className="friends-title mt-4 text-center">
                     <h1>Usuarios con los que has conectado</h1>

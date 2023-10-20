@@ -64,6 +64,11 @@
 
 /* Ajusta el estilo del modal para dispositivos móviles */
 @media (max-width: 768px) {
+
+    .calendar-margin {
+        padding-bottom: 80px;
+    }
+
     .fc-toolbar-chunk {
         display: flex;
     }
@@ -80,5 +85,11 @@
 
     .event-info-modal h5 {
         font-size: 18px;
+    }
+}
+
+@media(min-width: 768px) {
+    .top-div-header {
+        display: none;
     }
 }

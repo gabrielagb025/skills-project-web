@@ -5,6 +5,7 @@ import { logout } from '../../../stores/AccessTokenStore';
 const CurrentUserNav = () => {
     return (
         <div className="current-user-nav-margin">
+            <div className="top-div-header"></div>
             <div className="current-user-nav">
                 <ul className="">
                     <li className="nav-item">

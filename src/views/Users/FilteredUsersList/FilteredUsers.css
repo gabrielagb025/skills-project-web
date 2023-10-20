@@ -15,3 +15,11 @@
     border: 2px solid #5e8039; /* Color y grosor de la línea */
     width: 100%; 
 }
+
+@media (max-width: 768px) {
+
+    .users-filtered-margin {
+        padding-bottom: 80px;
+    }
+    
+}

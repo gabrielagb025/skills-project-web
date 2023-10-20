@@ -111,6 +111,7 @@ const ChooseSkills = ({ setSkillsSelected }) => {
 
     return (
         <div className="skills-margin">
+            <div className="top-div-header"></div>
             <div className="ChooseSkills choose-skills-container container">
                 <div className="choose-skills-title">
                     <h1>Habilidades</h1>

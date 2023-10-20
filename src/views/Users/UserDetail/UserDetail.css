@@ -129,6 +129,15 @@
 }
 
 @media (max-width: 768px) {
+
+    .top-div-header {
+        height: 80px!important;
+    }
+
+    .user-detail-margin {
+        padding-bottom: 80px;
+    }
+
     .user-detail-info img {
         width: 100px;
         height: 100px;
@@ -165,6 +174,7 @@
 }
 
 @media (min-width: 768px) {
+
 
     .ratings-container {
         height: 100% !important;

@@ -4,7 +4,7 @@
     width: 100%;
     height: 100vh;
     background-color: rgb(255, 255, 255);
-    padding: 20px;
+    padding-bottom: 80px;
 }
 
 .current-user-nav hr {

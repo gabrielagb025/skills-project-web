@@ -30,6 +30,7 @@ const Notifications = () => {
 
     return (
         <div className="notifications-margin">
+            <div className="top-div-header"></div>
             <div className="Notifications container mt-4">
                 <div className="notifications-title">
                     <h1>Solicitudes de conexión</h1>

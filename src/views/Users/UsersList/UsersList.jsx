@@ -23,6 +23,7 @@ const UsersList = () => {
 
     return (
         <div className="users-list-margin">
+            <div className="top-div-header"></div>
             <div className="UsersList container">
                 <div className="users-title mt-4">
                     <h1>Encuentra usuarios con otros intereses</h1>

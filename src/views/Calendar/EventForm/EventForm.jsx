@@ -50,6 +50,7 @@ const EventForm = () => {
 
     return (
         <div className="event-form-margin">
+            <div className="top-div-header"></div>
             <div className="event-form d-flex align-items-center flex-column container mt-4">
                 <div>
                     <h1>Crea el evento de estudio</h1>

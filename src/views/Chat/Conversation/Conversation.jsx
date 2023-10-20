@@ -19,17 +19,40 @@ const Chat = () => {
     const { id } = useParams();
     const { user: currentUser } = useAuthContext();
 
+
     useEffect(() => {
-        getCurrentChat(id)
-            .then((chat) => {
-                setChat(chat);
-                setChatMessages(chat.messages);
-                markMessagesAsRead(chat.messages)
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        const fetchData = async () => {
+            try {
+                const chatData = await getCurrentChat(id);
+                setChat(chatData);
+                setChatMessages(chatData.messages);
+                markMessagesAsRead(chatData.messages);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        // Llama a fetchData inmediatamente y luego cada 2 segundos
+        fetchData();
+        const intervalId = setInterval(fetchData, 2000);
+
+        // Limpia el intervalo al desmontar el componente
+        return () => {
+            clearInterval(intervalId);
+        };
     }, [id]);
+
+    // useEffect(() => {
+    //     getCurrentChat(id)
+    //         .then((chat) => {
+    //             setChat(chat);
+    //             setChatMessages(chat.messages);
+    //             markMessagesAsRead(chat.messages)
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         })
+    // }, [id]);
 
     const markMessagesAsRead = (messages) => {
         messages.forEach((message) => {
@@ -103,6 +126,7 @@ const Chat = () => {
     return (
         chat ? (
             <div className="chat-margin">
+                <div className="top-div-header"></div>
                 <div className="Chat container">
                     <NavLink style={{ textDecoration: 'none', color: '#3F423B' }} to={`/user/users/detail/${otherUser.id}`}>
                         <div className="chat-user-info d-flex align-items-center">

@@ -1,0 +1,26 @@
+.header {
+    height: 80px; /* Ajusta la altura del encabezado según tus preferencias */
+    background-color: #ffffff; /* Color de fondo del encabezado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra en la parte inferior del encabezado */
+  }
+  
+  .logo {
+    width: 35%; /* Ajusta el ancho del logo según tus preferencias */
+    height: auto;
+  }
+
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que el encabezado fijo esté por encima del contenido */
+  }
+ 
+  @media (min-width: 767px) {
+    .header {
+        display: none;
+    }
+} 

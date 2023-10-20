@@ -21,3 +21,11 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+@media(max-width: 768px) {
+
+    .users-list-margin {
+        padding-bottom: 80px;
+    }
+    
+}

@@ -54,6 +54,10 @@
 
 @media (max-width : 768px) {
 
+    .skills-margin {
+        padding-bottom: 80px;
+    }
+
     .category-buttons {
         display: flex;
         flex-direction: column;

@@ -50,6 +50,7 @@ const UserDetail = () => {
 
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     Promise.all([getUser(id), getRatings(id), getFriends(), getPendingFriendRequests(), getAcceptedFriendRequest(id), getChats(), getUserDescription(id), getUserPosts(id)])
       .then(([user, ratings, friends, pendingFriendRequests, acceptedFriendReq, chats, description, userPostList]) => {
         setUser(user);
@@ -228,6 +229,7 @@ const UserDetail = () => {
 
   return (
     <div className="user-detail-margin">
+      <div className="top-div-header"></div>
       <div className="UserDetail">
         {!user ? (
           <></>

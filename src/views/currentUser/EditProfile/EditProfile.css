@@ -24,3 +24,10 @@
 .edit-profile-form {
     max-width: 400px !important;
 }
+
+@media (max-width: 768px) {
+
+    .edit-profile-margin {
+        padding-bottom: 80px;
+    }
+}

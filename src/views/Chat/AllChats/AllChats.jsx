@@ -21,6 +21,7 @@ const Chats = () => {
 
     return (
         <div className="chats-margin">
+            <div className="top-div-header"></div>
             <div className="Chats container">
                 <div className="chat-title mt-4">
                     <h1>Tus conversaciones</h1>

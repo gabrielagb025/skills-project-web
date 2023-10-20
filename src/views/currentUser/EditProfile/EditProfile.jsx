@@ -69,6 +69,7 @@ const EditProfile = () => {
 
     return (
         <div className="edit-profile-margin">
+            <div className="top-div-header"></div>
             <div className="EditProfile edit-profile d-flex flex-column align-items-center container mt-4">
                 <div className="edit-profile-title">
                     <h1>Editar perfil</h1>

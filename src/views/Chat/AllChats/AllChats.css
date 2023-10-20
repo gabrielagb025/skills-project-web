@@ -78,6 +78,11 @@
 
 
 @media (max-width: 767px) {
+
+    .chats-margin {
+        padding-bottom: 80px;
+    }
+
     .chat-list-container img {
         height: 80px;
         width: 80px;

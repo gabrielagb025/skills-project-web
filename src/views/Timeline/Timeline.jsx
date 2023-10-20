@@ -80,6 +80,7 @@ const Timeline = () => {
 
     return (
         <div className="timeline-margin">
+            <div className="top-div-header"></div>
             <div className="Timeline container">
                 <h1 className="mt-4">Publicaciones</h1>
                 <hr />

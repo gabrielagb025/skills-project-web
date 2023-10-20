@@ -23,6 +23,7 @@ import ActivateUser from './views/Auth/Mail/ActiveUser';
 import EventForm from './views/Calendar/EventForm/EventForm';
 import Calendar from './views/Calendar/CalendarView/Calendar';
 import CurrentUserNav from './views/currentUser/CurrentUserNav/CurrentUserNav';
+import Header from './components/LogoHeader/LogoHeader';
 
 function App() {
 
@@ -39,7 +40,7 @@ function App() {
       }
     }
   }, [isAuthenticationFetched, user, userHasSkills, navigate]);
-  
+
 
   return (
     <div className="App">
@@ -48,6 +49,7 @@ function App() {
         <p>Loading...</p>
       ) : (
         <>
+          {user ? <Header /> : ''}
           {user ? <NavBar /> : ''}
 
           <Routes>
@@ -57,22 +59,22 @@ function App() {
             <Route path="mail" element={<Mail />} />
             <Route path="/activate/:id" element={<ActivateUser />} />
 
-            <Route path="/user" element={<ProtectedRoute />}>
-              <Route path="/user/nav" element={<CurrentUserNav />} />
-              <Route path="/user/timeline" element={<Timeline />} />
-              <Route path="/user/users" element={<UsersList />} />
-              <Route path="/user/users/filtered" element={<FilteredUsersList />} />
-              <Route path="/user/users/detail/:id" element={<UserDetail />} />
-              <Route path="/user/notifications" element={<Notifications />} />
-              <Route path="/user/friends" element={<Friends />} />
-              <Route path="/user/chats" element={<ChatsView />} />
-              <Route path="/user/chat/:id" element={<Conversation />} />
-              <Route path="/user/event/:id" element={<EventForm />} />
-              <Route path="/user/calendar" element={<Calendar />} />
-              <Route path="/user/profile" element={<Profile />} />
-              <Route path="/user/skills" element={<ChooseSkills />} />
-              <Route path="/user/edit" element={<EditProfile />} />
-            </Route>
+              <Route path="/user" element={<ProtectedRoute />}>
+                <Route path="/user/nav" element={<CurrentUserNav />} />
+                <Route path="/user/timeline" element={<Timeline />} />
+                <Route path="/user/users" element={<UsersList />} />
+                <Route path="/user/users/filtered" element={<FilteredUsersList />} />
+                <Route path="/user/users/detail/:id" element={<UserDetail />} />
+                <Route path="/user/notifications" element={<Notifications />} />
+                <Route path="/user/friends" element={<Friends />} />
+                <Route path="/user/chats" element={<ChatsView />} />
+                <Route path="/user/chat/:id" element={<Conversation />} />
+                <Route path="/user/event/:id" element={<EventForm />} />
+                <Route path="/user/calendar" element={<Calendar />} />
+                <Route path="/user/profile" element={<Profile />} />
+                <Route path="/user/skills" element={<ChooseSkills />} />
+                <Route path="/user/edit" element={<EditProfile />} />
+              </Route>
           </Routes>
         </>
       )}

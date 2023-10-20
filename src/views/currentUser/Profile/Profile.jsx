@@ -111,6 +111,7 @@ const Profile = () => {
 
   return (
     <div className="profile-margin">
+      <div className="top-div-header"></div>
       <div className="settings-button-container">
         <NavLink style={{color: " #3F423B"}} to="/user/nav"><i class="bi bi-gear fs-3"></i></NavLink>
       </div>

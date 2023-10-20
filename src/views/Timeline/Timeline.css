@@ -23,13 +23,15 @@
 }
 
 .Timeline hr {
-    border: 2px solid #5e8039; /* Color y grosor de la línea */
-    width: 100%; 
+    border: 2px solid #5e8039;
+    /* Color y grosor de la línea */
+    width: 100%;
 }
 
 .posts-list hr {
-    border: 1px solid #5e8039; /* Color y grosor de la línea */
-    width: 100%; 
+    border: 1px solid #5e8039;
+    /* Color y grosor de la línea */
+    width: 100%;
 }
 
 /* Agrega esto en tu archivo CSS (por ejemplo, Timeline.css) */
@@ -51,4 +53,10 @@
 
 .arrow-icon i:hover {
     color: #8db760;
+}
+
+@media (max-width: 768px) {
+    .timeline-margin {
+        padding-bottom: 80px;
+    }
 }

@@ -20,6 +20,7 @@ const FilteredUsersList = () => {
 
     return (
         <div className="users-filtered-margin">
+            <div className="top-div-header"></div>
             <div className="UsersList container">
                 <div className="filtered-users-title mt-4">
                     <h1>Encuentra usuarios según tus intereses</h1>

@@ -76,3 +76,8 @@
     background-color: #F4BFB3 !important;
 }
 
+@media(max-width: 768px) {
+    .notifications-margin {
+        padding-bottom: 80px;
+    }
+}
