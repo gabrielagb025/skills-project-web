@@ -76,6 +76,11 @@
         align-items: start;
         margin-left: 30px;
     }
+
+    .description-container {
+        margin-left: 20px !important;
+        width: 40% !important;
+    }    
 }
 
 @media (max-width: 768px) {

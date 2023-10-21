@@ -309,6 +309,7 @@ const UserDetail = () => {
                     <p>{userDescription.description}</p>
                   </div>
                 ) : (null)}
+                <hr />
                 <div className="user-detail-skills d-flex justify-content-around">
                   <div className="skills-info-container d-flex flex-column mt-2">
                     <h5><i class="bi bi-diamond-fill fs-6"></i>{user.name} puede enseñar:</h5>
