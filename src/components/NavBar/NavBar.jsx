@@ -26,7 +26,7 @@ const NavBar = () => {
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/user/users/filtered" onClick={() => setSelectedIcon('bi-people')}>
+                                <NavLink className="nav-link" to="/user/friends" onClick={() => setSelectedIcon('bi-people')}>
                                     <i className={`bi ${selectedIcon === 'bi-people' ? 'bi-people-fill' : 'bi-people'} fs-1`}></i>
                                 </NavLink>
                             </li>

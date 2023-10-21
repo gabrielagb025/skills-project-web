@@ -9,7 +9,7 @@ const CurrentUserNav = () => {
             <div className="current-user-nav">
                 <ul className="">
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/user/friends"><i class="bi bi-people-fill fs-2"></i>Conexiones</NavLink>
+                        <NavLink className="nav-link" to="/user/users/filtered"><i class="bi bi-people-fill fs-2"></i>Usuarios para ti</NavLink>
                     </li>
                     <hr/>
                     <li className="nav-item">

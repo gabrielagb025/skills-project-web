@@ -22,16 +22,6 @@ const DescriptionModal = ({ show, handleClose, handleSubmit, handleChange, descr
                             placeholder="Agrega una descripción..."
                         />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="urls">
-                        <Form.Label>Enlaces (URLs)</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="urls"
-                            value={description?.urls || ""}
-                            onChange={handleChange}
-                            placeholder="Agrega URLs separadas por comas..."
-                        />
-                    </Form.Group>
                     <div className="d-flex justify-content-center">
                         <Button className="submit-btn" variant="primary" type="submit">
                             {operationType === "create" ? "Guardar" : "Editar"}

@@ -10,24 +10,21 @@ import RatingCard from '../../../components/RatingCard/RatingCard';
 import { NavLink } from 'react-router-dom';
 import { set } from 'date-fns';
 
-const initialValues = {
-  description: "",
-  urls: []
-}
-
 
 const Profile = () => {
   const { user } = useAuthContext();
   const [userPostList, setUserPostList] = useState([]);
   const [postInput, setPostInput] = useState(false);
-  const [userDescription, setUserDescription] = useState(initialValues);
-  const [isCurrentUserDescription, setIsCurrentUserDescription] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
+  const [userDescription, setUserDescription] = useState('');
+  const [isDescriptionCreated, setIsDescriptionCreated] = useState(false);
+  // const [isCurrentUserDescription, setIsCurrentUserDescription] = useState(null);
+  const [isDescriptionEditing, setIsDescriptionEditing] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDescriptionModalOpen, setIsDescriptionModalOpen] = useState(false);
   const [userRatings, setUserRatings] = useState([]);
   const [activeTab, setActiveTab] = useState("postList");
 
-  const [editedDescription, setEditedDescription] = useState({ ...isCurrentUserDescription })
+  // const [editedDescription, setEditedDescription] = useState({ ...isCurrentUserDescription })
   const [operationType, setOperationType] = useState("create");
 
 
@@ -36,7 +33,12 @@ const Profile = () => {
       .then(([posts, ratings, description]) => {
         setUserPostList(posts);
         setUserRatings(ratings);
-        setIsCurrentUserDescription(description);
+        if (description) {
+          setIsDescriptionCreated(true);
+          setUserDescription(description);
+        } else {
+          setIsDescriptionCreated(false);
+        }
       })
       .catch(err => {
         console.error(err);
@@ -77,14 +79,13 @@ const Profile = () => {
 
   const handleCreateDescription = (ev) => {
     ev.preventDefault();
-
     createDescription(userDescription)
       .then(() => {
-        // Una vez que se ha creado la descripción con éxito, obtén la descripción actualizada del currentUser
+        setIsDescriptionCreated(true);
         currentUserDescription()
           .then((description) => {
             // Establece el estado userDescription con la descripción obtenida
-            setIsCurrentUserDescription(description);
+            setUserDescription(description);
             setIsDescriptionModalOpen(false);
             console.log('descripción creada');
           })
@@ -98,34 +99,54 @@ const Profile = () => {
   };
 
 
-  const handleEditDescription = () => {
-    setIsDescriptionModalOpen(true);
-    setIsEditing(true);
-    setOperationType("edit");
-  }
+ const handleEditDescriptionModal = () => {
+   setIsEditModalOpen(true);
+   setIsDescriptionEditing(true);
+   setOperationType("edit");
+ }
 
-  const handleChangeEditDescription = (ev) => {
-    const key = ev.target.name;
-    const value = ev.target.value;
+ const handleCloseEditDescriptionModal = () => {
+    setIsEditModalOpen(false);
+    setIsDescriptionEditing(false);
+ }
 
-    console.log(editedDescription)
+ const handleEditDescription = (ev, descriptionId) => {
+  ev.preventDefault();
 
-    setEditedDescription(prevDesc => ({
-      ...prevDesc,
-      [key]: value
-    }))
-  }
+  editDescription(descriptionId, userDescription)
+    .then((updatedDescription) => {
+      setUserDescription(updatedDescription);
+      setIsDescriptionCreated(true);
+      setIsEditModalOpen(false);
+      console.log('descripción editada');
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
 
-  const handleUpdateDescription = () => {
-    editDescription(editedDescription)
-      .then((description) => {
-        setIsCurrentUserDescription(description)
-        setIsDescriptionModalOpen(false)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+  // const handleChangeEditDescription = (ev) => {
+  //   const key = ev.target.name;
+  //   const value = ev.target.value;
+
+  //   console.log(editedDescription)
+
+  //   setEditedDescription(prevDesc => ({
+  //     ...prevDesc,
+  //     [key]: value
+  //   }))
+  // }
+
+  // const handleUpdateDescription = () => {
+  //   editDescription(editedDescription)
+  //     .then((description) => {
+  //       setIsCurrentUserDescription(description)
+  //       setIsDescriptionModalOpen(false)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }
 
   const handleShowDescriptionModal = () => {
     setIsDescriptionModalOpen(true);
@@ -159,17 +180,17 @@ const Profile = () => {
             </div>
           </div>
           <div className="description-container">
-            {isCurrentUserDescription === null ? (
+            {!isDescriptionCreated ? (
               <div className="no-description">
                 <p className="text-center">Añade información detallada sobre tus conocimientos e intereses para poder conectar mejor con otros usuarios.</p>
                 <div className="submit-button">
                   <button onClick={handleShowDescriptionModal} className="btn btn-primary">Añadir</button>
                 </div>
-                {isDescriptionModalOpen && operationType === 'create' ? (
+                {isDescriptionModalOpen ? (
                   <DescriptionModal
                     show={handleShowDescriptionModal}
                     handleClose={handleCloseDescriptionModal}
-                    handleSubmit={handleUpdateDescription}
+                    handleSubmit={handleCreateDescription}
                     handleChange={handleChangeDescription}
                     description={userDescription} 
                     operationType={operationType}/>
@@ -177,20 +198,18 @@ const Profile = () => {
               </div>
             ) : (
               <div className="user-description">
-                <h4>Descripción</h4>
-                <p>{isCurrentUserDescription.description}</p>
-                <p>{isCurrentUserDescription.urls}</p>
+                <p>{userDescription.description}</p>
                 <div className="description-submit-button d-flex justify-content-center">
-                  <button className="btn btn-success" onClick={handleEditDescription}>Editar descripción</button>
+                  <button className="btn btn-success" onClick={handleEditDescriptionModal}>Editar descripción</button>
                 </div>
-                {isDescriptionModalOpen && operationType === 'edit' ? (
+                {isEditModalOpen ? (
                   <DescriptionModal
-                  show={handleShowDescriptionModal}
-                  handleClose={handleCloseDescriptionModal}
-                  handleSubmit={handleCreateDescription}
-                  handleChange={handleChangeEditDescription}
-                  description={editedDescription}
-                  operationType={operationType} />
+                    show={handleEditDescriptionModal}
+                    handleClose={handleCloseEditDescriptionModal}
+                    handleSubmit={(ev) => handleEditDescription(ev, userDescription.id)}
+                    handleChange={handleChangeDescription}
+                    description={userDescription} 
+                    operationType={operationType}/>
                 ): (null)}
               </div>)}
           </div>

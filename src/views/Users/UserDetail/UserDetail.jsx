@@ -302,18 +302,11 @@ const UserDetail = () => {
                 </div>
               </div>
               <hr className="mt-4"/>
-              <div className="mt-4 profile-info-container">
+              <div className="mt-2 profile-info-container">
                 {userDescription ? (
                   <div className="user-description">
-                    <h4>Descripción</h4>
+                    <h5>Acerca de</h5>
                     <p>{userDescription.description}</p>
-                    {userDescription.images.map((image, index) => (
-                      <img key={index} src={image} width={100} />
-                    ))}
-                    <p>URLs</p>
-                    {userDescription.urls.map((url, index) => (
-                      <a className="me-4" key={index} href={url}>{url}</a>
-                    ))}
                   </div>
                 ) : (null)}
                 <div className="user-detail-skills d-flex justify-content-around">
