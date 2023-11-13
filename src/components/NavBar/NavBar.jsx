@@ -4,11 +4,13 @@ import { logout } from "../../stores/AccessTokenStore";
 import React, { useState } from 'react';
 import Logo from '../../assets/logo-skillsync-letras.png';
 import { Dropdown } from "react-bootstrap";
+import { useFriendRequestContext } from "../../contexts/FriendRequestContext";
 import './NavBar.css';
 
 const NavBar = () => {
 
     const { user } = useAuthContext();
+    const { friendRequests } = useFriendRequestContext();
     const [selectedIcon, setSelectedIcon] = useState('profile');
     const [selectedIconDesktop, setSelectedIconDesktop] = useState('timeline');
 
@@ -37,6 +39,9 @@ const NavBar = () => {
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/user/notifications" onClick={() => setSelectedIcon('bi-bell')}>
+                                    {friendRequests.length > 0 && (
+                                        <div className="notification-badge">{friendRequests.length}</div>
+                                    )}
                                     <i className={`bi ${selectedIcon === 'bi-bell' ? 'bi-bell-fill' : 'bi-bell'} fs-1`}></i>
                                 </NavLink>
                             </li>
@@ -59,40 +64,40 @@ const NavBar = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav navbar-menu">
                             <div className="navbar-menu-profile">
-                            <li className="nav-item">
-                                <NavLink className={`nav-link ${selectedIconDesktop === 'timeline' ? 'selected-icon' : ''}`} to="/user/timeline" onClick={() => setSelectedIconDesktop('timeline')}>Publicaciones</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className={`nav-link ${selectedIconDesktop === 'users-foryou' ? 'selected-icon' : ''}`} to="/user/users/filtered" onClick={() => setSelectedIconDesktop('users-foryou')}>Usuarios para ti</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className={`nav-link ${selectedIconDesktop === 'other-users' ? 'selected-icon' : ''}`} to="/user/users" onClick={() => setSelectedIconDesktop('other-users')}>Otros usuarios</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className={`nav-link ${selectedIconDesktop === 'friends' ? 'selected-icon' : ''}`} to="/user/friends" onClick={() => setSelectedIconDesktop('friends')}>Amigos</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className={`nav-link ${selectedIconDesktop === 'bells' ? 'selected-icon' : ''}`} to="/user/notifications" onClick={() => setSelectedIconDesktop('bells')}>Notificaciones</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className={`nav-link ${selectedIconDesktop === 'chats' ? 'selected-icon' : ''}`} to="/user/chats" onClick={() => setSelectedIconDesktop('chats')}>Conversaciones</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className={`nav-link ${selectedIconDesktop === 'calendar' ? 'selected-icon' : ''}`} to="/user/calendar" onClick={() => setSelectedIconDesktop('calendar')}>Calendario</NavLink>
-                            </li>
+                                <li className="nav-item">
+                                    <NavLink className={`nav-link ${selectedIconDesktop === 'timeline' ? 'selected-icon' : ''}`} to="/user/timeline" onClick={() => setSelectedIconDesktop('timeline')}>Publicaciones</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className={`nav-link ${selectedIconDesktop === 'users-foryou' ? 'selected-icon' : ''}`} to="/user/users/filtered" onClick={() => setSelectedIconDesktop('users-foryou')}>Usuarios para ti</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className={`nav-link ${selectedIconDesktop === 'other-users' ? 'selected-icon' : ''}`} to="/user/users" onClick={() => setSelectedIconDesktop('other-users')}>Otros usuarios</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className={`nav-link ${selectedIconDesktop === 'friends' ? 'selected-icon' : ''}`} to="/user/friends" onClick={() => setSelectedIconDesktop('friends')}>Amigos</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className={`nav-link ${selectedIconDesktop === 'bells' ? 'selected-icon' : ''}`} to="/user/notifications" onClick={() => setSelectedIconDesktop('bells')}>Notificaciones</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className={`nav-link ${selectedIconDesktop === 'chats' ? 'selected-icon' : ''}`} to="/user/chats" onClick={() => setSelectedIconDesktop('chats')}>Conversaciones</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className={`nav-link ${selectedIconDesktop === 'calendar' ? 'selected-icon' : ''}`} to="/user/calendar" onClick={() => setSelectedIconDesktop('calendar')}>Calendario</NavLink>
+                                </li>
                             </div>
-                            <div className="navbar-menu-profile-dropdown"> 
-                            <Dropdown as={NavLink}>
-                                <Dropdown.Toggle variant="link" className="custom-dropdown" id="dropdown-basic">
-                                    <img src={user.avatar} alt="" width={50} />
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item className="custom-dropdown-item" as={NavLink} to="/user/profile">Mi perfil</Dropdown.Item>
-                                    <Dropdown.Item className="custom-dropdown-item" as={NavLink} to="/user/edit">Editar perfil</Dropdown.Item>
-                                    <Dropdown.Item className="custom-dropdown-item" as={NavLink} to="/user/skills">Editar habilidades</Dropdown.Item>
-                                    <Dropdown.Item className="custom-dropdown-item" onClick={logout}>Cerrar sesión</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <div className="navbar-menu-profile-dropdown">
+                                <Dropdown as={NavLink}>
+                                    <Dropdown.Toggle variant="link" className="custom-dropdown" id="dropdown-basic">
+                                        <img src={user.avatar} alt="" width={50} />
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item className="custom-dropdown-item" as={NavLink} to="/user/profile">Mi perfil</Dropdown.Item>
+                                        <Dropdown.Item className="custom-dropdown-item" as={NavLink} to="/user/edit">Editar perfil</Dropdown.Item>
+                                        <Dropdown.Item className="custom-dropdown-item" as={NavLink} to="/user/skills">Editar habilidades</Dropdown.Item>
+                                        <Dropdown.Item className="custom-dropdown-item" onClick={logout}>Cerrar sesión</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </div>
                         </ul>
                     </div>

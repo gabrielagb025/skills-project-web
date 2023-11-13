@@ -287,7 +287,7 @@ const Profile = () => {
                     ))}
                   </div>
                 ) : (
-                  <p className="mt-4">Todavía no has hecho ninguna publicación.</p>
+                  <p className="mt-4 text-center">Todavía no has hecho ninguna publicación.</p>
                 )}
               </div>
             </div>
@@ -308,7 +308,7 @@ const Profile = () => {
                   ))}
                 </div>
               ) : (
-                <p className="mt-4">Todavía no tienes reseñas.</p>
+                <p className="mt-4 text-center">Todavía no tienes reseñas.</p>
               )}
             </div>
           </div>
