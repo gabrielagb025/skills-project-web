@@ -43,21 +43,6 @@
     position: static !important;
 }
 
-/* EventForm.css */
-
-/* Estilo del modal */
-.react-datetime-picker {
-    max-width: 200px; /* Define el ancho máximo del modal */
-  }
-  
-  /* Color de selección */
-  .react-datetime-picker__inputGroup__input--focused {
-    border-color: green !important; /* Cambia el color del borde en estado enfocado */
-  }
-  
-  /* Puedes ajustar estos estilos según tus necesidades */
-  
-
 @media(max-width: 768px) {
     .event-form-margin {
         padding-bottom: 80px;

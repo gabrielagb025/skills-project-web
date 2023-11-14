@@ -4,21 +4,13 @@ import { useState, useEffect } from "react";
 import moment from "moment";
 import "moment/locale/es";
 import './EventForm.css';
+import DatePicker from "react-datepicker";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
+import es from 'date-fns/locale/es';
 
 
 const EventForm = () => {
-
-    useEffect(() => {
-        // Configura moment para usar la localización en español
-        moment.locale('es');
-
-        // Limpia la configuración al desmontar el componente para evitar efectos secundarios
-        return () => {
-            moment.locale();  // Restablece la localización a la configuración predeterminada
-        };
-    }, []);
 
     const [title, setTitle] = useState('');
     const [start, setStart] = useState(new Date());
@@ -27,17 +19,6 @@ const EventForm = () => {
     const navigate = useNavigate();
 
     const { id } = useParams();
-    // const [newEvent, setNewEvent] = useState(initialValues);
-
-    /* const handleChangeEvent = (ev) => {
-         const key = ev.target.name;
-         const value = ev.target.value;
- 
-         setNewEvent(prevEvent => ({
-             ...prevEvent,
-             [key]: value
-         }))
-     }*/
 
     const handleSubmitEvent = (e) => {
         e.preventDefault();
@@ -84,15 +65,13 @@ const EventForm = () => {
                     </div>
                     <div className="input-form-event mt-3">
                         <label className="form-label"><h5>Inicio:</h5></label>
-                        {/* Usa react-datetime solo para la fecha */}
-                        <Datetime
-                            value={start}
+                        <DatePicker
+                            className="form-control"
+                            selected={start}
                             onChange={date => setStart(date)}
-                            dateFormat="YYYY-MM-DD"
-                            timeFormat={false}
-                            locale="es"
+                            dateFormat="yyyy-MM-dd"
+                            locale={es}
                         />
-                        {/* Agrega un campo de entrada para la hora de inicio */}
                         <input
                             className="form-control mt-2"
                             type="time"
@@ -102,13 +81,12 @@ const EventForm = () => {
                     </div>
                     <div className="input-form-event mt-3">
                         <label className="form-label"><h5>Finalización:</h5></label>
-                        {/* Hacer lo mismo para la fecha y hora de finalización */}
-                        <Datetime
-                            value={end}
+                        <DatePicker
+                            className="form-control"
+                            selected={end}
                             onChange={date => setEnd(date)}
-                            dateFormat="YYYY-MM-DD"
-                            timeFormat={false}
-                            locale="es"
+                            dateFormat="yyyy-MM-dd"
+                            locale={es}
                         />
                         <input
                             className="form-control mt-2"
