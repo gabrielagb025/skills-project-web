@@ -5,6 +5,7 @@ import moment from "moment";
 import "moment/locale/es";
 import './EventForm.css';
 import DatePicker from "react-datepicker";
+import TimePicker from 'react-time-picker';
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import es from 'date-fns/locale/es';

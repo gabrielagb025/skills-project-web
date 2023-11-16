@@ -10,7 +10,6 @@ import './NavBar.css';
 const NavBar = () => {
 
     const { user } = useAuthContext();
-    const { friendRequests } = useFriendRequestContext();
     const [selectedIcon, setSelectedIcon] = useState('profile');
     const [selectedIconDesktop, setSelectedIconDesktop] = useState('timeline');
 
@@ -39,9 +38,6 @@ const NavBar = () => {
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/user/notifications" onClick={() => setSelectedIcon('bi-bell')}>
-                                    {friendRequests.length > 0 && (
-                                        <div className="notification-badge">{friendRequests.length}</div>
-                                    )}
                                     <i className={`bi ${selectedIcon === 'bi-bell' ? 'bi-bell-fill' : 'bi-bell'} fs-1`}></i>
                                 </NavLink>
                             </li>

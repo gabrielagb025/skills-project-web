@@ -126,9 +126,9 @@ const PostInput = (props) => {
     }
 
     const handleMaxFiles = () => {
-        if (files.length >= 4) {
+        if (files.length >= 2) {
             setShowInputFile(false);
-            setMessageImg("No puedes agregar más de 4 imágenes");
+            setMessageImg("No puedes agregar más de 2 imágenes");
             setShowImgBtn(false);
         } else {
             setMessageImg(" ");
@@ -147,9 +147,9 @@ const PostInput = (props) => {
     };
 
     const handleMaxUrls = () => {
-        if (urlsElem.length >= 4) {
+        if (urlsElem.length >= 2) {
             setShowUrlInput(false);
-            setMessageUrl("No puedes agregar más de 4 urls");
+            setMessageUrl("No puedes agregar más de 2 urls");
             setShowUrlBtn(false)
         } else {
             setMessageUrl("");
@@ -181,7 +181,7 @@ const PostInput = (props) => {
                 <div className="post-input-media-container">
                     {/* Images */}
                     <div className="image-input-container">
-                        {showImgBtn && <div className="btn-media"><button type="button" className="btn" onClick={showInputHandler}><i className="bi bi-card-image fs-3"></i></button></div>} {files.length >= 4 && <p>{messageImg}</p>}
+                        {showImgBtn && <div className="btn-media"><button type="button" className="btn" onClick={showInputHandler}><i className="bi bi-card-image fs-3"></i></button></div>} {files.length >= 2 && <p>{messageImg}</p>}
                         <div className="image-input">
                             {showInputFile &&
                                 <div {...getRootProps()}>
@@ -225,7 +225,7 @@ const PostInput = (props) => {
                                 />
                                 <div className="add-url-button mb-2">
                                     <button type="button" className="btn mt-2" onClick={handleAddUrl}>Agregar url</button>
-                                </div></>} {urlsElem.length >= 4 && <p>{messageUrl}</p>}
+                                </div></>} {urlsElem.length >= 2 && <p>{messageUrl}</p>}
                             <div className="url-preview">
                                 {urlsElem ? urlsElem.map((url, index) => (
                                     <div className="d-flex align-items-center" key={index}>
