@@ -396,7 +396,9 @@ const UserDetail = () => {
                   </div>
                   {ratingList.length > 0 ? (
                     <div className="row">
-                      {ratingList.map((rating) => (
+                      {ratingList
+                      .sort((a, b) => new Date(b.date) - new Date(a.date))
+                      .map((rating) => (
                         <div key={rating.id} className="col-12 col-md-6 col-lg-4">
                           <div className="ratings-container">
                             <RatingCard rating={rating} handleDeleteRating={handleDeleteRating} className="" />
