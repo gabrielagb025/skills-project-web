@@ -405,7 +405,7 @@ const UserDetail = () => {
                       ))}
                     </div>
                   ) : (
-                    <p className="mt-4">{user.name} todavía no tiene reseñas.</p>
+                    <p className="mt-4 text-center">{user.name} todavía no tiene reseñas.</p>
                   )}
                 </div>
               </div>

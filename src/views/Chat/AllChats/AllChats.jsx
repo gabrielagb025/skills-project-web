@@ -29,7 +29,9 @@ const Chats = () => {
                 </div>
                 {chats.length > 0 ? (
                     <>
-                        {chats.map((chat) => {
+                        {chats
+                        .sort((a, b) => new Date(b.messages[b.messages.length - 1].date) - new Date(a.messages[a.messages.length - 1].date))
+                        .map((chat) => {
                             const otherUser = chat?.users.find((user) => user.id !== currentUser.id);
                             const unreadMessages = chat.messages.filter(message => message.sender !== currentUser.id && message.status === 'unread').length;
                             return (
