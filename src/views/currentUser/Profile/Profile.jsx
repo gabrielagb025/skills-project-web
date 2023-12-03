@@ -17,14 +17,11 @@ const Profile = () => {
   const [postInput, setPostInput] = useState(false);
   const [userDescription, setUserDescription] = useState('');
   const [isDescriptionCreated, setIsDescriptionCreated] = useState(false);
-  // const [isCurrentUserDescription, setIsCurrentUserDescription] = useState(null);
   const [isDescriptionEditing, setIsDescriptionEditing] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDescriptionModalOpen, setIsDescriptionModalOpen] = useState(false);
   const [userRatings, setUserRatings] = useState([]);
   const [activeTab, setActiveTab] = useState("postList");
-
-  // const [editedDescription, setEditedDescription] = useState({ ...isCurrentUserDescription })
   const [operationType, setOperationType] = useState("create");
 
 
@@ -61,8 +58,8 @@ const Profile = () => {
         console.log(err)
       })
   }
-  
-  {/* DESCRIPCIÓN */}
+
+  {/* DESCRIPCIÓN */ }
 
   const handleChangeDescription = (ev) => {
 
@@ -84,7 +81,6 @@ const Profile = () => {
         setIsDescriptionCreated(true);
         currentUserDescription()
           .then((description) => {
-            // Establece el estado userDescription con la descripción obtenida
             setUserDescription(description);
             setIsDescriptionModalOpen(false);
             console.log('descripción creada');
@@ -99,54 +95,31 @@ const Profile = () => {
   };
 
 
- const handleEditDescriptionModal = () => {
-   setIsEditModalOpen(true);
-   setIsDescriptionEditing(true);
-   setOperationType("edit");
- }
+  const handleEditDescriptionModal = () => {
+    setIsEditModalOpen(true);
+    setIsDescriptionEditing(true);
+    setOperationType("edit");
+  }
 
- const handleCloseEditDescriptionModal = () => {
+  const handleCloseEditDescriptionModal = () => {
     setIsEditModalOpen(false);
     setIsDescriptionEditing(false);
- }
+  }
 
- const handleEditDescription = (ev, descriptionId) => {
-  ev.preventDefault();
+  const handleEditDescription = (ev, descriptionId) => {
+    ev.preventDefault();
 
-  editDescription(descriptionId, userDescription)
-    .then((updatedDescription) => {
-      setUserDescription(updatedDescription);
-      setIsDescriptionCreated(true);
-      setIsEditModalOpen(false);
-      console.log('descripción editada');
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
-
-  // const handleChangeEditDescription = (ev) => {
-  //   const key = ev.target.name;
-  //   const value = ev.target.value;
-
-  //   console.log(editedDescription)
-
-  //   setEditedDescription(prevDesc => ({
-  //     ...prevDesc,
-  //     [key]: value
-  //   }))
-  // }
-
-  // const handleUpdateDescription = () => {
-  //   editDescription(editedDescription)
-  //     .then((description) => {
-  //       setIsCurrentUserDescription(description)
-  //       setIsDescriptionModalOpen(false)
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-  // }
+    editDescription(descriptionId, userDescription)
+      .then((updatedDescription) => {
+        setUserDescription(updatedDescription);
+        setIsDescriptionCreated(true);
+        setIsEditModalOpen(false);
+        console.log('descripción editada');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   const handleShowDescriptionModal = () => {
     setIsDescriptionModalOpen(true);
@@ -165,6 +138,8 @@ const Profile = () => {
       </div>
       <div className="Profile profile-container container mt-4">
         <div className="profile-header-container">
+
+          {/* USER INFO */}
           <div className="user-content d-flex align-items-center">
             <div className="profile-info-img">
               <img src={user.avatar} alt="" width="300" />
@@ -179,6 +154,8 @@ const Profile = () => {
               </div>
             </div>
           </div>
+
+          {/* DESCRIPTION */}
           <div className="description-container">
             {!isDescriptionCreated ? (
               <div className="no-description">
@@ -192,9 +169,9 @@ const Profile = () => {
                     handleClose={handleCloseDescriptionModal}
                     handleSubmit={handleCreateDescription}
                     handleChange={handleChangeDescription}
-                    description={userDescription} 
-                    operationType={operationType}/>
-                ): (null)}
+                    description={userDescription}
+                    operationType={operationType} />
+                ) : (null)}
               </div>
             ) : (
               <div className="user-description">
@@ -208,13 +185,15 @@ const Profile = () => {
                     handleClose={handleCloseEditDescriptionModal}
                     handleSubmit={(ev) => handleEditDescription(ev, userDescription.id)}
                     handleChange={handleChangeDescription}
-                    description={userDescription} 
-                    operationType={operationType}/>
-                ): (null)}
+                    description={userDescription}
+                    operationType={operationType} />
+                ) : (null)}
               </div>)}
           </div>
         </div>
         <hr />
+
+        {/* USER SKILLS */}
         <div className="user-profile-skills d-flex justify-content-around">
           <div className="skills-info-container d-flex flex-column mt-2">
             <h5><i className="bi bi-diamond-fill fs-6"></i>Puedes enseñar:</h5>
@@ -240,6 +219,7 @@ const Profile = () => {
           </div>
         </div>
 
+        {/* POSTS AND RATINGS */}
         <div className="card-body posts-ratings-container text-black mt-3">
           <ul className="nav nav-tabs d-flex align-items-center justify-content-center posts-ratings-buttons border-0" id="myTab">
             <li className="nav-item">

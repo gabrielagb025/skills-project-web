@@ -12,7 +12,7 @@
 }
 
 .Chats hr {
-    border: 2px solid #5e8039; /* Color y grosor de la línea */
+    border: 2px solid #5e8039; 
     width: 100%; 
 }
 
@@ -59,15 +59,15 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background-color: #5e8039; /* Color de fondo del círculo (verde) */
-    color: #ffffff; /* Color del texto (blanco) */
-    text-align: center; /* Centra el número dentro del círculo */
-    line-height: 25px; /* Centra verticalmente el número dentro del círculo */ /* Hace que el número sea más visible */
+    background-color: #5e8039; 
+    color: #ffffff; 
+    text-align: center; 
+    line-height: 25px; 
 }
 
 .unread-circle:active {
-    background-color: #5e8039; /* Color de fondo del círculo (verde) */
-    color: #ffffff; /* Color del texto (blanco) */
+    background-color: #5e8039; 
+    color: #ffffff; 
 }
 
 .chat-container-text {

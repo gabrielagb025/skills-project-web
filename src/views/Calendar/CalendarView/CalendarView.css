@@ -3,7 +3,7 @@
 }
 
 .calendar-container hr {
-    border: 2px solid #5e8039; /* Color y grosor de la línea */
+    border: 2px solid #5e8039; 
     width: 100%; 
 }
 
@@ -62,7 +62,6 @@
     max-width: 100%;
 }
 
-/* Ajusta el estilo del modal para dispositivos móviles */
 @media (max-width: 768px) {
 
     .calendar-margin {
@@ -78,9 +77,9 @@
     }
 
     .ReactModal__Content {
-        width: 80%; /* Ajusta el ancho del modal según tus necesidades */
-        max-width: 300px; /* Establece un ancho máximo para evitar que el modal sea demasiado grande */
-        margin: 0 auto; /* Centra el modal horizontalmente en la pantalla */
+        width: 80%; 
+        max-width: 300px; 
+        margin: 0 auto; 
     }
 
     .event-info-modal h5 {

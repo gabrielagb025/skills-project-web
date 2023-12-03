@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(255, 255, 255); /* Cambia el color de fondo según tus necesidades */
+    background-color: rgb(255, 255, 255); 
 }
 
 .login-container {
@@ -22,8 +22,8 @@
 }
 
 .login-container hr {
-    border: 2px solid #EA9F92; /* Color y grosor de la línea */
-    width: 40%; /* Ancho de la línea, 100% para cubrir todo el contenedor */ /* Espaciado superior para separar la línea del contenido */
+    border: 2px solid #EA9F92; 
+    width: 40%; 
 }
 
 .login-container i {
@@ -46,8 +46,8 @@
     }
 
     .login-container .form-container {
-        width: 300px; /* Establecer el ancho al 100% para dispositivos móviles */
-        padding: 0 20px; /* Agregar algún espacio en los bordes izquierdo y derecho para que no esté pegado a los bordes de la pantalla */
+        width: 300px;
+        padding: 0 20px; 
     }
 
     .login-container hr {

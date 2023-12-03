@@ -9,7 +9,6 @@
 
 .current-user-nav hr {
     border: 1.5px solid #5e8039;
-    /* Color y grosor de la línea */
     width: 100%;
 
 }
@@ -28,32 +27,24 @@
 
 .current-user-nav h1 {
     font-size: 18px;
-    /* Tamaño de fuente del título del menú */
     margin-bottom: 20px;
-    /* Espaciado inferior para el título del menú */
 }
 
 .current-user-nav ul {
     list-style: none;
-    /* Quita los puntos de la lista */
     padding: 0;
     margin: 0;
 }
 
 .current-user-nav li {
     margin-bottom: 15px;
-    /* Espaciado inferior entre elementos de la lista */
 }
 
 .current-user-nav a, .close-session button {
     color: #3F423B;
-    /* Color del texto del enlace */
     text-decoration: none;
-    /* Quita el subrayado del enlace */
     font-size: 20px;
-    /* Tamaño de fuente del enlace */
     transition: color 0.3s ease;
-    /* Transición de color suave al pasar el mouse sobre el enlace */
 }
 
 .close-session button {
@@ -62,5 +53,4 @@
 
 .current-user-nav a:hover {
     color: #5e8039;
-    /* Color del texto del enlace */
 }

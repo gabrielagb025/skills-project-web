@@ -3,9 +3,6 @@ import { getSkills } from "../../../services/SkillService";
 import { updateCurrentUser } from "../../../services/UserService";
 import { useAuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { OverlayTrigger } from "react-bootstrap";
-import { Tooltip } from "react-bootstrap";
-
 import './ChooseSkills.css';
 
 const ChooseSkills = ({ setSkillsSelected }) => {

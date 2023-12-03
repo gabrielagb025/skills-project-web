@@ -89,9 +89,9 @@
 }
 
 .multimedia-list img {
-    width: 80px; /* Tamaño deseado para las imágenes */
-    height: 80px; /* Tamaño deseado para las imágenes */
-    object-fit: cover; /* Mantiene la relación de aspecto y cubre completamente el contenedor */
+    width: 80px; 
+    height: 80px;
+    object-fit: cover;
 }
 
 .url-preview {

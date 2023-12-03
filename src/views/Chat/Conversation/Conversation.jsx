@@ -24,7 +24,6 @@ const Chat = () => {
 
     useEffect(() => {
         if (chatContainerRef.current) {
-            // Desplaza el scroll hacia abajo del contenedor del chat
             chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
         }
         const fetchData = async () => {
@@ -48,18 +47,6 @@ const Chat = () => {
         };
     }, [id, chatMessages.length]);
 
-    // useEffect(() => {
-    //     getCurrentChat(id)
-    //         .then((chat) => {
-    //             setChat(chat);
-    //             setChatMessages(chat.messages);
-    //             markMessagesAsRead(chat.messages)
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         })
-    // }, [id]);
-
     const markMessagesAsRead = (messages) => {
         messages.forEach((message) => {
             if (message.status === 'unread' && message.sender.id !== currentUser.id) {
@@ -75,12 +62,12 @@ const Chat = () => {
     };
 
     const handleFocus = () => {
-        setMessageError(""); // Ocultar el mensaje de error cuando el campo de entrada recibe foco
+        setMessageError(""); 
     };
 
     const handleBlur = () => {
         if (!message.text) {
-            setMessageError("Debes escribir un mensaje"); // Mostrar el mensaje de error si el campo de entrada está vacío cuando el usuario deja el campo
+            setMessageError("Debes escribir un mensaje"); 
         }
     };
 

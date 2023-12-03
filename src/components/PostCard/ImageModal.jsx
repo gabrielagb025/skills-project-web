@@ -14,15 +14,15 @@ const customStyles = {
     },
 };
 
-Modal.setAppElement('#root'); // Indica a React Modal dónde debe renderizar el modal en el DOM.
+Modal.setAppElement('#root'); 
 
 const ImageModal = ({ isOpen, onRequestClose, imageUrl }) => {
 
     const customStyles = {
         content: {
-          width: '400px', // Ancho fijo del modal
-          height: '300px', // Altura fija del modal
-          margin: 'auto', // Para centrar el modal horizontalmente
+          width: '400px', 
+          height: '300px', 
+          margin: 'auto', 
         },
       };
       

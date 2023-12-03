@@ -27,27 +27,29 @@ const friendRequestIntialValues = {
 
 const UserDetail = () => {
   const [user, setUser] = useState(null);
+  const [userDescription, setUserDescription] = useState(null);
+  const navigate = useNavigate();
+  const { id } = useParams();
+
   const [newRating, setNewRating] = useState(ratingInitialValues);
-  const [friendRequest, setFriendRequest] = useState(friendRequestIntialValues);
   const [ratingList, setRatingList] = useState([]);
   const [showRatingModal, setShowRatingModal] = useState(false);
-  const [showInput, setShowInput] = useState(false);
-  const [requestSent, setRequestSent] = useState(false);
+
+  const [friendRequest, setFriendRequest] = useState(friendRequestIntialValues);
   const [isFriend, setIsFriend] = useState(false);
+  const [requestSent, setRequestSent] = useState(false);
   const [madeRequest, setMadeRequest] = useState(false);
   const [haveRequest, setHaveRequest] = useState(false);
   const [acceptedFriendRequest, setAcceptedFriendRequest] = useState(null);
-  const [userDescription, setUserDescription] = useState(null);
-  const [chatList, setChatList] = useState([]);
   const [showFriendModal, setShowFriendModal] = useState(false);
+
+  const [chatList, setChatList] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
-  const { id } = useParams();
-  const { user: currentUser } = useAuthContext();
-  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("postList");
 
+  const { user: currentUser } = useAuthContext();
   const [rating, setRating] = useState(0);
-
+  const [showInput, setShowInput] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -95,25 +97,13 @@ const UserDetail = () => {
   };
 
   const handleStarClick = (starValue) => {
-    console.log('click')
     setNewRating({ ...newRating, score: starValue });
   };
-
-  // const handleChangeRating = (ev) => {
-  //   const key = ev.target.name;
-  //   const value = ev.target.value;
-
-  //   setNewRating(prevRating => ({
-  //     ...prevRating,
-  //     [key]: value
-  //   }))
-  // }
 
   const handleSubmitRating = (event) => {
     event.preventDefault()
     createRating(id, newRating)
       .then(() => {
-        console.log('rating creado')
         setNewRating(ratingInitialValues)
         setShowRatingModal(false)
         getRatings(id)
@@ -127,7 +117,6 @@ const UserDetail = () => {
   const handleDeleteRating = (ratingId) => {
     deleteRating(ratingId)
       .then(() => {
-        console.log('rating borrado')
         const filteredRatings = ratingList.filter((rating) => rating.id !== ratingId);
         setRatingList(filteredRatings);
       })
@@ -145,10 +134,6 @@ const UserDetail = () => {
   const handleCloseFriendModal = () => {
     setShowFriendModal(false);
   };
-
-  /*const handleShowInput = () => {
-    setShowInput(true)
-  }*/
 
   const handleChangeFriendRequest = (ev) => {
     const key = ev.target.name;
@@ -301,7 +286,7 @@ const UserDetail = () => {
                   />
                 </div>
               </div>
-              <hr className="mt-4"/>
+              <hr className="mt-4" />
               <div className="mt-2 profile-info-container">
                 {userDescription ? (
                   <div className="user-description">
@@ -370,16 +355,16 @@ const UserDetail = () => {
               </ul>
               <div className="tab-content user-detail-posts-container mb-5 mt-3" id="myTabContent">
                 <div className={`tab-pane fade ${activeTab === "postList" ? "active show" : ""}`} id="postList" role="tabpanel" aria-labelledby="postList-tab">
-                <div className="detail-posts-title">
+                  <div className="detail-posts-title">
                     <h4>Publicaciones</h4>
-                    <hr className="border-bottom-title"/>
+                    <hr className="border-bottom-title" />
                   </div>
                   <div className="posts-container">
                     {userPosts?.length > 0 ? (
                       <div className="row">
                         {userPosts.map((post) => (
                           <div key={post.id} className="detail-posts-container col-12 col-md-6 my-3">
-                          <PostCard post={post} />
+                            <PostCard post={post} />
                           </div>
                         ))}
                       </div>
@@ -392,19 +377,19 @@ const UserDetail = () => {
                 <div className={`tab-pane fade ${activeTab === "ratings" ? "active show" : ""}`} id="ratings" role="tabpanel" aria-labelledby="ratings-tab">
                   <div className="detail-ratings-title">
                     <h4>Reseñas</h4>
-                    <hr className="border-bottom-title"/>
+                    <hr className="border-bottom-title" />
                   </div>
                   {ratingList.length > 0 ? (
                     <div className="row">
                       {ratingList
-                      .sort((a, b) => new Date(b.date) - new Date(a.date))
-                      .map((rating) => (
-                        <div key={rating.id} className="col-12 col-md-6 col-lg-4">
-                          <div className="ratings-container">
-                            <RatingCard rating={rating} handleDeleteRating={handleDeleteRating} className="" />
+                        .sort((a, b) => new Date(b.date) - new Date(a.date))
+                        .map((rating) => (
+                          <div key={rating.id} className="col-12 col-md-6 col-lg-4">
+                            <div className="ratings-container">
+                              <RatingCard rating={rating} handleDeleteRating={handleDeleteRating} className="" />
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
                     </div>
                   ) : (
                     <p className="mt-4 text-center">{user.name} todavía no tiene reseñas.</p>
@@ -420,37 +405,3 @@ const UserDetail = () => {
 }
 
 export default UserDetail;
-
-
-{/* PUBLICACIONES
-              <h4>Publicaciones de {user.name}</h4>
-              <div className="posts-container">
-                {user.posts?.length > 0 ? (
-                  <>
-                    {user.posts.map((post) => (
-                      <div className="post-container" key={post.id}>
-                        <p>{post.message}</p>
-                      </div>
-                    ))}
-                  </>
-                ) : (
-                  <p>{user.name} todavía no ha hecho ninguna publicación.</p>
-                )}
-              </div>
-              <hr />
-            </div>
-            LISTA DE RESEÑAS
-            <div className="rating-list container mt-4">
-              <h4>Reseñas acerca de {user.name}</h4>
-              {ratingList.length > 0 ? (
-                <>
-                  {ratingList.map((rating) => (
-                    <div className="ratings-container" key={rating.id} >
-                      <RatingCard rating={rating} handleDeleteRating={handleDeleteRating} />
-                    </div>
-                  ))}
-                </>
-              ) : (
-                <p>{user.name} todavía no tiene reseñas.</p>
-              )}
-            </div> */}

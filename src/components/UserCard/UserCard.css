@@ -28,7 +28,7 @@
 .info-user-card {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra el texto horizontalmente */
+    align-items: center; 
 }
 
 .skills-user-card {

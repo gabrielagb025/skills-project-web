@@ -24,17 +24,14 @@
 
 .Timeline hr {
     border: 2px solid #5e8039;
-    /* Color y grosor de la línea */
     width: 100%;
 }
 
 .posts-list hr {
     border: 1px solid #5e8039;
-    /* Color y grosor de la línea */
     width: 100%;
 }
 
-/* Agrega esto en tu archivo CSS (por ejemplo, Timeline.css) */
 .arrow-icon {
     position: fixed;
     bottom: 20px;

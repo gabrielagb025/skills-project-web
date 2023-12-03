@@ -7,7 +7,7 @@
 }
 
 .choose-skills-title hr {
-    border: 2px solid #5e8039; /* Color y grosor de la línea */
+    border: 2px solid #5e8039; 
     width: 100%; 
 }
 
@@ -42,7 +42,7 @@
 }
 
 .choose-category-title hr {
-    border: 1.5px solid #5e8039; /* Color y grosor de la línea */
+    border: 1.5px solid #5e8039; 
     width: 100%; 
 }
 
@@ -66,11 +66,7 @@
 }
 
 @media (min-width : 768px) {
-
-    /* .teachSkills {
-        width: 100% !important;
-    } */
-
+    
     .choose-skills-container {
         width: 100%;
     }

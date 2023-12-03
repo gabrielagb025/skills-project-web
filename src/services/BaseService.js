@@ -21,9 +21,6 @@ const createHttp = (useAccessToken = false) => {
     http.interceptors.response.use(
         (response) => response.data,
         (error) => {
-          // Any status codes that falls outside the range of 2xx will trigger this function
-    
-          // If the error is due to an expired token, we'll delete it and redirect to login
           if (error?.response?.status && [401, 403].includes(error.response.status)) {
             if (getAccessToken()) {
               logout();

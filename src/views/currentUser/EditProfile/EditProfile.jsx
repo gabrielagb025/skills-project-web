@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { editUser } from "../../../services/UserService";
 import InputGroup from "../../../components/InputGroup/InputGroup";
 import { useAuthContext } from "../../../contexts/AuthContext";
@@ -9,21 +9,17 @@ import './EditProfile.css';
 
 const EditProfile = () => {
     const { user, getUser } = useAuthContext();
-    const [userData, setUserData] = useState({
-        name: user.name,
-        // avatar: user.avatar,
-        city: user.city,
-        phone: user.phone
-    });
-
-    const navigate = useNavigate();
-
     const initialValues = {
         name: user.name,
         avatar: user.avatar,
         city: user.city,
         phone: user.phone
     }
+
+    const [userData, setUserData] = useState(initialValues);
+    const navigate = useNavigate();
+
+ 
 
     const {
         values,

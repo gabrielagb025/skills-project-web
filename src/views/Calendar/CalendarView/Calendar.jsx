@@ -27,8 +27,6 @@ const Calendar = () => {
             })
     }, []);
 
-    // console.log('eventos:', events)
-
     const handleEventClick = (eventInfo) => {
         setSelectedEvent(eventInfo.event);
         console.log(eventInfo.event.start)
@@ -53,10 +51,10 @@ const Calendar = () => {
 
     const modalStyles = {
         content: {
-            width: "450px",  // Ancho del modal
-            height: "300px",  // Altura automática
-            margin: "auto",  // Centra el modal horizontalmente
-            borderRadius: "25px",  // Bordes redondeados
+            width: "450px",  
+            height: "300px", 
+            margin: "auto", 
+            borderRadius: "25px", 
             border: "2px solid #5e8039",
             padding: "20px",
             backgroundColor: "#ffffff",
@@ -106,7 +104,7 @@ const Calendar = () => {
                                 <h5 className="mb-0">
                                     {selectedEvent &&
                                         selectedEvent._def.extendedProps.users
-                                            .filter((user) => user.id !== currentUser.id) // Filtrar el usuario en sesión
+                                            .filter((user) => user.id !== currentUser.id) 
                                             .map((user) => user.name)
                                             .join(", ")}
                                 </h5>

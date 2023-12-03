@@ -58,7 +58,7 @@ const DescriptionInput = (props) => {
         event.preventDefault();
 
         if (!description.description) {
-            setMessageError("La descripción es obligatioria"); // Establecer el mensaje de error si el mensaje está vacío
+            setMessageError("La descripción es obligatioria"); 
             return;
         }
 
@@ -82,12 +82,12 @@ const DescriptionInput = (props) => {
     }
 
     const handleFocus = () => {
-        setMessageError(""); // Ocultar el mensaje de error cuando el campo de entrada recibe foco
+        setMessageError(""); 
     };
 
     const handleBlur = () => {
         if (!description.description) {
-            setMessageError("La descripción es requerida"); // Mostrar el mensaje de error si el campo de entrada está vacío cuando el usuario deja el campo
+            setMessageError("La descripción es requerida"); 
         }
     };
 

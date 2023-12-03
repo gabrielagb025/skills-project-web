@@ -86,12 +86,12 @@ const PostInput = (props) => {
     }
 
     const handleFocus = () => {
-        setMessageError(""); // Ocultar el mensaje de error cuando el campo de entrada recibe foco
+        setMessageError(""); 
     };
 
     const handleBlur = () => {
         if (!post.message) {
-            setMessageError("El comentario es obligatorio"); // Mostrar el mensaje de error si el campo de entrada está vacío cuando el usuario deja el campo
+            setMessageError("El comentario es obligatorio"); 
         }
     };
 

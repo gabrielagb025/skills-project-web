@@ -51,7 +51,7 @@
 
 @media (max-width: 767px) {
     .register-container .form-container {
-        width: 300px; /* Establecer el ancho al 100% para dispositivos móviles */
-        padding: 0 20px; /* Agregar algún espacio en los bordes izquierdo y derecho para que no esté pegado a los bordes de la pantalla */
+        width: 300px; 
+        padding: 0 20px;
     }
 }

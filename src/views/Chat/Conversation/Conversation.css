@@ -8,7 +8,7 @@
 }
 
 .Chat hr {
-    border: 2px solid #5e8039; /* Color y grosor de la línea */
+    border: 2px solid #5e8039; 
     width: 100%; 
 }
 
@@ -75,7 +75,7 @@
 }
 
 .message-left {
-    background-color: #F4BFB3; /* Color de fondo para mensajes del otro usuario */
+    background-color: #F4BFB3; 
     border-radius: 10px;
     border-bottom-left-radius: 0PX;
     padding: 10px;
@@ -85,7 +85,7 @@
 
 .message-right {
     margin-left: auto;
-    background-color: #C0DBA3; /* Color de fondo para mensajes del usuario actual */
+    background-color: #C0DBA3;
     border-radius: 10px;
     border-bottom-right-radius: 0px;
     padding: 10px;
@@ -95,16 +95,16 @@
 }
 
 .message-right .chat-message-content {
-    flex-direction: row-reverse !important; /* Invierte la dirección de los elementos */
+    flex-direction: row-reverse !important;
 }
 
 .message-right .chat-message-content .message-time {
-    order: 2; /* Coloca la hora a la izquierda */
-    margin-right: 10px; /* Agrega un margen derecho para separar la hora del texto */
+    order: 2; 
+    margin-right: 10px; 
 }
 
 .message-right .chat-message-content .message-text {
-    order: 1; /* Coloca el texto a la derecha */
+    order: 1;
 }
 
 .chat-user-name button {
@@ -125,49 +125,49 @@
 .btn-circle {
     width: 40px;
     height: 40px;
-    border-radius: 50%; /* Hace que el botón sea circular */
+    border-radius: 50%; 
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #5e8039; /* Color de fondo del círculo */
-    color: white; /* Color del icono */
-    border: none; /* Sin borde para el botón */
+    background-color: #5e8039; 
+    color: white; 
+    border: none; 
     cursor: pointer;
 }
 
 .btn-circle:hover {
-    background-color: #8db760; /* Color de fondo del círculo */
+    background-color: #8db760;
 }
 
 
 /* >>>>>>>>>>>>>>>>>> */
 
 .chat-box::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
+    width: 12px;               
   }
   
   .chat-box::-webkit-scrollbar-track {
-    background: #e3f3d2;        /* color of the tracking area */
+    background: #e3f3d2;        
   }
   
   .chat-box::-webkit-scrollbar-thumb {
-    background-color: #c2dfa8;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid #e3f3d2;  /* creates padding around scroll thumb */
+    background-color: #c2dfa8;    
+    border-radius: 20px;       
+    border: 3px solid #e3f3d2;  
   }
 
   body::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
+    width: 12px;             
   }
   
   body::-webkit-scrollbar-track {
-    background: #e3f3d2;        /* color of the tracking area */
+    background: #e3f3d2;      
   }
   
   body::-webkit-scrollbar-thumb {
-    background-color: #c2dfa8;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid #e3f3d2;  /* creates padding around scroll thumb */
+    background-color: #c2dfa8;    
+    border-radius: 20px;       
+    border: 3px solid #e3f3d2; 
   }
 
 

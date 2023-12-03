@@ -7,23 +7,17 @@
         display: none !important;
     }
 
-    /* Estilo del contenedor de la barra de navegación */
     .navbar-container {
         position: fixed;
         bottom: 0;
         width: 100%;
         background-color: #ffffff;
-        /* Color de fondo de la barra de navegación */
         box-shadow: 0px -2px 10px 0px rgba(0, 0, 0, 0.1);
-        /* Sombra en la parte superior de la barra */
         z-index: 1000;
-        /* Asegura que la barra de navegación esté por encima del contenido de la página */
     }
 
-    /* Estilos de la barra de navegación y enlaces */
     .mobile-navbar {
         padding: 10px 0;
-        /* Espaciado interno de la barra de navegación */
     }
 
     .mobile-navbar .navbar-nav {
@@ -42,10 +36,8 @@
 
     .mobile-navbar .nav-link {
         color: #333;
-        /* Color del texto del enlace */
         text-decoration: none;
         transition: color 0.3s ease;
-        /* Transición de color suave al pasar el mouse sobre el enlace */
     }
 
     .nav-mobile-image img {
@@ -62,7 +54,6 @@
 
     .profile-border {
         border: 3px solid #5e8039;
-        /* Color y grosor de la línea */
         width: 100%;
     }
 
